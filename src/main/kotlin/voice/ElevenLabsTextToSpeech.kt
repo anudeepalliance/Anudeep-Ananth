@@ -20,7 +20,8 @@ import util.usage.persistAgentUsageLogToMongo
 
 private val elevenLabsLogger = LoggerFactory.getLogger("ElevenLabsTextToSpeech")
 
-private const val DEFAULT_ELEVEN_LABS_VOICE_ID = "JBFqnCBsd6RMkjVDRZzb"
+/** Raj — Indian male English, used for spoken agent replies. */
+private const val INDIAN_MALE_ENGLISH_VOICE_ID = "uavKGt8JpB2lo1bcty9J"
 private const val ELEVEN_LABS_MODEL_ID = "eleven_multilingual_v2"
 
 private val elevenLabsHttpClient by lazy { HttpClient(CIO) }
@@ -36,7 +37,7 @@ private data class ElevenLabsSpeechRequestBody(
  */
 suspend fun synthesizeEnglishSpeechWithElevenLabs(
     text: String,
-    voiceId: String = DEFAULT_ELEVEN_LABS_VOICE_ID,
+    voiceId: String = INDIAN_MALE_ENGLISH_VOICE_ID,
     agentId: String? = null,
     clientIpAddress: String? = null,
     sessionId: String? = null,

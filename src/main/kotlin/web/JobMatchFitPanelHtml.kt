@@ -45,7 +45,7 @@ private fun renderSuccessfulFitPanelHtml(
     return createHTML().div(classes = "fit-result") {
         div(classes = "fit-result-head") {
             div(classes = scoreToneClass) {
-                span(classes = "fit-score-label") { +"fit_score" }
+                span(classes = "fit-score-label") { +"Fit score" }
                 span(classes = "fit-score-value") { +fitAnalysis.fitScore.toString() }
             }
             if (fitAnalysis.softReject) {
@@ -115,7 +115,7 @@ private fun renderFailedFitPanelHtml(errorMessage: String): String {
                     "document.getElementById('job-matching-form')?.requestSubmit()"
                 +"Retry fit analysis"
             }
-            a(href = "#agents", classes = "btn btn-ghost") { +"Back to console" }
+            a(href = "#job-matching", classes = "btn btn-ghost") { +"Back to Job Matching" }
         }
     }
 }
