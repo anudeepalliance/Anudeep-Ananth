@@ -52,12 +52,12 @@ Do **not** use Compose for Web for this site.
 ## Agents (all live)
 
 1. Job Matching (primary)
-2. Performance Marketing
-3. Market Research
-4. Prospecting (ABM)
-5. Lead Scoring
-6. Social Media Marketing
-7. Product Analytics
+2. Performance Marketing Manager
+3. Market Researcher
+4. Prospecting Agent
+5. Lead Scorer
+6. Social Media Manager
+7. Product Analytics Agent
 
 Each agent gets a slightly tweaked portrait derived from Anudeep’s professional photo.
 

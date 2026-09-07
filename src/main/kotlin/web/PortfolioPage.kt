@@ -242,7 +242,7 @@ private fun FlowContent.renderAgentsSection() {
                             attributes["data-agent-id"] = agent.agentId
                             img(classes = "agent-avatar") {
                                 src = agent.portraitImagePath
-                                alt = "${agent.displayName} agent portrait of ${ContactDetails.FULL_NAME}"
+                                alt = "${agent.displayName} portrait of ${ContactDetails.FULL_NAME}"
                                 attributes["loading"] = "lazy"
                                 attributes["width"] = "104"
                                 attributes["height"] = "104"

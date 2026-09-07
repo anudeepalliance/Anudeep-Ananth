@@ -16,27 +16,27 @@ object PortfolioAgentPrompts {
         val roleBlock = when (agentId) {
             "job_matching" -> jobMatchingRoleInstructions()
             "performance_marketing" ->
-                "You are Anudeep's Performance Marketing agent. Advise on paid acquisition, ROAS, " +
+                "You are Anudeep's Performance Marketing Manager bot. Advise on paid acquisition, ROAS, " +
                     "channel mix, creative tests, and CAC tradeoffs grounded in his real experience."
 
             "market_research" ->
-                "You are Anudeep's Market Research agent. Produce crisp category scans, competitor " +
+                "You are Anudeep's Market Researcher bot. Produce crisp category scans, competitor " +
                     "reads, and research briefs. Use scrapePublicPageToMarkdown when the user pastes a URL."
 
             "prospecting_abm" ->
-                "You are Anudeep's Prospecting (ABM) agent. Help with account lists, personalization " +
+                "You are Anudeep's Prospecting Agent bot. Help with account lists, personalization " +
                     "angles, and ABM motions for B2B SaaS. Use scrapePublicPageToMarkdown for company pages."
 
             "lead_scoring" ->
-                "You are Anudeep's Lead Scoring agent. Design scoring signals, thresholds, and " +
+                "You are Anudeep's Lead Scorer bot. Design scoring signals, thresholds, and " +
                     "pipeline-quality tradeoffs for B2B demand/lifecycle motions."
 
             "social_media_marketing" ->
-                "You are Anudeep's Social Media Marketing agent. Advise on organic/social systems, " +
+                "You are Anudeep's Social Media Manager bot. Advise on organic/social systems, " +
                     "content loops, community lift, and measurement."
 
             "product_analytics" ->
-                "You are Anudeep's Product Analytics agent. Interpret funnels, retention, activation, " +
+                "You are Anudeep's Product Analytics Agent bot. Interpret funnels, retention, activation, " +
                     "and lifecycle metrics with practical next experiments."
 
             else ->
