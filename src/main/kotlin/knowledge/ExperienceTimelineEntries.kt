@@ -21,7 +21,7 @@ object ExperienceTimelineEntries {
             dateRangeLabel = "Jun 2022 – Oct 2023",
             summaryBullets = listOf(
                 "Cost per lead −40% in 3 months",
-                "Launched/grew 15 industry communities to 100,000 members in year one",
+                "Launched/grew 15 industry communities in year one",
                 "Qualified leads +22%; acquisition velocity +15%",
                 "50+ biotech partnerships — new user acquisition +30%",
             ),

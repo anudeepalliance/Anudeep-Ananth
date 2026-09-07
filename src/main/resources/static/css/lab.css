@@ -476,7 +476,7 @@ h3 { margin: 0; font-size: 1.05rem; }
   margin-bottom: 1.05rem;
 }
 .receipt-stubs {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   align-items: stretch;
 }
 

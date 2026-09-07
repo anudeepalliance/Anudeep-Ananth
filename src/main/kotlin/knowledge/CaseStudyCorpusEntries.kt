@@ -17,7 +17,7 @@ object CaseStudyCorpusEntries {
                     "and analytics-informed acquisition loops using SQL and product feedback.",
             outcomes = listOf(
                 "CPL −40% in 3 months",
-                "15 communities → 100,000 members in year one",
+                "15 industry communities in year one",
                 "Qualified leads +22%",
                 "Acquisition velocity +15%",
                 "50+ partnerships → new user acquisition +30%",

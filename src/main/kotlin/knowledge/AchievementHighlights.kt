@@ -12,11 +12,6 @@ object AchievementHighlights {
             proofImagePath = "/static/images/proof/elucidata-cpl.jpg",
         ),
         AchievementHighlight(
-            metricLabel = "100K community members",
-            contextLabel = "15 industry communities in year one (Elucidata)",
-            category = "Community",
-        ),
-        AchievementHighlight(
             metricLabel = "\$1.2M new business",
             contextLabel = "Jiva Infotech community-led growth in 18 months",
             category = "Revenue",
