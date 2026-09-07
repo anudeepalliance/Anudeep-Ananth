@@ -50,16 +50,24 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 
 ## Phase 2 — Design system & static page shell
 
-- [ ] Set up Kotlin HTML DSL + Ktor HTMX dependencies (`ktor-htmx`, `ktor-htmx-html`, `ktor-server-htmx`)
-- [ ] Create AI lab / terminal visual design system (CSS tokens, typography, panels, glow)
-- [ ] Build server-rendered single-page shell: Hook → Proof → Agents → Contact
-  - Hint: wire copy from `AnudeepKnowledgePack` (do not hardcode new pitch/timeline strings).
-- [ ] Hook section: name, pitch, photo slot, video slot, JD CTA
-- [ ] Proof section: timeline + achievements + tech stack strip
-- [ ] Agents section: roster cards + empty chat/fit panels
-- [ ] Contact section: email + LinkedIn
-- [ ] Ensure content is visible on first byte (no full-page invisible preloader)
-- [ ] Mobile stacked layout + desktop lab-console polish for Agents block
+- [x] Set up Kotlin HTML DSL + Ktor HTMX dependencies (`ktor-htmx`, `ktor-htmx-html`, `ktor-server-htmx`)
+  - Notes: `build.gradle.kts` adds `ktorLibs.server.htmlBuilder`, `ktorLibs.htmx`, `ktorLibs.htmx.html`, `ktorLibs.server.htmx`. HTMX client via CDN `htmx.org@2.0.4`.
+- [x] Create AI lab / terminal visual design system (CSS tokens, typography, panels, glow)
+  - Notes: `src/main/resources/static/css/lab.css` — void navy, cyan/violet accents, Syne + IBM Plex Sans/Mono.
+- [x] Build server-rendered single-page shell: Hook → Proof → Agents → Contact
+  - Notes: `web/PortfolioHtmlDocument.kt` + `web/PortfolioPage.kt`; route in `Routing.kt` `GET /` → `respondHtml`. Static at `/static`.
+- [x] Hook section: name, pitch, photo slot, video slot, JD CTA
+  - Notes: photo/video are dashed placeholders until Phase 3.
+- [x] Proof section: timeline + achievements + tech stack strip
+  - Notes: rendered from knowledge pack objects (no duplicated copy).
+- [x] Agents section: roster cards + empty chat/fit panels
+  - Notes: `knowledge/AgentRosterEntries.kt` (7 agents). Stub HTMX posts: `POST /htmx/job-match`, `POST /htmx/agent-chat`.
+- [x] Contact section: email + LinkedIn
+  - Notes: mailto + LinkedIn from `ContactDetails`.
+- [x] Ensure content is visible on first byte (no full-page invisible preloader)
+  - Notes: verified in browser a11y snapshot + tests assert no `opacity:0`.
+- [x] Mobile stacked layout + desktop lab-console polish for Agents block
+  - Notes: browser-checked desktop 1280 and mobile 390; HTMX JD stub swap verified live.
 
 ## Phase 3 — Assets
 

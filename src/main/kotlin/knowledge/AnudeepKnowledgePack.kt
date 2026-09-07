@@ -11,6 +11,7 @@ object AnudeepKnowledgePack {
     val caseStudyEntries = CaseStudyCorpusEntries.entries
     val jobMatchingRules = JobMatchingTargetingRules
     val contactDetails = ContactDetails
+    val agentRoster = AgentRosterEntries.agents
 
     /**
      * Full text blob for LLM grounding (profile + rules + case studies + timeline).
