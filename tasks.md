@@ -12,12 +12,12 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 ## Phase 0 — Foundations
 
 - [x] Init git repo, add `.gitignore` (`.gradle`, `build`, `.idea`, `.superpowers`, `ConfidentialObjects.kt`)
-- [ ] Confirm local `./gradlew run` still serves the Ktor hello-world baseline
-- [ ] Confirm `ConfidentialObjects.kt` stays gitignored and is present locally; wire new keys there only (no env/secrets pattern)
-- [ ] Add VPS community Mongo connection strings to `ConfidentialObjects.kt` (in-VPS + local SSH-tunnel URIs; database `Anudeep-Ananth`)
-- [ ] Port a slim PeekoPals-style Mongo helper (client singleton + collections + kotlinx codecs; hostname/tunnel pick like PeekoPals)
-- [ ] Define usage-event data class + `agent_usage_logs` collection
-- [ ] Implement insert helper for agent / STT / TTS usage (never fail the user request if logging fails)
+- [x] Confirm local `./gradlew run` still serves the Ktor hello-world baseline
+- [x] Confirm `ConfidentialObjects.kt` stays gitignored and is present locally; wire new keys there only (no env/secrets pattern)
+- [x] Add VPS community Mongo connection strings to `ConfidentialObjects.kt` (in-VPS + local SSH-tunnel URIs; database `Anudeep-Ananth`)
+- [x] Port a slim PeekoPals-style Mongo helper (client singleton + collections + kotlinx codecs; hostname/tunnel pick like PeekoPals)
+- [x] Define usage-event data class + `agent_usage_logs` collection
+- [x] Implement insert helper for agent / STT / TTS usage (never fail the user request if logging fails)
 
 ## Phase 1 — Content & knowledge pack
 
