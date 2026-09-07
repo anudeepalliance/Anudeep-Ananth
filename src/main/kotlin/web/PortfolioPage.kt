@@ -191,7 +191,7 @@ private fun FlowContent.renderDrawnExperienceJourney() {
                 C 44 950, 156 1010, 100 1090
                 C 30 1170, 170 1230, 100 1310
                 C 60 1370, 140 1430, 100 1510"
-                fill="none" stroke="#4f46e5" stroke-width="3.2"
+                fill="none" stroke="#ffcc00" stroke-width="3.2"
                 stroke-linecap="round" stroke-dasharray="11 7 3 8"/>
             </svg>
             """.trimIndent()
