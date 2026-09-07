@@ -1,7 +1,7 @@
 package knowledge
 
 /**
- * Scannable achievement chips/cards for the Proof section and agent grounding.
+ * Scannable achievement chips/cards for the Achievements section and agent grounding.
  */
 object AchievementHighlights {
     val highlights = listOf(

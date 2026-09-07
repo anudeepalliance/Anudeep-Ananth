@@ -42,13 +42,13 @@ private val techStackLabels = listOf(
 )
 
 /**
- * Renders the single-page portfolio body sections (Hook → Proof → Agents → Contact).
+ * Renders the single-page portfolio body sections (Hook → Achievements → Agents → Contact).
  */
 fun FlowContent.renderPortfolioPageBody() {
     renderTopBar()
     renderHookSection()
     renderPortraitFold()
-    renderProofSection()
+    renderAchievementsSection()
     renderAgentsSection()
     renderContactSection()
     renderSiteFooter()
@@ -68,7 +68,7 @@ private fun FlowContent.renderTopBar() {
 private fun FlowContent.navLinkRow() {
     div(classes = "topnav") {
         a(href = "#hook") { +"Intro" }
-        a(href = "#proof") { +"Proof" }
+        a(href = "#achievements") { +"Achievements" }
         a(href = "#agents") { +"Agents" }
         a(href = "#contact") { +"Contact" }
     }
@@ -137,10 +137,10 @@ private fun FlowContent.renderPortraitFold() {
     }
 }
 
-private fun FlowContent.renderProofSection() {
+private fun FlowContent.renderAchievementsSection() {
     section(classes = "section") {
-        id = "proof"
-        p(classes = "eyebrow") { +"Proof" }
+        id = "achievements"
+        p(classes = "eyebrow") { +"Achievements" }
         h2 { +"Timeline, outcomes, stack" }
         p(classes = "muted") { +HomepageSalesPitch.PARAGRAPH }
         div(classes = "panel proof-grid") {
@@ -159,7 +159,7 @@ private fun FlowContent.renderProofSection() {
                                 attributes["data-lightbox-alt"] = "${highlight.metricLabel} — ${highlight.contextLabel}"
                                 img(classes = "proof-image") {
                                     src = proofImagePath
-                                    alt = "${highlight.metricLabel} proof"
+                                    alt = "${highlight.metricLabel} achievement"
                                     attributes["loading"] = "lazy"
                                 }
                             }

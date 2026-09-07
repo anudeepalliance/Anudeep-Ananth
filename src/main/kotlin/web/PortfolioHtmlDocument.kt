@@ -80,7 +80,7 @@ fun HTML.renderPortfolioHtmlDocument() {
             attributes["hidden"] = "hidden"
             attributes["role"] = "dialog"
             attributes["aria-modal"] = "true"
-            attributes["aria-label"] = "Proof image"
+            attributes["aria-label"] = "Achievement image"
             button(classes = "lightbox-close") {
                 type = ButtonType.button
                 attributes["aria-label"] = "Close image"

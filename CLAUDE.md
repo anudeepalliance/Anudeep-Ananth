@@ -18,7 +18,7 @@ That project is already set up to work with this same VPS and the MongoDB commun
 ## Product intent
 
 - Domain: `www.anudeepananth.com` (buy + deploy only in the final phase after local sign-off)
-- Single page: Hook → Proof → Agents → Contact
+- Single page: Hook → Achievements → Agents → Contact
 - Feel: senior marketing leader at a company; public-safe language only (no internal org words such as GROWTH)
 - Giant hero word: ANUDEEP (not GROWTH)
 - Visual: light festival/editorial landing (Odyssey-style) — giant type, script name, floating cards; not the old dark terminal look
@@ -104,7 +104,7 @@ Mirror the PeekoPals Mongo pattern (`util/mongoDB`: client singleton, collection
 
 ## SEO
 
-- Semantic HTML for bio/proof/agents/contact
+- Semantic HTML for bio/achievements/agents/contact
 - Title, description, canonical, Open Graph, Twitter cards
 - JSON-LD `Person` + `WebSite` with `sameAs` LinkedIn
 - `robots.txt` + `sitemap.xml`
