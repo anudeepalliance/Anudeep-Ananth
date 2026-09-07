@@ -79,8 +79,10 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
   - Notes: `AgentRosterEntry.portraitImagePath` + `<img class="agent-avatar">` in `PortfolioPage`.
 - [x] Write Seedance intro script (background + pitch)
   - Notes: `content/SeedanceIntroScript.md`
-- [ ] Generate Seedance intro video and host it statically
-  - Notes: Placeholder for now is a YouTube embed (`ContactDetails.PLACEHOLDER_INTRO_YOUTUBE_VIDEO_ID` = first YouTube video `jNQXAC9IVRw`). Swap to Seedance file later.
+- [x] First-fold intro video autoplays from VPS
+  - Notes: `https://www.reaptive.in/media/peekopals-web/mark-intro.mp4` — muted autoplay + loop, no YouTube.
+- [x] Proof images: ₹1.25 Cr photo, −40% CPL dashboard, Amazon Star Award certificate
+  - Notes: `static/images/proof/` + `AchievementHighlight.proofImagePath`. Hero photo is the professional headshot provided by Anudeep.
 - [x] Lazy-load video and optimize image delivery (sizes/format)
   - Notes: video `preload=none` + poster; agent portraits `loading=lazy`; hero `loading=eager`.
 

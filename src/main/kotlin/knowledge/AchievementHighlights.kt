@@ -19,6 +19,7 @@ object AchievementHighlights {
             metricLabel = "−40% CPL",
             contextLabel = "Elucidata demand gen in 3 months",
             category = "Demand gen",
+            proofImagePath = "/static/images/proof/elucidata-cpl.jpg",
         ),
         AchievementHighlight(
             metricLabel = "100K community members",
@@ -44,6 +45,13 @@ object AchievementHighlights {
             metricLabel = "₹1.25 Cr / ₹10 L",
             contextLabel = "Honeycomb social programs in 6 months",
             category = "ROAS-style efficiency",
+            proofImagePath = "/static/images/proof/honeycomb-revenue.jpg",
+        ),
+        AchievementHighlight(
+            metricLabel = "Amazon Star Award",
+            contextLabel = "Employee of the Month — Feb 2014, signed by Karthik Mitta",
+            category = "Recognition",
+            proofImagePath = "/static/images/proof/amazon-star-award.jpg",
         ),
         AchievementHighlight(
             metricLabel = "+15% retention",
@@ -62,4 +70,5 @@ data class AchievementHighlight(
     val metricLabel: String,
     val contextLabel: String,
     val category: String,
+    val proofImagePath: String? = null,
 )

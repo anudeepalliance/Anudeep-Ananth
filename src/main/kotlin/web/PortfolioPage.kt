@@ -17,15 +17,16 @@ import kotlinx.html.h2
 import kotlinx.html.h3
 import kotlinx.html.header
 import kotlinx.html.id
-import kotlinx.html.iframe
 import kotlinx.html.img
 import kotlinx.html.input
 import kotlinx.html.li
 import kotlinx.html.p
 import kotlinx.html.section
+import kotlinx.html.source
 import kotlinx.html.span
 import kotlinx.html.textArea
 import kotlinx.html.ul
+import kotlinx.html.video
 
 private val techStackLabels = listOf(
     "Koog",
@@ -100,14 +101,17 @@ private fun FlowContent.renderHookSection() {
         }
         div(classes = "float-card float-video") {
             div(classes = "hero-video-wrap") {
-                iframe {
-                    src = "https://www.youtube-nocookie.com/embed/${ContactDetails.PLACEHOLDER_INTRO_YOUTUBE_VIDEO_ID}"
-                    attributes["title"] = "Placeholder intro video (YouTube) until Seedance cut is ready"
-                    attributes["allow"] =
-                        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    attributes["allowfullscreen"] = "true"
-                    attributes["loading"] = "lazy"
-                    attributes["referrerpolicy"] = "strict-origin-when-cross-origin"
+                video {
+                    attributes["autoplay"] = "true"
+                    attributes["muted"] = "true"
+                    attributes["loop"] = "true"
+                    attributes["playsinline"] = "true"
+                    attributes["preload"] = "auto"
+                    attributes["aria-label"] = "Intro video"
+                    source {
+                        src = ContactDetails.INTRO_VIDEO_URL
+                        type = "video/mp4"
+                    }
                 }
             }
         }
@@ -141,6 +145,13 @@ private fun FlowContent.renderProofSection() {
             div(classes = "achievements") {
                 AchievementHighlights.highlights.forEach { highlight ->
                     div(classes = "achievement-card") {
+                        highlight.proofImagePath?.let { proofImagePath ->
+                            img(classes = "proof-image") {
+                                src = proofImagePath
+                                alt = "${highlight.metricLabel} proof"
+                                attributes["loading"] = "lazy"
+                            }
+                        }
                         div(classes = "metric") { +highlight.metricLabel }
                         div(classes = "context") { +highlight.contextLabel }
                         div(classes = "chip-row") {

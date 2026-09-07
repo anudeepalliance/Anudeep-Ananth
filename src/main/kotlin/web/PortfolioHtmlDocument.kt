@@ -70,6 +70,13 @@ fun HTML.renderPortfolioHtmlDocument() {
             // Roster click updates active card, hidden agentId, chat title, and JD panel visibility.
             unsafe {
                 +"""
+                document.addEventListener('DOMContentLoaded', function () {
+                  document.querySelectorAll('video[autoplay]').forEach(function (videoNode) {
+                    videoNode.muted = true;
+                    var playPromise = videoNode.play();
+                    if (playPromise && playPromise.catch) playPromise.catch(function () {});
+                  });
+                });
                 document.addEventListener('click', function (event) {
                   var card = event.target.closest('[data-agent-id]');
                   if (!card) return;
