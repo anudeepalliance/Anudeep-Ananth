@@ -47,6 +47,7 @@ private val techStackLabels = listOf(
 fun FlowContent.renderPortfolioPageBody() {
     renderTopBar()
     renderHookSection()
+    renderPortraitFold()
     renderProofSection()
     renderAgentsSection()
     renderContactSection()
@@ -77,12 +78,17 @@ private fun FlowContent.renderHookSection() {
     section(classes = "hero-stage") {
         id = "hook"
         span(classes = "hero-giant") { +"ANUDEEP" }
-        img(classes = "hero-portrait") {
-            src = "/static/images/anudeep-hero.jpg"
-            alt = "${ContactDetails.FULL_NAME} portrait"
-            attributes["loading"] = "eager"
-            attributes["width"] = "840"
-            attributes["height"] = "1040"
+        video(classes = "hero-stage-video") {
+            attributes["autoplay"] = "true"
+            attributes["muted"] = "true"
+            attributes["loop"] = "true"
+            attributes["playsinline"] = "true"
+            attributes["preload"] = "auto"
+            attributes["aria-label"] = "Intro video"
+            source {
+                src = ContactDetails.INTRO_VIDEO_URL
+                type = "video/mp4"
+            }
         }
         span(classes = "hero-script") { +ContactDetails.FULL_NAME }
         span(classes = "float-pill pill-left") {
@@ -101,22 +107,6 @@ private fun FlowContent.renderHookSection() {
                 span { +"Open Job Matching" }
             }
         }
-        div(classes = "float-card float-video") {
-            div(classes = "hero-video-wrap") {
-                video {
-                    attributes["autoplay"] = "true"
-                    attributes["muted"] = "true"
-                    attributes["loop"] = "true"
-                    attributes["playsinline"] = "true"
-                    attributes["preload"] = "auto"
-                    attributes["aria-label"] = "Intro video"
-                    source {
-                        src = ContactDetails.INTRO_VIDEO_URL
-                        type = "video/mp4"
-                    }
-                }
-            }
-        }
         div(classes = "float-card dark float-contact") {
             h3 { +"Start a conversation" }
             p { +"Email or LinkedIn for hiring partners and peer marketing leaders." }
@@ -129,6 +119,21 @@ private fun FlowContent.renderHookSection() {
             span(classes = "date-pill") { +"Lifecycle · demand gen · B2B SaaS" }
             h1 { +"SENIOR MARKETING LEADERSHIP" }
         }
+    }
+}
+
+private fun FlowContent.renderPortraitFold() {
+    section(classes = "portrait-fold") {
+        id = "portrait"
+        p(classes = "eyebrow") { +"Portrait" }
+        img(classes = "fold-portrait") {
+            src = "/static/images/anudeep-hero.jpg"
+            alt = "${ContactDetails.FULL_NAME} portrait"
+            attributes["loading"] = "lazy"
+            attributes["width"] = "840"
+            attributes["height"] = "840"
+        }
+        p(classes = "muted portrait-caption") { +HomepageSalesPitch.HEADLINE }
     }
 }
 
