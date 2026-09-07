@@ -10,6 +10,7 @@ import org.bson.types.ObjectId
  * @property kind One of [UsageKind.AGENT], [UsageKind.STT], [UsageKind.TTS].
  * @property agentId Agent id when [kind] is agent (or voice tied to an agent); otherwise null.
  * @property visitorEnteredQueryText Chat message, job description, or speech-to-text transcript the visitor submitted. Null for spoken-reply events.
+ * @property agentReplyText Text the agent returned (chat markdown, or Job Matching fit JSON). Null for speech-only events and failures with no reply.
  */
 @Serializable
 data class AgentUsageLogDocument(
@@ -22,6 +23,7 @@ data class AgentUsageLogDocument(
     val durationMs: Long,
     val inputChars: Int? = null,
     val visitorEnteredQueryText: String? = null,
+    val agentReplyText: String? = null,
     val errorMessage: String? = null,
     val clientIpAddress: String? = null,
     val sessionId: String? = null,

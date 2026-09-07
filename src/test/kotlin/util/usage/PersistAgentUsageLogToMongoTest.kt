@@ -16,6 +16,7 @@ class PersistAgentUsageLogToMongoTest {
             agentId = "job_matching",
             inputChars = 40,
             visitorEnteredQueryText = "Paste a role. See the fit.",
+            agentReplyText = "Fit score 84. Strong demand gen overlap.",
         )
     }
 

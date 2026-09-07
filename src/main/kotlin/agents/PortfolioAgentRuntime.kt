@@ -111,6 +111,10 @@ class PortfolioAgentRuntime(
                 agentId = "job_matching",
                 inputChars = trimmedJobDescriptionText.length,
                 visitorEnteredQueryText = trimmedJobDescriptionText,
+                agentReplyText = lenientJsonParser.encodeToString(
+                    JobMatchFitAnalysis.serializer(),
+                    reconciledFitAnalysis,
+                ),
                 clientIpAddress = clientIpAddress,
                 sessionId = sessionId,
             )
@@ -177,6 +181,7 @@ class PortfolioAgentRuntime(
                 agentId = normalizedAgentId,
                 inputChars = trimmedUserMessageText.length,
                 visitorEnteredQueryText = trimmedUserMessageText,
+                agentReplyText = replyText,
                 clientIpAddress = clientIpAddress,
                 sessionId = sessionId,
             )

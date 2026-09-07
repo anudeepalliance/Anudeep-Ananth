@@ -30,6 +30,7 @@ suspend fun persistAgentUsageLogToMongo(
     agentId: String? = null,
     inputChars: Int? = null,
     visitorEnteredQueryText: String? = null,
+    agentReplyText: String? = null,
     errorMessage: String? = null,
     clientIpAddress: String? = null,
     sessionId: String? = null,
@@ -41,7 +42,8 @@ suspend fun persistAgentUsageLogToMongo(
             ok = ok,
             durationMs = durationMs,
             inputChars = inputChars,
-            visitorEnteredQueryText = clippedVisitorEnteredQueryText(visitorEnteredQueryText),
+            visitorEnteredQueryText = clippedUsageLogText(visitorEnteredQueryText),
+            agentReplyText = clippedUsageLogText(agentReplyText),
             errorMessage = errorMessage,
             clientIpAddress = clientIpAddress,
             sessionId = sessionId,
@@ -52,12 +54,16 @@ suspend fun persistAgentUsageLogToMongo(
 internal const val MAX_VISITOR_ENTERED_QUERY_TEXT_CHARACTERS = 20_000
 
 /**
- * Keeps visitor query text from blowing past a single Mongo document. Blank input becomes null.
+ * Keeps query or reply text from blowing past a single Mongo document. Blank input becomes null.
  */
 internal fun clippedVisitorEnteredQueryText(visitorEnteredQueryText: String?): String? {
-    val trimmedVisitorEnteredQueryText = visitorEnteredQueryText?.trim().orEmpty()
-    if (trimmedVisitorEnteredQueryText.isEmpty()) {
+    return clippedUsageLogText(visitorEnteredQueryText)
+}
+
+internal fun clippedUsageLogText(usageLogText: String?): String? {
+    val trimmedUsageLogText = usageLogText?.trim().orEmpty()
+    if (trimmedUsageLogText.isEmpty()) {
         return null
     }
-    return trimmedVisitorEnteredQueryText.take(MAX_VISITOR_ENTERED_QUERY_TEXT_CHARACTERS)
+    return trimmedUsageLogText.take(MAX_VISITOR_ENTERED_QUERY_TEXT_CHARACTERS)
 }

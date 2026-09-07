@@ -92,7 +92,7 @@ Mirror the PeekoPals Mongo pattern (`util/mongoDB`: client singleton, collection
 - **Collection:** usage events (e.g. `agent_usage_logs`)
 - **Connectivity:** PeekoPals-style dual URI — in-VPS hostname/network string for production, SSH-tunnel/`localhost` string for local Mac; optional hostname probe if sharing the same docker network pattern
 - **When:** insert one document after each agent run, Sarvam STT call, and ElevenLabs TTS call
-- **Fields (minimum):** `createdAt`, `kind` (`agent` | `stt` | `tts`), `agentId` (nullable for pure voice), `ok`, `durationMs`, `inputChars`, `visitorEnteredQueryText` (chat / JD / STT transcript; null for TTS), `errorMessage` (nullable), optional client IP / coarse session id
+- **Fields (minimum):** `createdAt`, `kind` (`agent` | `stt` | `tts`), `agentId` (nullable for pure voice), `ok`, `durationMs`, `inputChars`, `visitorEnteredQueryText` (chat / JD / STT transcript; null for TTS), `agentReplyText` (chat reply or Job Matching fit JSON; null for STT/TTS and failures with no reply), `errorMessage` (nullable), optional client IP / coarse session id
 - **Rules:** no rate limiting; logging must not break the user request (catch/log failures); never hardcode Mongo field name strings — use data-class property `.name` references
 - **Reference implementation:** `/Users/anudeepmac/IntelliJ/Peekopals/PeekoPals/server/src/main/kotlin/com/peekopals/app/util/mongoDB`
 
