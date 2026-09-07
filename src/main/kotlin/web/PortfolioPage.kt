@@ -81,7 +81,6 @@ private fun FlowContent.renderHookSection() {
                 type = "video/mp4"
             }
         }
-        span(classes = "hero-script") { +ContactDetails.FULL_NAME }
         div(classes = "float-card float-jd") {
             h3 { +"Agents I use" }
             p { +"Custom agents I built for marketing work. Start with Job Matching." }
