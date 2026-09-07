@@ -80,7 +80,7 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 - [x] Write Seedance intro script (background + pitch)
   - Notes: `content/SeedanceIntroScript.md`
 - [ ] Generate Seedance intro video and host it statically
-  - Notes: **Blocked** — xAI video gen unavailable under ZDR. Poster + lazy video tag already point at `/static/video/anudeep-intro.mp4`. Generate via Seedance/Higgsfield later and drop the file there.
+  - Notes: Placeholder for now is a YouTube embed (`ContactDetails.PLACEHOLDER_INTRO_YOUTUBE_VIDEO_ID` = first YouTube video `jNQXAC9IVRw`). Swap to Seedance file later.
 - [x] Lazy-load video and optimize image delivery (sizes/format)
   - Notes: video `preload=none` + poster; agent portraits `loading=lazy`; hero `loading=eager`.
 

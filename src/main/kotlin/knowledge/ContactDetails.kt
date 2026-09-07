@@ -9,4 +9,7 @@ object ContactDetails {
     const val PHONE_DISPLAY = "+91-9741701504"
     const val LINKEDIN_URL = "https://www.linkedin.com/in/anudeepananth"
     const val PORTFOLIO_URL = "https://www.anudeepananth.com"
+
+    /** Temporary YouTube placeholder until the Seedance intro file exists. */
+    const val PLACEHOLDER_INTRO_YOUTUBE_VIDEO_ID = "jNQXAC9IVRw"
 }

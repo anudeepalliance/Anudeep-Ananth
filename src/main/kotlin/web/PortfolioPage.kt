@@ -17,16 +17,15 @@ import kotlinx.html.h2
 import kotlinx.html.h3
 import kotlinx.html.header
 import kotlinx.html.id
+import kotlinx.html.iframe
 import kotlinx.html.img
 import kotlinx.html.input
 import kotlinx.html.li
 import kotlinx.html.p
 import kotlinx.html.section
-import kotlinx.html.source
 import kotlinx.html.span
 import kotlinx.html.textArea
 import kotlinx.html.ul
-import kotlinx.html.video
 
 private val techStackLabels = listOf(
     "Koog",
@@ -100,25 +99,25 @@ private fun FlowContent.renderHookSection() {
             div(classes = "panel hero-media") {
                 div(classes = "panel-head") {
                     span(classes = "prompt") { +"> media.slots" }
-                    span { +"phase_3_assets" }
+                    span { +"photo + youtube placeholder" }
                 }
                 img(classes = "hero-photo") {
                     src = "/static/images/anudeep-hero.jpg"
-                    alt = "${ContactDetails.FULL_NAME} professional portrait"
+                    alt = "${ContactDetails.FULL_NAME} portrait"
                     attributes["loading"] = "eager"
                     attributes["width"] = "640"
-                    attributes["height"] = "800"
+                    attributes["height"] = "640"
                 }
-                video(classes = "hero-video") {
-                    attributes["controls"] = "true"
-                    attributes["preload"] = "none"
-                    attributes["poster"] = "/static/images/anudeep-hero.jpg"
-                    attributes["playsinline"] = "true"
-                    source {
-                        src = "/static/video/anudeep-intro.mp4"
-                        type = "video/mp4"
+                div(classes = "hero-video-wrap") {
+                    iframe {
+                        src = "https://www.youtube-nocookie.com/embed/${ContactDetails.PLACEHOLDER_INTRO_YOUTUBE_VIDEO_ID}"
+                        attributes["title"] = "Placeholder intro video (YouTube) until Seedance cut is ready"
+                        attributes["allow"] =
+                            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        attributes["allowfullscreen"] = "true"
+                        attributes["loading"] = "lazy"
+                        attributes["referrerpolicy"] = "strict-origin-when-cross-origin"
                     }
-                    +"Intro video pending Seedance generation — see content/SeedanceIntroScript.md"
                 }
             }
         }
