@@ -121,17 +121,19 @@ fun HTML.renderPortfolioHtmlDocument() {
                   var agentId = card.getAttribute('data-agent-id');
                   if (!agentId) return;
                   document.querySelectorAll('#agents [data-agent-id]').forEach(function (node) {
-                    node.classList.toggle('is-active', node === card);
+                    var isActive = node === card;
+                    node.classList.toggle('is-active', isActive);
+                    node.setAttribute('aria-checked', isActive ? 'true' : 'false');
                   });
                   var agentIdInput = document.getElementById('active-agent-id');
                   if (agentIdInput) agentIdInput.value = agentId;
-                  var titleNode = card.querySelector('h3');
-                  var displayName = titleNode ? titleNode.childNodes[0].textContent.trim() : agentId;
+                  var displayName = card.getAttribute('data-agent-name') || agentId;
                   var chatTitle = document.getElementById('active-agent-chat-title');
-                  if (chatTitle) chatTitle.textContent = 'Chat — ' + displayName;
+                  if (chatTitle) chatTitle.textContent = displayName;
                   var chatHint = document.getElementById('active-agent-chat-hint');
                   if (chatHint) {
-                    chatHint.textContent = 'This is my ' + displayName + ' agent. Ask it something I use it for.';
+                    chatHint.textContent = card.getAttribute('data-agent-use') ||
+                      ('Ask my ' + displayName + ' agent something I use it for.');
                   }
                 });
                 """.trimIndent()

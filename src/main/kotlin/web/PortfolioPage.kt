@@ -327,97 +327,94 @@ private fun FlowContent.renderAgentsSection() {
         agent.agentId != "job_matching"
     }
     val defaultChatAgent = workingAgents.first()
-    section(classes = "section") {
+    section(classes = "section agents-stage") {
         id = "agents"
         p(classes = "eyebrow") { +"Agents" }
-        h2 { +"I built these. I use them." }
-        p(classes = "muted") {
-            +"Custom agents for performance, research, prospecting, scoring, social, and analytics. They are live here because that is how I work — not a mockup. Job Matching has its own section above."
+        h2 { +"Working agents, not a pitch deck." }
+        p(classes = "muted agents-lede") {
+            +"I built these and I use them. Pick one and talk to it. Job Matching has its own section above."
         }
-        div(classes = "panel") {
-            div(classes = "panel-head") {
-                span(classes = "prompt") { +"Built by me" }
-                span { +"used in the work" }
+        div(classes = "agent-kit") {
+            attributes["role"] = "radiogroup"
+            attributes["aria-label"] = "Choose an agent"
+            workingAgents.forEachIndexed { index, agent ->
+                val isActive = index == 0
+                button(classes = "agent-poster${if (isActive) " is-active" else ""}") {
+                    type = ButtonType.button
+                    attributes["role"] = "radio"
+                    attributes["data-agent-id"] = agent.agentId
+                    attributes["data-agent-name"] = agent.displayName
+                    attributes["data-agent-use"] = agent.shortDescription
+                    attributes["aria-checked"] = if (isActive) "true" else "false"
+                    img(classes = "agent-poster-photo") {
+                        src = agent.portraitImagePath
+                        alt = "${agent.displayName} portrait of ${ContactDetails.FULL_NAME}"
+                        attributes["loading"] = "lazy"
+                        attributes["width"] = "280"
+                        attributes["height"] = "280"
+                    }
+                    span(classes = "agent-poster-name") { +agent.displayName }
+                }
             }
-            div(classes = "agents-layout") {
-                div(classes = "agent-roster") {
-                    workingAgents.forEachIndexed { index, agent ->
-                        val activeClass = if (index == 0) "agent-card is-active" else "agent-card"
-                        button(classes = activeClass) {
-                            type = ButtonType.button
-                            attributes["data-agent-id"] = agent.agentId
-                            img(classes = "agent-avatar") {
-                                src = agent.portraitImagePath
-                                alt = "${agent.displayName} portrait of ${ContactDetails.FULL_NAME}"
-                                attributes["loading"] = "lazy"
-                                attributes["width"] = "104"
-                                attributes["height"] = "104"
-                            }
-                            div {
-                                h3 { +agent.displayName }
-                                p { +agent.shortDescription }
-                            }
-                        }
+        }
+        div(classes = "agent-desk") {
+            p(classes = "agent-live") {
+                span(classes = "live-pip")
+                +"Live"
+            }
+            h3 {
+                id = "active-agent-chat-title"
+                +defaultChatAgent.displayName
+            }
+            p(classes = "muted") {
+                id = "active-agent-chat-hint"
+                +defaultChatAgent.shortDescription
+            }
+            form {
+                id = "agent-chat-form"
+                attributes["hx-post"] = "/htmx/agent-chat"
+                attributes["hx-target"] = "#agent-chat-output"
+                attributes["hx-swap"] = "innerHTML"
+                attributes["hx-indicator"] = "#agent-chat-indicator"
+                input {
+                    id = "active-agent-id"
+                    type = InputType.hidden
+                    name = "agentId"
+                    value = defaultChatAgent.agentId
+                }
+                textArea {
+                    name = "message"
+                    placeholder = "Ask about channels, lifecycle, ABM, scoring, social, analytics…"
+                    attributes["aria-label"] = "Agent chat message"
+                }
+                div(classes = "console-actions") {
+                    button(classes = "btn btn-primary") {
+                        type = ButtonType.submit
+                        +"Send"
+                    }
+                    button(classes = "btn btn-ghost") {
+                        type = ButtonType.button
+                        attributes["data-voice-chat"] = "true"
+                        +"Voice input"
+                    }
+                    button(classes = "btn btn-ghost") {
+                        type = ButtonType.button
+                        attributes["data-speak-reply"] = "true"
+                        +"Play spoken reply"
                     }
                 }
-                div(classes = "console-panel") {
-                    div(classes = "chat-panel") {
-                        h3 {
-                            id = "active-agent-chat-title"
-                            +"Chat — ${defaultChatAgent.displayName}"
-                        }
-                        p(classes = "muted") {
-                            id = "active-agent-chat-hint"
-                            +"Talk to an agent I built. Ask it something I would actually use it for."
-                        }
-                        form {
-                            id = "agent-chat-form"
-                            attributes["hx-post"] = "/htmx/agent-chat"
-                            attributes["hx-target"] = "#agent-chat-output"
-                            attributes["hx-swap"] = "innerHTML"
-                            attributes["hx-indicator"] = "#agent-chat-indicator"
-                            input {
-                                id = "active-agent-id"
-                                type = InputType.hidden
-                                name = "agentId"
-                                value = defaultChatAgent.agentId
-                            }
-                            textArea {
-                                name = "message"
-                                placeholder = "Ask about channels, lifecycle, ABM, scoring, social, analytics…"
-                                attributes["aria-label"] = "Agent chat message"
-                            }
-                            div(classes = "console-actions") {
-                                button(classes = "btn btn-primary") {
-                                    type = ButtonType.submit
-                                    +"Send"
-                                }
-                                button(classes = "btn btn-ghost") {
-                                    type = ButtonType.button
-                                    attributes["data-voice-chat"] = "true"
-                                    +"Voice input"
-                                }
-                                button(classes = "btn btn-ghost") {
-                                    type = ButtonType.button
-                                    attributes["data-speak-reply"] = "true"
-                                    +"Play spoken reply"
-                                }
-                            }
-                        }
-                        p(classes = "muted voice-status") {
-                            id = "voice-status"
-                            +"Voice: English only. Falls back to typing if the mic or speech API fails."
-                        }
-                        div(classes = "htmx-indicator thinking-indicator") {
-                            id = "agent-chat-indicator"
-                            +"Thinking — agent drafting reply…"
-                        }
-                        div(classes = "output-slot") {
-                            id = "agent-chat-output"
-                            +"Replies from the agent I built land here."
-                        }
-                    }
-                }
+            }
+            p(classes = "muted voice-status") {
+                id = "voice-status"
+                +"Voice: English only. Falls back to typing if the mic or speech API fails."
+            }
+            div(classes = "htmx-indicator thinking-indicator") {
+                id = "agent-chat-indicator"
+                +"Thinking — agent drafting reply…"
+            }
+            div(classes = "output-slot") {
+                id = "agent-chat-output"
+                +"Replies from the agent I built land here."
             }
         }
     }

@@ -766,41 +766,118 @@ h3 { margin: 0; font-size: 1.05rem; }
   object-fit: cover;
 }
 .job-matching-intro h3 { font-size: 1.25rem; }
-.agents-layout {
-  display: grid;
-  grid-template-columns: 0.9fr 1.3fr;
-  gap: 1.25rem;
-  padding: 1.35rem 1.35rem 1.5rem;
+
+.agents-lede {
+  max-width: 42rem;
+  margin: 0 0 1.5rem;
 }
-.agent-roster { display: grid; gap: 0.75rem; }
-.agent-card {
+.agent-kit {
   display: grid;
-  grid-template-columns: 52px 1fr;
-  gap: 0.9rem;
-  align-items: center;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 0.95rem 1rem;
-  background: #fff;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.85rem;
+  align-items: stretch;
+}
+.agent-poster {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.55rem 0.55rem 0.8rem;
+  border: 2px solid #1f1a17;
+  border-radius: 6px 16px 10px 14px;
+  background: #fffaf1;
   cursor: pointer;
   color: inherit;
   text-align: left;
   width: 100%;
   font: inherit;
+  height: 100%;
+  box-sizing: border-box;
+  box-shadow: 5px 6px 0 rgba(31, 26, 23, 0.08);
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
-.agent-card:hover,
-.agent-card.is-active {
-  border-color: var(--accent);
-  box-shadow: 0 10px 24px var(--accent-glow);
+.agent-poster:hover {
+  transform: translateY(-3px);
 }
-.agent-card.is-primary { background: var(--accent-soft); }
-.agent-avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+.agent-poster.is-active {
+  background: var(--accent);
+  box-shadow: 5px 6px 0 rgba(31, 26, 23, 0.14);
+}
+.agent-poster:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.agent-poster.is-active:focus-visible {
+  outline-color: var(--ink);
+}
+.agent-poster-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  height: auto;
   object-fit: cover;
+  object-position: center 18%;
+  border-radius: 8px;
+  display: block;
+  background: #d9dce6;
 }
-.agent-card p { margin: 0; font-size: 0.84rem; color: var(--muted); }
+.agent-poster-name {
+  margin: 0 0.15rem;
+  min-height: 2.4em;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.agent-desk {
+  margin-top: 1.2rem;
+  padding: 1.2rem 1.3rem 1.35rem;
+  background: #fffaf1;
+  border: 2px solid #1f1a17;
+  border-radius: 6px 18px 10px 16px;
+  box-shadow: 6px 8px 0 rgba(31, 26, 23, 0.08);
+}
+.agent-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.55rem;
+  padding: 0.22rem 0.7rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.live-pip {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent-ink);
+}
+.agent-desk h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  margin: 0 0 0.35rem;
+}
+.agent-desk textarea {
+  width: 100%;
+  min-height: 110px;
+  resize: vertical;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  padding: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+.agent-desk textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
 .badge {
   display: inline-block;
   margin-left: 0.35rem;
@@ -918,6 +995,7 @@ h3 { margin: 0; font-size: 1.05rem; }
 
 @media (max-width: 1200px) {
   .receipt-stubs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .agent-kit { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 980px) {
@@ -927,22 +1005,25 @@ h3 { margin: 0; font-size: 1.05rem; }
   .float-pill, .float-card { position: static; width: 100%; margin-top: 0.75rem; }
   .float-pill { width: auto; justify-content: center; }
   .hero-bottom { position: static; margin-top: 1.25rem; }
-  .job-matching-layout,
-  .agents-layout { grid-template-columns: 1fr; }
+  .job-matching-layout { grid-template-columns: 1fr; }
   .receipt-headliners { grid-template-columns: 1fr; }
   .receipt-stubs { grid-template-columns: 1fr 1fr; }
   .outcome-ticket { --ticket-tilt: 0deg; }
   .outcome-polaroid { transform: none; }
+  .agent-kit { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .agent-poster { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .outcome-ticket,
-  .outcome-polaroid {
+  .outcome-polaroid,
+  .agent-poster {
     transform: none;
     transition: none;
   }
-  .outcome-ticket:hover {
+  .outcome-ticket:hover,
+  .agent-poster:hover {
     transform: none;
   }
 }
