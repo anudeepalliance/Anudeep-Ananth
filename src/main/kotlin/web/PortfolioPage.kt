@@ -9,6 +9,7 @@ import kotlinx.html.ButtonType
 import kotlinx.html.FlowContent
 import kotlinx.html.InputType
 import kotlinx.html.a
+import kotlinx.html.article
 import kotlinx.html.button
 import kotlinx.html.div
 import kotlinx.html.form
@@ -26,6 +27,7 @@ import kotlinx.html.source
 import kotlinx.html.span
 import kotlinx.html.textArea
 import kotlinx.html.ul
+import kotlinx.html.unsafe
 import kotlinx.html.video
 
 private val techStackLabels = listOf(
@@ -167,21 +169,9 @@ private fun FlowContent.renderProofSection() {
             }
             h3 {
                 attributes["style"] = "margin-top:1.25rem;"
-                +"Experience timeline"
+                +"Experience, drawn as a path"
             }
-            div(classes = "timeline") {
-                ExperienceTimelineEntries.entries.forEach { entry ->
-                    div(classes = "timeline-item") {
-                        div(classes = "timeline-meta") { +"${entry.dateRangeLabel} · ${entry.companyName}" }
-                        h3 { +entry.roleTitle }
-                        ul {
-                            entry.summaryBullets.forEach { bullet ->
-                                li { +bullet }
-                            }
-                        }
-                    }
-                }
-            }
+            renderDrawnExperienceJourney()
             h3 {
                 attributes["style"] = "margin-top:1.25rem;"
                 +"Tech stack"
@@ -189,6 +179,51 @@ private fun FlowContent.renderProofSection() {
             div(classes = "tech-strip") {
                 techStackLabels.forEach { label ->
                     span(classes = "chip") { +label }
+                }
+            }
+        }
+    }
+}
+
+private fun FlowContent.renderDrawnExperienceJourney() {
+    val chronologicalEntries = ExperienceTimelineEntries.entries.asReversed()
+    div(classes = "journey-map") {
+        unsafe {
+            +"""
+            <svg class="journey-spine" viewBox="0 0 200 1540" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M100 24
+                C 36 90, 164 150, 100 220
+                C 28 290, 172 350, 100 430
+                C 40 510, 160 570, 100 650
+                C 24 730, 176 790, 100 870
+                C 44 950, 156 1010, 100 1090
+                C 30 1170, 170 1230, 100 1310
+                C 60 1370, 140 1430, 100 1510"
+                fill="none" stroke="#4f46e5" stroke-width="3.2"
+                stroke-linecap="round" stroke-dasharray="11 7 3 8"/>
+            </svg>
+            """.trimIndent()
+        }
+        chronologicalEntries.forEachIndexed { index, entry ->
+            val sideClass = if (index % 2 == 0) "is-left" else "is-right"
+            val isLatest = index == chronologicalEntries.lastIndex
+            article(classes = "journey-stop $sideClass${if (isLatest) " is-now" else ""}") {
+                span(classes = "journey-pin") {
+                    span { +"${index + 1}" }
+                }
+                div(classes = "journey-card") {
+                    span(classes = "journey-tape")
+                    if (isLatest) {
+                        span(classes = "journey-now") { +"now" }
+                    }
+                    span(classes = "journey-year") { +entry.dateRangeLabel }
+                    h3 { +entry.companyName }
+                    p(classes = "journey-role") { +entry.roleTitle }
+                    ul {
+                        entry.summaryBullets.take(3).forEach { bullet ->
+                            li { +bullet }
+                        }
+                    }
                 }
             }
         }

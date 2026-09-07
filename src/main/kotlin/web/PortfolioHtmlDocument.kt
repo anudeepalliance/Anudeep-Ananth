@@ -54,7 +54,7 @@ fun HTML.renderPortfolioHtmlDocument() {
         }
         link(
             rel = "stylesheet",
-            href = "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Manrope:wght@400;600;700;800&display=swap",
+            href = "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;700&family=Great+Vibes&family=Manrope:wght@400;600;700;800&display=swap",
         )
         link(rel = "stylesheet", href = "/static/css/lab.css")
         script {
