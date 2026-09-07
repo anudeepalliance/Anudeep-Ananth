@@ -53,6 +53,30 @@ object AiTechStackEntries {
             siteUrl = "https://x.ai",
             logoImagePath = "/static/images/stack/grok.png",
         ),
+        AiTechStackEntry(
+            displayName = "Firecrawl",
+            useLabel = "Web scraping",
+            siteUrl = "https://www.firecrawl.dev",
+            logoImagePath = "/static/images/stack/firecrawl.png",
+        ),
+        AiTechStackEntry(
+            displayName = "GrokBot",
+            useLabel = "Autonomous work",
+            siteUrl = "https://x.ai/news/introducing-grok-bot",
+            logoImagePath = "/static/images/stack/grokbot.png",
+        ),
+        AiTechStackEntry(
+            displayName = "Claude Code",
+            useLabel = "Power user",
+            siteUrl = "https://code.claude.com",
+            logoImagePath = "/static/images/stack/claude-code.png",
+        ),
+        AiTechStackEntry(
+            displayName = "OpenDesign",
+            useLabel = "Create social media assets",
+            siteUrl = "https://open-design.ai",
+            logoImagePath = "/static/images/stack/opendesign.png",
+        ),
     )
 }
 
