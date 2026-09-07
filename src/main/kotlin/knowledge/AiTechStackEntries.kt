@@ -8,7 +8,7 @@ object AiTechStackEntries {
         AiTechStackEntry(
             displayName = "Koog",
             useLabel = "Custom AI agents",
-            siteUrl = "https://docs.koog.ai",
+            siteUrl = "https://www.jetbrains.com/koog/",
             logoImagePath = "/static/images/stack/koog.png",
         ),
         AiTechStackEntry(
