@@ -11,7 +11,8 @@ Project rules: `CLAUDE.md`
 
 - [x] Init git repo, add `.gitignore` (`.gradle`, `build`, `.idea`, `.superpowers`, `.env*`, secrets)
 - [ ] Confirm local `./gradlew run` still serves the Ktor hello-world baseline
-- [ ] Add env/secrets pattern for MiniMax, Sarvam, ElevenLabs, Firecrawl (local + VPS-ready)
+- [ ] Add env/secrets pattern for MiniMax, Sarvam, ElevenLabs, Firecrawl (local + VPS-ready); keep `ConfidentialObjects.kt` gitignored
+- [ ] Rotate any keys that were ever committed or pasted into chat, then update local secrets only
 - [ ] Purchase/connect `anudeepananth.com` to Hostinger VPS when ready (can finish later in Phase 7)
 - [ ] Add usage logging hooks plan (no rate limits, but log agent/voice calls)
 

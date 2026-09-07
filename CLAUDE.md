@@ -35,7 +35,8 @@ Do **not** use Compose for Web for this site.
 - Page content is server-rendered and **visible on first byte** — never hide the whole page behind `opacity: 0` until JS/Wasm boots
 - HTMX handles swaps for score cards, chat bubbles, agent panel switches; streaming via SSE (or equivalent) for agent replies
 - Minimal client JS only for mic capture and audio playback
-- Secrets stay on the VPS / env — never commit API keys
+- Secrets stay local / on the VPS — never commit API keys
+- `src/main/kotlin/util/ConfidentialObjects.kt` is gitignored; do not re-add it to git. Prefer env vars over time
 
 ## Agents (all live)
 
