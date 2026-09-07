@@ -2,11 +2,12 @@ package web
 
 import agents.AgentChatTurnOutcome
 import knowledge.AgentRosterEntries
+import knowledge.ContactDetails
 import kotlinx.html.ButtonType
 import kotlinx.html.button
 import kotlinx.html.div
+import kotlinx.html.img
 import kotlinx.html.p
-import kotlinx.html.span
 import kotlinx.html.stream.createHTML
 import kotlinx.html.unsafe
 
@@ -21,18 +22,28 @@ fun renderAgentChatPanelHtml(outcome: AgentChatTurnOutcome): String {
 }
 
 private fun renderSuccessfulChatTurnHtml(outcome: AgentChatTurnOutcome.Success): String {
-    val displayName = AgentRosterEntries.agents
-        .firstOrNull { it.agentId == outcome.agentId }
-        ?.displayName
-        ?: outcome.agentId
+    val rosterEntry = AgentRosterEntries.agents.firstOrNull { agentRosterEntry ->
+        agentRosterEntry.agentId == outcome.agentId
+    }
+    val displayName = rosterEntry?.displayName ?: outcome.agentId
+    val portraitImagePath = rosterEntry?.portraitImagePath
+        ?: "/static/images/agents/${outcome.agentId}.jpg"
 
     return createHTML().div(classes = "chat-turn") {
-        div(classes = "chat-meta") {
-            span(classes = "chip") { +displayName }
-            span(classes = "muted") { +"agent reply" }
+        div(classes = "chat-speaker") {
+            img(classes = "chat-speaker-photo") {
+                src = portraitImagePath
+                alt = "$displayName portrait of ${ContactDetails.FULL_NAME}"
+                attributes["width"] = "56"
+                attributes["height"] = "56"
+            }
         }
-        div(classes = "chat-bubble chat-markdown") {
-            unsafe { +MarkdownToSafeHtml.render(outcome.replyText) }
+        div(classes = "chat-bubble") {
+            attributes["role"] = "group"
+            attributes["aria-label"] = "$displayName reply"
+            div(classes = "chat-markdown") {
+                unsafe { +MarkdownToSafeHtml.render(outcome.replyText) }
+            }
         }
     }
 }

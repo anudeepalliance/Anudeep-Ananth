@@ -58,6 +58,8 @@ class MarkdownToSafeHtmlTest {
             ),
         )
         assertTrue(html.contains("chat-markdown"))
+        assertTrue(html.contains("chat-speaker-photo"))
+        assertTrue(html.contains("/static/images/agents/market_research.jpg"))
         assertTrue(html.contains("<h2>"))
         assertTrue(html.contains("<strong>Inspektlabs</strong>"))
         assertTrue(html.contains("<table>"))

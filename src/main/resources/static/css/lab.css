@@ -998,6 +998,13 @@ h3 { margin: 0; font-size: 1.05rem; }
   font-size: 0.86rem;
   min-height: 72px;
 }
+.output-slot:has(.chat-turn) {
+  border: 0;
+  padding: 0.45rem 0 0;
+  background: transparent;
+  color: inherit;
+  min-height: 0;
+}
 
 .htmx-indicator { display: none; }
 .htmx-request .htmx-indicator,
@@ -1059,9 +1066,64 @@ h3 { margin: 0; font-size: 1.05rem; }
 .chip-ok { color: var(--ok); border-color: rgba(15, 159, 110, 0.3); }
 .chip-warn { color: var(--warn); border-color: rgba(196, 123, 0, 0.3); }
 .chip-danger { color: var(--danger); border-color: rgba(210, 59, 86, 0.3); }
-.chat-turn { display: grid; gap: 0.55rem; }
+.chat-turn {
+  display: grid;
+  grid-template-columns: 3.7rem minmax(0, 1fr);
+  gap: 0.2rem 0.85rem;
+  align-items: start;
+  color: var(--ink);
+}
+.chat-turn.is-error {
+  grid-template-columns: 1fr;
+  gap: 0.55rem;
+}
+.chat-speaker {
+  display: grid;
+  justify-items: center;
+  gap: 0.28rem;
+  padding-top: 0.15rem;
+}
+.chat-speaker-photo {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+  object-position: center 18%;
+  border: 2px solid #1f1a17;
+  border-radius: 5px 11px 7px 9px;
+  background: #fffaf1;
+  box-shadow: 3px 4px 0 rgba(31, 26, 23, 0.08);
+  display: block;
+}
 .chat-meta { display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; }
-.chat-bubble { margin: 0; font-size: 0.95rem; }
+.chat-bubble {
+  position: relative;
+  margin: 0;
+  font-size: 0.95rem;
+  background: #fffaf1;
+  border: 2px solid #1f1a17;
+  border-radius: 5px 18px 16px 18px;
+  padding: 0.85rem 1rem 0.95rem;
+  box-shadow: 4px 5px 0 rgba(31, 26, 23, 0.08);
+}
+.chat-bubble::before,
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  top: 1.25rem;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.chat-bubble::before {
+  left: -14px;
+  border-width: 9px 14px 9px 0;
+  border-color: transparent #1f1a17 transparent transparent;
+}
+.chat-bubble::after {
+  left: -10px;
+  border-width: 7px 11px 7px 0;
+  border-color: transparent #fffaf1 transparent transparent;
+}
 .chat-markdown { overflow-x: auto; }
 .chat-markdown > :first-child { margin-top: 0; }
 .chat-markdown > :last-child { margin-bottom: 0; }
