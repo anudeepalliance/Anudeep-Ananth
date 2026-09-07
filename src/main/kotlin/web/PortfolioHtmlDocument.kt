@@ -69,6 +69,10 @@ fun HTML.renderPortfolioHtmlDocument() {
             src = "/static/js/lightbox.js"
             attributes["defer"] = "true"
         }
+        script {
+            src = "/static/js/hero-video.js"
+            attributes["defer"] = "true"
+        }
     }
     body {
         a(href = "#hook", classes = "skip-link") { +"Skip to content" }

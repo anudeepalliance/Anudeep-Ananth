@@ -69,16 +69,44 @@ private fun FlowContent.renderHookSection() {
     section(classes = "hero-stage") {
         id = "hook"
         h1(classes = "hero-giant") { +"ANUDEEP" }
-        video(classes = "hero-stage-video") {
-            attributes["autoplay"] = "true"
-            attributes["muted"] = "true"
-            attributes["loop"] = "true"
-            attributes["playsinline"] = "true"
-            attributes["preload"] = "auto"
-            attributes["aria-label"] = "Intro video"
-            source {
-                src = ContactDetails.INTRO_VIDEO_URL
-                type = "video/mp4"
+        div(classes = "hero-video-frame") {
+            video(classes = "hero-stage-video") {
+                attributes["autoplay"] = "true"
+                attributes["muted"] = "true"
+                attributes["loop"] = "true"
+                attributes["playsinline"] = "true"
+                attributes["preload"] = "auto"
+                attributes["aria-label"] = "Intro video"
+                source {
+                    src = ContactDetails.INTRO_VIDEO_URL
+                    type = "video/mp4"
+                }
+            }
+            div(classes = "hero-video-controls") {
+                button(classes = "hero-video-mute is-muted") {
+                    type = ButtonType.button
+                    attributes["aria-label"] = "Unmute intro video"
+                    unsafe {
+                        +"""
+                        <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 9.5v5h3.2L12 18.2V5.8L7.7 9.5H4.5z"/>
+                          <path d="m16.2 9.1 5.2 5.2M21.4 9.1l-5.2 5.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="icon-sound" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 9.5v5h3.2L12 18.2V5.8L7.7 9.5H4.5z"/>
+                          <path d="M15.2 8.4a4.4 4.4 0 0 1 0 7.2M17.8 6a7.4 7.4 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                        """.trimIndent()
+                    }
+                }
+                input(classes = "hero-video-seek") {
+                    type = InputType.range
+                    attributes["min"] = "0"
+                    attributes["max"] = "1000"
+                    attributes["value"] = "0"
+                    attributes["step"] = "1"
+                    attributes["aria-label"] = "Intro video position"
+                }
             }
         }
         span(classes = "float-pill pill-a") {
