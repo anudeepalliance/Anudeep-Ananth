@@ -85,4 +85,15 @@ data class AiTechStackEntry(
     val useLabel: String,
     val siteUrl: String,
     val logoImagePath: String,
-)
+) {
+    /**
+     * Host and path shown on the stack tile, without https:// or a trailing slash.
+     */
+    fun visibleHyperlinkText(): String {
+        return siteUrl
+            .removePrefix("https://")
+            .removePrefix("http://")
+            .removePrefix("www.")
+            .trimEnd('/')
+    }
+}

@@ -474,6 +474,7 @@ private fun FlowContent.renderAiTechStackSection() {
                     }
                     h3 { +stackEntry.displayName }
                     p { +stackEntry.useLabel }
+                    p(classes = "stack-url") { +stackEntry.visibleHyperlinkText() }
                 }
             }
         }

@@ -1209,6 +1209,13 @@ h3 { margin: 0; font-size: 1.05rem; }
   color: var(--muted);
   font-size: 0.86rem;
 }
+.stack-card .stack-url {
+  margin-top: 0.28rem;
+  color: var(--accent-text);
+  font-size: 0.72rem;
+  font-weight: 700;
+  word-break: break-word;
+}
 
 .contact-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
 .site-footer {
