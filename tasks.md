@@ -11,8 +11,7 @@ Project rules: `CLAUDE.md`
 
 - [x] Init git repo, add `.gitignore` (`.gradle`, `build`, `.idea`, `.superpowers`, `ConfidentialObjects.kt`)
 - [ ] Confirm local `./gradlew run` still serves the Ktor hello-world baseline
-- [ ] Confirm `ConfidentialObjects.kt` stays gitignored and is present locally/on VPS; wire new keys there only (no env/secrets pattern)
-- [ ] Purchase/connect `anudeepananth.com` to Hostinger VPS when ready (can finish later in Phase 7)
+- [ ] Confirm `ConfidentialObjects.kt` stays gitignored and is present locally; wire new keys there only (no env/secrets pattern)
 - [ ] Add usage logging hooks plan (no rate limits, but log agent/voice calls)
 
 ## Phase 1 — Content & knowledge pack

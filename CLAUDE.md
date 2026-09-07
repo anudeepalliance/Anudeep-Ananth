@@ -7,7 +7,7 @@ Work tracker: `tasks.md` (run phases/tasks one by one in Grok Build)
 
 ## Product intent
 
-- Domain: `www.anudeepananth.com`
+- Domain: `www.anudeepananth.com` (buy + deploy only in the final phase after local sign-off)
 - Single page: Hook → Proof → Agents → Contact
 - Feel: special, AI-native marketer who ships agents
 - Visual: dark AI lab / terminal

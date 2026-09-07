@@ -23,7 +23,7 @@ Recruiters should quickly answer:
 - Job Matching on hard skips: soft reject (strong misalignment + transferable strengths)
 - Voice: Sarvam STT in, ElevenLabs TTS out, English only
 - Rate limits: none (accepted cost risk); still log usage
-- Hosting: Hostinger VPS ready; domain to purchase
+- Hosting: Hostinger VPS ready; domain purchase + DNS + deploy only after full local testing (final phase)
 - Secrets: `src/main/kotlin/util/ConfidentialObjects.kt` only (gitignored) — no env/secrets pattern
 - Assets ready: professional photo (source for agent portraits)
 - Assets to create: Seedance intro video, case studies/corpus, 7 portrait variants
