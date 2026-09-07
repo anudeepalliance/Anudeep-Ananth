@@ -205,6 +205,36 @@ a:hover { text-decoration: underline; }
   outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
+.hero-video-replay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: none;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(17, 18, 22, 0.38);
+  cursor: pointer;
+}
+.hero-video-frame.is-ended .hero-video-replay {
+  display: grid;
+}
+.hero-video-replay-orb {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 1.45rem;
+  box-shadow: 0 12px 24px var(--accent-glow);
+}
+.hero-video-replay:focus-visible .hero-video-replay-orb {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
 
 .contact-layout {
   display: grid;
@@ -909,6 +939,7 @@ h3 { margin: 0; font-size: 1.05rem; }
 }
 
 .agent-desk {
+  scroll-margin-top: 1rem;
   margin-top: 1.2rem;
   padding: 1.2rem 1.3rem 1.35rem;
   background: #fffaf1;

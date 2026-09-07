@@ -84,7 +84,6 @@ private fun FlowContent.renderHookSection() {
             video(classes = "hero-stage-video") {
                 attributes["autoplay"] = "true"
                 attributes["muted"] = "true"
-                attributes["loop"] = "true"
                 attributes["playsinline"] = "true"
                 attributes["preload"] = "auto"
                 attributes["width"] = "960"
@@ -94,6 +93,11 @@ private fun FlowContent.renderHookSection() {
                     src = ContactDetails.INTRO_VIDEO_URL
                     type = "video/mp4"
                 }
+            }
+            button(classes = "hero-video-replay") {
+                type = ButtonType.button
+                attributes["aria-label"] = "Play intro again"
+                span(classes = "hero-video-replay-orb") { +"▶" }
             }
             div(classes = "hero-video-controls") {
                 button(classes = "hero-video-mute is-muted") {
@@ -395,6 +399,7 @@ private fun FlowContent.renderAgentsSection() {
             }
         }
         div(classes = "agent-desk") {
+            id = "agent-live"
             p(classes = "agent-live") {
                 span(classes = "live-pip")
                 +"Live"

@@ -19,7 +19,7 @@ import kotlinx.html.unsafe
 import web.seo.PortfolioSeo
 import web.seo.buildPortfolioJsonLdScript
 
-private const val STATIC_ASSET_VERSION = "20260907c"
+private const val STATIC_ASSET_VERSION = "20260907d"
 
 /**
  * Full HTML document shell for the portfolio homepage.
@@ -240,6 +240,16 @@ fun HTML.renderPortfolioHtmlDocument() {
                   var chatInput = document.querySelector('#agent-chat-form textarea');
                   var inputHint = card.getAttribute('data-agent-hint');
                   if (chatInput && inputHint) chatInput.placeholder = inputHint;
+                  if (window.matchMedia('(max-width: 980px)').matches) {
+                    var liveDesk = document.getElementById('agent-live');
+                    if (liveDesk) {
+                      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                      liveDesk.scrollIntoView({
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                        block: 'start',
+                      });
+                    }
+                  }
                 });
                 """.trimIndent()
             }

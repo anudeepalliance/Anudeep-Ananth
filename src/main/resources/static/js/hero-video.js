@@ -4,14 +4,32 @@
   var introVideo = videoFrame.querySelector("video");
   var muteToggleButton = videoFrame.querySelector(".hero-video-mute");
   var seekBar = videoFrame.querySelector(".hero-video-seek");
+  var replayButton = videoFrame.querySelector(".hero-video-replay");
   if (!introVideo || !muteToggleButton || !seekBar) return;
 
+  introVideo.loop = false;
   introVideo.muted = true;
   muteToggleButton.classList.add("is-muted");
   muteToggleButton.setAttribute("aria-label", "Unmute intro video");
 
   function seekBarMaximum() {
     return Number(seekBar.max) || 1000;
+  }
+
+  function showReplayOverlay() {
+    videoFrame.classList.add("is-ended");
+    if (replayButton) replayButton.removeAttribute("hidden");
+  }
+
+  function hideReplayOverlay() {
+    videoFrame.classList.remove("is-ended");
+  }
+
+  function playIntroFromStart() {
+    hideReplayOverlay();
+    introVideo.currentTime = 0;
+    var playPromise = introVideo.play();
+    if (playPromise && playPromise.catch) playPromise.catch(function () {});
   }
 
   function syncSeekBarToPlayback() {
@@ -26,6 +44,13 @@
     if (!introVideo.duration) return;
     introVideo.currentTime =
       (Number(seekBar.value) / seekBarMaximum()) * introVideo.duration;
+    if (introVideo.ended || introVideo.currentTime >= introVideo.duration - 0.05) {
+      showReplayOverlay();
+      return;
+    }
+    hideReplayOverlay();
+    var playPromise = introVideo.play();
+    if (playPromise && playPromise.catch) playPromise.catch(function () {});
   }
 
   muteToggleButton.addEventListener("click", function () {
@@ -35,9 +60,17 @@
       "aria-label",
       introVideo.muted ? "Unmute intro video" : "Mute intro video",
     );
-    var playPromise = introVideo.play();
-    if (playPromise && playPromise.catch) playPromise.catch(function () {});
+    if (!introVideo.ended) {
+      var playPromise = introVideo.play();
+      if (playPromise && playPromise.catch) playPromise.catch(function () {});
+    }
   });
+
+  if (replayButton) {
+    replayButton.addEventListener("click", function () {
+      playIntroFromStart();
+    });
+  }
 
   seekBar.addEventListener("pointerdown", function () {
     seekBar.dataset.isDragging = "true";
@@ -50,4 +83,9 @@
 
   introVideo.addEventListener("timeupdate", syncSeekBarToPlayback);
   introVideo.addEventListener("loadedmetadata", syncSeekBarToPlayback);
+  introVideo.addEventListener("ended", function () {
+    syncSeekBarToPlayback();
+    showReplayOverlay();
+  });
+  introVideo.addEventListener("play", hideReplayOverlay);
 })();
