@@ -31,13 +31,14 @@ import kotlinx.html.unsafe
 import kotlinx.html.video
 
 /**
- * Renders the single-page portfolio body sections (Hook → Achievements → Agents → Contact).
+ * Renders the single-page portfolio body sections (Hook → Achievements → Job Matching → Agents → Contact).
  */
 fun FlowContent.renderPortfolioPageBody() {
     renderTopBar()
     renderHookSection()
     renderPortraitFold()
     renderAchievementsSection()
+    renderJobMatchingSection()
     renderAgentsSection()
     renderContactSection()
     renderSiteFooter()
@@ -58,6 +59,7 @@ private fun FlowContent.navLinkRow() {
     div(classes = "topnav") {
         a(href = "#hook") { +"Intro" }
         a(href = "#achievements") { +"Achievements" }
+        a(href = "#job-matching") { +"Job Matching" }
         a(href = "#agents") { +"Agents" }
         a(href = "#contact") { +"Contact" }
     }
@@ -84,8 +86,8 @@ private fun FlowContent.renderHookSection() {
             h3 { +"Agents I use" }
             p { +"Custom agents I built for marketing work. Start with Job Matching." }
             div(classes = "mini-row") {
-                a(href = "#agents", classes = "play-orb") { +"▶" }
-                span { +"Open agents" }
+                a(href = "#job-matching", classes = "play-orb") { +"▶" }
+                span { +"Open Job Matching" }
             }
         }
         div(classes = "float-card dark float-contact") {
@@ -214,14 +216,88 @@ private fun FlowContent.renderDrawnExperienceJourney() {
     }
 }
 
+private fun FlowContent.renderJobMatchingSection() {
+    val jobMatchingAgent = AgentRosterEntries.agents.first { it.agentId == "job_matching" }
+    section(classes = "section") {
+        id = "job-matching"
+        p(classes = "eyebrow") { +"Job Matching" }
+        h2 { +"Paste a role. See the fit." }
+        p(classes = "muted") {
+            +"I built this agent and I use it to score a job description against published experience. It has its own input and output — separate from the other agents."
+        }
+        div(classes = "panel") {
+            div(classes = "panel-head") {
+                span(classes = "prompt") { +"Built by me" }
+                span { +"used in the work" }
+            }
+            div(classes = "job-matching-layout") {
+                div(classes = "job-matching-intro") {
+                    img(classes = "job-matching-portrait") {
+                        src = jobMatchingAgent.portraitImagePath
+                        alt = "${jobMatchingAgent.displayName} portrait of ${ContactDetails.FULL_NAME}"
+                        attributes["width"] = "280"
+                        attributes["height"] = "280"
+                    }
+                    h3 { +jobMatchingAgent.displayName }
+                    p(classes = "muted") { +jobMatchingAgent.shortDescription }
+                }
+                div(classes = "fit-panel") {
+                    id = "job-matching-panel"
+                    h3 { +"Job description" }
+                    p(classes = "muted") {
+                        +"Paste the full posting. The output is a fit read: strengths, gaps, and talking points."
+                    }
+                    form {
+                        id = "job-matching-form"
+                        attributes["hx-post"] = "/htmx/job-match"
+                        attributes["hx-target"] = "#job-match-output"
+                        attributes["hx-swap"] = "innerHTML"
+                        attributes["hx-indicator"] = "#job-match-indicator"
+                        textArea {
+                            name = "jobDescription"
+                            placeholder = "Paste the full job description here…"
+                            attributes["aria-label"] = "Job description"
+                        }
+                        div(classes = "console-actions") {
+                            button(classes = "btn btn-primary") {
+                                type = ButtonType.submit
+                                +"Run fit analysis"
+                            }
+                            button(classes = "btn btn-ghost") {
+                                type = ButtonType.button
+                                attributes["data-voice-jd"] = "true"
+                                +"Voice input"
+                            }
+                        }
+                    }
+                    p(classes = "muted voice-status") {
+                        +"Voice: English only. Falls back to typing if the mic or speech API fails."
+                    }
+                    div(classes = "htmx-indicator thinking-indicator") {
+                        id = "job-match-indicator"
+                        +"Scoring the role against published experience…"
+                    }
+                    div(classes = "output-slot") {
+                        id = "job-match-output"
+                        +"Paste a job description to see strengths, gaps, and talking points."
+                    }
+                }
+            }
+        }
+    }
+}
+
 private fun FlowContent.renderAgentsSection() {
-    val primaryAgent = AgentRosterEntries.agents.first { it.isPrimary }
+    val workingAgents = AgentRosterEntries.agents.filter { agent ->
+        agent.agentId != "job_matching"
+    }
+    val defaultChatAgent = workingAgents.first()
     section(classes = "section") {
         id = "agents"
         p(classes = "eyebrow") { +"Agents" }
         h2 { +"I built these. I use them." }
         p(classes = "muted") {
-            +"Custom agents for performance, research, prospecting, scoring, social, and analytics. They are live here because that is how I work — not a mockup."
+            +"Custom agents for performance, research, prospecting, scoring, social, and analytics. They are live here because that is how I work — not a mockup. Job Matching has its own section above."
         }
         div(classes = "panel") {
             div(classes = "panel-head") {
@@ -230,9 +306,9 @@ private fun FlowContent.renderAgentsSection() {
             }
             div(classes = "agents-layout") {
                 div(classes = "agent-roster") {
-                    AgentRosterEntries.agents.forEach { agent ->
-                        val activeClass = if (agent.isPrimary) " agent-card is-active is-primary" else " agent-card"
-                        button(classes = activeClass.trim()) {
+                    workingAgents.forEachIndexed { index, agent ->
+                        val activeClass = if (index == 0) "agent-card is-active" else "agent-card"
+                        button(classes = activeClass) {
                             type = ButtonType.button
                             attributes["data-agent-id"] = agent.agentId
                             img(classes = "agent-avatar") {
@@ -243,60 +319,17 @@ private fun FlowContent.renderAgentsSection() {
                                 attributes["height"] = "104"
                             }
                             div {
-                                h3 {
-                                    +agent.displayName
-                                    if (agent.isPrimary) {
-                                        span(classes = "badge") { +"primary" }
-                                    }
-                                }
+                                h3 { +agent.displayName }
                                 p { +agent.shortDescription }
                             }
                         }
                     }
                 }
                 div(classes = "console-panel") {
-                    div(classes = "fit-panel") {
-                        id = "job-matching-panel"
-                        h3 { +"Job Matching" }
-                        p(classes = "muted") {
-                            +"I built this agent to score a role against published experience. Paste a job description."
-                        }
-                        form {
-                            id = "job-matching-form"
-                            attributes["hx-post"] = "/htmx/job-match"
-                            attributes["hx-target"] = "#job-match-output"
-                            attributes["hx-swap"] = "innerHTML"
-                            attributes["hx-indicator"] = "#job-match-indicator"
-                            textArea {
-                                name = "jobDescription"
-                                placeholder = "Paste the full job description here…"
-                                attributes["aria-label"] = "Job description"
-                            }
-                            div(classes = "console-actions") {
-                                button(classes = "btn btn-primary") {
-                                    type = ButtonType.submit
-                                    +"Run fit analysis"
-                                }
-                                button(classes = "btn btn-ghost") {
-                                    type = ButtonType.button
-                                    attributes["data-voice-jd"] = "true"
-                                    +"Voice input"
-                                }
-                            }
-                        }
-                        div(classes = "htmx-indicator thinking-indicator") {
-                            id = "job-match-indicator"
-                            +"Scoring the role against published experience…"
-                        }
-                        div(classes = "output-slot") {
-                            id = "job-match-output"
-                            +"Paste a job description to see strengths, gaps, and talking points."
-                        }
-                    }
                     div(classes = "chat-panel") {
                         h3 {
                             id = "active-agent-chat-title"
-                            +"Chat — ${primaryAgent.displayName}"
+                            +"Chat — ${defaultChatAgent.displayName}"
                         }
                         p(classes = "muted") {
                             id = "active-agent-chat-hint"
@@ -312,11 +345,11 @@ private fun FlowContent.renderAgentsSection() {
                                 id = "active-agent-id"
                                 type = InputType.hidden
                                 name = "agentId"
-                                value = primaryAgent.agentId
+                                value = defaultChatAgent.agentId
                             }
                             textArea {
                                 name = "message"
-                                placeholder = "Ask a follow-up about fit, channels, lifecycle, ABM…"
+                                placeholder = "Ask about channels, lifecycle, ABM, scoring, social, analytics…"
                                 attributes["aria-label"] = "Agent chat message"
                             }
                             div(classes = "console-actions") {
@@ -336,7 +369,7 @@ private fun FlowContent.renderAgentsSection() {
                                 }
                             }
                         }
-                        p(classes = "muted") {
+                        p(classes = "muted voice-status") {
                             id = "voice-status"
                             +"Voice: English only. Falls back to typing if the mic or speech API fails."
                         }

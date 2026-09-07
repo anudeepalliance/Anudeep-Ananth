@@ -105,7 +105,7 @@ fun HTML.renderPortfolioHtmlDocument() {
             }
         }
         script {
-            // Roster click updates active card, hidden agentId, chat title, and JD panel visibility.
+            // Roster click updates active card, hidden agentId, and chat title in the Agents section.
             unsafe {
                 +"""
                 document.addEventListener('DOMContentLoaded', function () {
@@ -116,11 +116,11 @@ fun HTML.renderPortfolioHtmlDocument() {
                   });
                 });
                 document.addEventListener('click', function (event) {
-                  var card = event.target.closest('[data-agent-id]');
+                  var card = event.target.closest('#agents [data-agent-id]');
                   if (!card) return;
                   var agentId = card.getAttribute('data-agent-id');
                   if (!agentId) return;
-                  document.querySelectorAll('[data-agent-id]').forEach(function (node) {
+                  document.querySelectorAll('#agents [data-agent-id]').forEach(function (node) {
                     node.classList.toggle('is-active', node === card);
                   });
                   var agentIdInput = document.getElementById('active-agent-id');
@@ -131,13 +131,7 @@ fun HTML.renderPortfolioHtmlDocument() {
                   if (chatTitle) chatTitle.textContent = 'Chat — ' + displayName;
                   var chatHint = document.getElementById('active-agent-chat-hint');
                   if (chatHint) {
-                    chatHint.textContent = agentId === 'job_matching'
-                      ? 'Follow-up with the Job Matching agent I built.'
-                      : 'This is my ' + displayName + ' agent. Ask it something I use it for.';
-                  }
-                  var jobPanel = document.getElementById('job-matching-panel');
-                  if (jobPanel) {
-                    jobPanel.classList.toggle('is-dimmed', agentId !== 'job_matching');
+                    chatHint.textContent = 'This is my ' + displayName + ' agent. Ask it something I use it for.';
                   }
                 });
                 """.trimIndent()

@@ -20,7 +20,7 @@ Open http://127.0.0.1:8080
 
 ## Surfaces
 
-- `/` — Hook → Achievements → Agents → Contact (visible HTML on first byte)
+- `/` — Hook → Achievements → Job Matching → Agents → Contact (visible HTML on first byte)
 - `/llms.txt` and `/llms-full.txt` — LLM/Google-AI crawlable overviews
 - `/robots.txt`, `/sitemap.xml`
 - `POST /htmx/job-match`, `POST /htmx/agent-chat`

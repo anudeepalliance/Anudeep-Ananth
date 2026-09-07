@@ -1,7 +1,8 @@
 (function () {
   function setStatus(message) {
-    var statusNode = document.getElementById("voice-status");
-    if (statusNode) statusNode.textContent = message || "";
+    document.querySelectorAll(".voice-status").forEach(function (statusNode) {
+      statusNode.textContent = message || "";
+    });
   }
 
   async function recordOnce() {

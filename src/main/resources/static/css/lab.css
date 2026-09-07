@@ -620,6 +620,25 @@ h3 { margin: 0; font-size: 1.05rem; }
 }
 .btn-ghost:hover { border-color: var(--accent); text-decoration: none; }
 
+.job-matching-layout {
+  display: grid;
+  grid-template-columns: 0.7fr 1.4fr;
+  gap: 1.25rem;
+  padding: 1.35rem 1.35rem 1.5rem;
+  align-items: start;
+}
+.job-matching-intro {
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+}
+.job-matching-portrait {
+  width: 160px;
+  height: 160px;
+  border-radius: 22px;
+  object-fit: cover;
+}
+.job-matching-intro h3 { font-size: 1.25rem; }
 .agents-layout {
   display: grid;
   grid-template-columns: 0.9fr 1.3fr;
@@ -779,6 +798,7 @@ h3 { margin: 0; font-size: 1.05rem; }
   .hero-script { top: 42%; }
   .float-card { position: static; width: 100%; margin-top: 0.75rem; }
   .hero-bottom { position: static; margin-top: 1.25rem; }
+  .job-matching-layout,
   .agents-layout { grid-template-columns: 1fr; }
 }
 
