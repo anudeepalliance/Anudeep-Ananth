@@ -5,6 +5,16 @@ Personal portfolio site for **Anudeep Ananth**. Target audience: TA, recruiters,
 Canonical design: `docs/superpowers/specs/2026-09-07-portfolio-agent-site-design.md`  
 Work tracker: `tasks.md` (run phases/tasks one by one in Grok Build)
 
+## Reference project (VPS + Mongo)
+
+When wiring Hostinger VPS deploy, MongoDB community edition, SSH tunnels, docker-network hostname probes, or related ops — **copy patterns from PeekoPals**, do not reinvent:
+
+- Project root: `/Users/anudeepmac/IntelliJ/Peekopals/PeekoPals`
+- Mongo helpers: `server/src/main/kotlin/com/peekopals/app/util/mongoDB/`
+- Secrets pattern: `server/src/main/kotlin/com/peekopals/app/util/confidentialObjects/ConfidentialObjects.kt`
+
+That project is already set up to work with this same VPS and the MongoDB community edition running on it. Prefer adapting its connection/probe/tunnel approach for this portfolio (database name `Anudeep-Ananth`).
+
 ## Product intent
 
 - Domain: `www.anudeepananth.com` (buy + deploy only in the final phase after local sign-off)
