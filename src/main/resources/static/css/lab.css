@@ -246,14 +246,87 @@ a:hover { text-decoration: underline; }
   object-fit: cover;
 }
 
+.proof-image-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 0.7rem;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
 .proof-image {
   width: 100%;
   height: 140px;
   object-fit: cover;
   border-radius: 14px;
-  margin-bottom: 0.7rem;
   display: block;
 }
+.proof-image-button:hover .proof-image {
+  filter: brightness(1.04);
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 2.5rem 3.5rem 3.5rem;
+  background: rgba(12, 13, 18, 0.86);
+}
+.lightbox[hidden] {
+  display: none;
+}
+.lightbox img {
+  max-width: min(1100px, 92vw);
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+.lightbox-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1rem;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+}
+.lightbox-close,
+.lightbox-nav {
+  position: absolute;
+  border: 0;
+  background: #fff;
+  color: #16171c;
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.lightbox-close {
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+.lightbox-prev,
+.lightbox-next {
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
 
 .hero-bottom {
   position: absolute;

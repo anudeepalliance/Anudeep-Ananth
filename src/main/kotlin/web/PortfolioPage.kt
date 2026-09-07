@@ -146,10 +146,15 @@ private fun FlowContent.renderProofSection() {
                 AchievementHighlights.highlights.forEach { highlight ->
                     div(classes = "achievement-card") {
                         highlight.proofImagePath?.let { proofImagePath ->
-                            img(classes = "proof-image") {
-                                src = proofImagePath
-                                alt = "${highlight.metricLabel} proof"
-                                attributes["loading"] = "lazy"
+                            button(classes = "proof-image-button") {
+                                type = ButtonType.button
+                                attributes["data-lightbox-src"] = proofImagePath
+                                attributes["data-lightbox-alt"] = "${highlight.metricLabel} — ${highlight.contextLabel}"
+                                img(classes = "proof-image") {
+                                    src = proofImagePath
+                                    alt = "${highlight.metricLabel} proof"
+                                    attributes["loading"] = "lazy"
+                                }
                             }
                         }
                         div(classes = "metric") { +highlight.metricLabel }

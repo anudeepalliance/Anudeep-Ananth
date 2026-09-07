@@ -2,13 +2,18 @@ package web
 
 import knowledge.ContactDetails
 import knowledge.HomepageSalesPitch
+import kotlinx.html.ButtonType
 import kotlinx.html.HTML
 import kotlinx.html.a
 import kotlinx.html.body
+import kotlinx.html.button
 import kotlinx.html.div
 import kotlinx.html.head
+import kotlinx.html.id
+import kotlinx.html.img
 import kotlinx.html.link
 import kotlinx.html.meta
+import kotlinx.html.p
 import kotlinx.html.script
 import kotlinx.html.title
 import kotlinx.html.unsafe
@@ -60,11 +65,44 @@ fun HTML.renderPortfolioHtmlDocument() {
             src = "/static/js/voice.js"
             attributes["defer"] = "true"
         }
+        script {
+            src = "/static/js/lightbox.js"
+            attributes["defer"] = "true"
+        }
     }
     body {
         a(href = "#hook", classes = "skip-link") { +"Skip to content" }
         div(classes = "site-shell") {
             renderPortfolioPageBody()
+        }
+        div(classes = "lightbox") {
+            id = "proof-lightbox"
+            attributes["hidden"] = "hidden"
+            attributes["role"] = "dialog"
+            attributes["aria-modal"] = "true"
+            attributes["aria-label"] = "Proof image"
+            button(classes = "lightbox-close") {
+                type = ButtonType.button
+                attributes["aria-label"] = "Close image"
+                +"×"
+            }
+            button(classes = "lightbox-nav lightbox-prev") {
+                type = ButtonType.button
+                attributes["aria-label"] = "Previous image"
+                +"‹"
+            }
+            img {
+                id = "proof-lightbox-image"
+                alt = ""
+            }
+            button(classes = "lightbox-nav lightbox-next") {
+                type = ButtonType.button
+                attributes["aria-label"] = "Next image"
+                +"›"
+            }
+            p(classes = "lightbox-caption") {
+                id = "proof-lightbox-caption"
+            }
         }
         script {
             // Roster click updates active card, hidden agentId, chat title, and JD panel visibility.
