@@ -19,6 +19,8 @@ import kotlinx.html.unsafe
 import web.seo.PortfolioSeo
 import web.seo.buildPortfolioJsonLdScript
 
+private const val STATIC_ASSET_VERSION = "20260907c"
+
 /**
  * Full HTML document shell for the portfolio homepage.
  * Content is visible on first byte — no opacity:0 preloader.
@@ -131,7 +133,7 @@ fun HTML.renderPortfolioHtmlDocument() {
             rel = "stylesheet",
             href = "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;700&family=Manrope:wght@400;600;700;800&display=swap",
         )
-        link(rel = "stylesheet", href = "/static/css/lab.css")
+        link(rel = "stylesheet", href = "/static/css/lab.css?v=$STATIC_ASSET_VERSION")
         script {
             unsafe {
                 +"""
@@ -146,19 +148,19 @@ fun HTML.renderPortfolioHtmlDocument() {
             attributes["defer"] = "true"
         }
         script {
-            src = "/static/js/voice.js"
+            src = "/static/js/voice.js?v=$STATIC_ASSET_VERSION"
             attributes["defer"] = "true"
         }
         script {
-            src = "/static/js/lightbox.js"
+            src = "/static/js/lightbox.js?v=$STATIC_ASSET_VERSION"
             attributes["defer"] = "true"
         }
         script {
-            src = "/static/js/hero-video.js"
+            src = "/static/js/hero-video.js?v=$STATIC_ASSET_VERSION"
             attributes["defer"] = "true"
         }
         script {
-            src = "/static/js/motion.js"
+            src = "/static/js/motion.js?v=$STATIC_ASSET_VERSION"
             attributes["defer"] = "true"
         }
     }

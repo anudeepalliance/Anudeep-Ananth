@@ -77,7 +77,7 @@ rsync -avz -e "$RSYNC_SSH_CMD" --delete \
 echo -e "${GREEN}Source code transferred${NC}"
 
 echo -e "\n${YELLOW}Step 3: Building Docker image on VPS...${NC}"
-ssh -p 1379 ${SSH_OPTIONS} ${VPS_HOST} "cd ${VPS_PROJECT_DIR} && sudo docker compose build --no-cache"
+ssh -p 1379 ${SSH_OPTIONS} ${VPS_HOST} "cd ${VPS_PROJECT_DIR} && sudo docker compose build"
 ssh -p 1379 ${SSH_OPTIONS} ${VPS_HOST} "sudo docker tag anudeep-ananth:latest anudeep-ananth:${BUILD_TAG}"
 echo -e "${GREEN}Docker image built${NC}"
 
