@@ -6,16 +6,6 @@ package knowledge
 object AchievementHighlights {
     val highlights = listOf(
         AchievementHighlight(
-            metricLabel = "+25% engagement",
-            contextLabel = "DigitalOcean AI/ML portfolio ecosystem",
-            category = "Lifecycle",
-        ),
-        AchievementHighlight(
-            metricLabel = "+30% onboarding conversion",
-            contextLabel = "DigitalOcean customer journey optimization",
-            category = "Lifecycle",
-        ),
-        AchievementHighlight(
             metricLabel = "−40% CPL",
             contextLabel = "Elucidata demand gen in 3 months",
             category = "Demand gen",
@@ -53,11 +43,6 @@ object AchievementHighlights {
             contextLabel = "Employee of the Month — Feb 2014, signed by Karthik Mitta",
             category = "Recognition",
             proofImagePath = "/static/images/proof/amazon-star-award.jpg",
-        ),
-        AchievementHighlight(
-            metricLabel = "+15% retention",
-            contextLabel = "DigitalOcean local PMF in key US markets",
-            category = "Retention",
         ),
         AchievementHighlight(
             metricLabel = "AI agents + n8n",

@@ -9,7 +9,7 @@ class AnudeepKnowledgePackTest {
     @Test
     fun `knowledge pack exposes expected core content counts`() {
         assertEquals(7, AnudeepKnowledgePack.timelineEntries.size)
-        assertEquals(4, AnudeepKnowledgePack.caseStudyEntries.size)
+        assertEquals(3, AnudeepKnowledgePack.caseStudyEntries.size)
         assertTrue(AnudeepKnowledgePack.achievementHighlights.isNotEmpty())
         assertEquals("anudeeps3@gmail.com", AnudeepKnowledgePack.contactDetails.EMAIL)
         assertEquals("soft_reject", AnudeepKnowledgePack.jobMatchingRules.HARD_SKIP_BEHAVIOR)
@@ -20,7 +20,7 @@ class AnudeepKnowledgePackTest {
         val groundingText = AnudeepKnowledgePack.formatFullAgentGroundingText()
         assertTrue(groundingText.contains("DigitalOcean"))
         assertTrue(groundingText.contains("HARD SKIP"))
-        assertTrue(groundingText.contains("digitalocean-aiml-lifecycle"))
+        assertTrue(groundingText.contains("elucidata-community-demand-gen"))
         assertTrue(groundingText.contains(ContactDetails.LINKEDIN_URL))
     }
 }

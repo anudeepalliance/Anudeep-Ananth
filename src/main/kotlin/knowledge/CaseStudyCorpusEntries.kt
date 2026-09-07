@@ -6,33 +6,6 @@ package knowledge
 object CaseStudyCorpusEntries {
     val entries = listOf(
         CaseStudyEntry(
-            caseStudyId = "digitalocean-aiml-lifecycle",
-            title = "DigitalOcean — AI/ML portfolio lifecycle engagement",
-            companyName = "DigitalOcean",
-            roleTitle = "Lifecycle Marketing Manager",
-            problemStatement =
-                "AI/ML product users needed clearer journeys across email, in-app, and community " +
-                    "touchpoints to deepen engagement and retention.",
-            whatAnudeepDid =
-                "Built data-informed lifecycle campaigns and content curation for the AI/ML portfolio; " +
-                    "partnered with Product on local product-market fit; grew moderator capacity and UGC loops.",
-            outcomes = listOf(
-                "Customer engagement +25%",
-                "Onboarding conversion +30%",
-                "Community moderators +40%",
-                "User-generated content +50%",
-                "Daily active users +18%",
-                "Retention +15% in key US markets",
-            ),
-            skillsDemonstrated = listOf(
-                "Lifecycle marketing",
-                "Cross-functional collaboration",
-                "Community operations",
-                "Experimentation",
-                "Retention",
-            ),
-        ),
-        CaseStudyEntry(
             caseStudyId = "elucidata-community-demand-gen",
             title = "Elucidata — community-led demand gen for biotech/AI",
             companyName = "Elucidata",

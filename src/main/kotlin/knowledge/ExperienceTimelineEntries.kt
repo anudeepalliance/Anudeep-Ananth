@@ -10,10 +10,9 @@ object ExperienceTimelineEntries {
             roleTitle = "Lifecycle Marketing Manager",
             dateRangeLabel = "Oct 2023 – Present",
             summaryBullets = listOf(
-                "AI/ML portfolio ecosystem growth — customer engagement +25%",
-                "Onboarding conversion +30%; community moderators +40%",
-                "UGC +50%; daily active users +18%",
-                "Local product-market fit work — retention +15% in key US markets",
+                "Lifecycle marketing for the AI/ML portfolio across email, in-app, and community",
+                "Customer journeys, onboarding, and cross-functional work with Product",
+                "Community operations and content loops",
             ),
         ),
         TimelineEntry(

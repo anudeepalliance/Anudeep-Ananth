@@ -11,11 +11,9 @@ object AnudeepProfile {
     const val CAREER_SUMMARY =
         "Growth-driven lifecycle marketing leader with 13+ years of experience in SaaS marketing, " +
             "specializing in customer journey optimization, retention strategies, and revenue growth. " +
-            "Currently driving AI/ML portfolio engagement at DigitalOcean through data-informed lifecycle " +
-            "campaigns across email, in-app, and multi-channel touchpoints. Proven expertise in A/B testing, " +
-            "customer segmentation, and cross-functional collaboration with Product, Sales, and Customer Success. " +
-            "Track record of improving onboarding conversion, reducing churn, and scaling engagement programs " +
-            "that deliver measurable business impact."
+            "Currently Lifecycle Marketing Manager at DigitalOcean, working on customer journeys across " +
+            "email, in-app, and community touchpoints. Proven expertise in A/B testing, " +
+            "customer segmentation, and cross-functional collaboration with Product, Sales, and Customer Success."
 
     val skillGroups = listOf(
         SkillGroup(
