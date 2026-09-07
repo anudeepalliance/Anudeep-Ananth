@@ -66,4 +66,25 @@ class MarkdownToSafeHtmlTest {
         assertFalse(html.contains("## Company Snapshot"))
         assertFalse(html.contains("| Vertical |"))
     }
+
+    @Test
+    fun `pipe table after a label without a blank line still becomes a table`() {
+        val html = MarkdownToSafeHtml.render(
+            """
+            **ICP:**
+            | Vertical | Ideal Prospect |
+            |---|---|
+            | Insurance | Auto insurers, TPAs, third-party claim administrators |
+            | Car Rental | Rental companies doing high-volume checkout/return inspections |
+            | Fleet Management | Commercial fleet operators, leasing companies |
+            """.trimIndent(),
+        )
+        assertTrue(html.contains("<table>"))
+        assertTrue(html.contains("<th>Vertical</th>"))
+        assertTrue(html.contains("<th>Ideal Prospect</th>"))
+        assertTrue(html.contains("Insurance"))
+        assertTrue(html.contains("Car Rental"))
+        assertFalse(html.contains("| Vertical |"))
+        assertFalse(html.contains("|---|---|"))
+    }
 }
