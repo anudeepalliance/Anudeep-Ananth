@@ -62,7 +62,7 @@ object ExperienceTimelineEntries {
             ),
         ),
         TimelineEntry(
-            companyName = "Amazon India",
+            companyName = "Amazon",
             roleTitle = "Process Associate",
             dateRangeLabel = "Oct 2013 – Dec 2014",
             logoImagePath = "/static/images/companies/amazon.png",
