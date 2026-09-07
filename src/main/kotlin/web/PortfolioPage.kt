@@ -331,11 +331,14 @@ private fun FlowContent.renderJobMatchingSection() {
                                 renderButtonIcon(ButtonIconKind.SEARCH)
                                 +"Run fit analysis"
                             }
-                            button(classes = "btn btn-ghost") {
+                            button(classes = "btn btn-ghost voice-record-btn") {
                                 type = ButtonType.button
                                 attributes["data-voice-jd"] = "true"
+                                attributes["data-idle-label"] = "Voice input"
+                                attributes["aria-pressed"] = "false"
                                 renderButtonIcon(ButtonIconKind.MICROPHONE)
-                                +"Voice input"
+                                renderButtonIcon(ButtonIconKind.STOP_RECORDING)
+                                span(classes = "voice-record-label") { +"Voice input" }
                             }
                         }
                     }
@@ -425,11 +428,14 @@ private fun FlowContent.renderAgentsSection() {
                         renderButtonIcon(ButtonIconKind.SEND)
                         +"Send"
                     }
-                    button(classes = "btn btn-ghost") {
+                    button(classes = "btn btn-ghost voice-record-btn") {
                         type = ButtonType.button
                         attributes["data-voice-chat"] = "true"
+                        attributes["data-idle-label"] = "Voice input"
+                        attributes["aria-pressed"] = "false"
                         renderButtonIcon(ButtonIconKind.MICROPHONE)
-                        +"Voice input"
+                        renderButtonIcon(ButtonIconKind.STOP_RECORDING)
+                        span(classes = "voice-record-label") { +"Voice input" }
                     }
                     button(classes = "btn btn-ghost") {
                         type = ButtonType.button

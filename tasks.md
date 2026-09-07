@@ -130,7 +130,7 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 ## Phase 6 — Voice
 
 - [x] Mic capture JS → Sarvam STT → fill active text input (English)
-  - Notes: `static/js/voice.js` + `POST /htmx/voice/stt` → `transcribeEnglishAudioWithSarvam()`.
+  - Notes: `static/js/voice.js` + `POST /htmx/voice/stt` → `transcribeEnglishAudioWithSarvam()`. Sarvam `saaras:v3` + `mode=transcribe` + `en-IN`. Browser `audio/webm;codecs=opus` is stripped before upload (that 400 was the failure). Record button becomes Stop recording with a live `--voice-level` border.
 - [x] Voice input on JD field and chat inputs
   - Notes: `[data-voice-jd]` and `[data-voice-chat]` buttons fill the matching textarea.
 - [x] ElevenLabs TTS for agent replies (opt-in play control)

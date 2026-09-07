@@ -17,7 +17,10 @@ internal enum class ButtonIconKind(val svgMarkup: String) {
         """<svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.2 20.8 21 12 3.2 3.2v7.1L14.3 12 3.2 13.7z"/></svg>""",
     ),
     MICROPHONE(
-        """<svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2a3.2 3.2 0 0 1 3.2 3.2v5.2a3.2 3.2 0 1 1-6.4 0V6.4A3.2 3.2 0 0 1 12 3.2zm7.2 8.4a7.2 7.2 0 0 1-14.4 0H3.2a8.8 8.8 0 0 0 8 8.76V22h1.6v-1.64a8.8 8.8 0 0 0 8-8.76z"/></svg>""",
+        """<svg class="btn-icon voice-icon-mic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2a3.2 3.2 0 0 1 3.2 3.2v5.2a3.2 3.2 0 1 1-6.4 0V6.4A3.2 3.2 0 0 1 12 3.2zm7.2 8.4a7.2 7.2 0 0 1-14.4 0H3.2a8.8 8.8 0 0 0 8 8.76V22h1.6v-1.64a8.8 8.8 0 0 0 8-8.76z"/></svg>""",
+    ),
+    STOP_RECORDING(
+        """<svg class="btn-icon voice-icon-stop" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.4" y="6.4" width="11.2" height="11.2" rx="2"/></svg>""",
     ),
     SPEAKER(
         """<svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.4 9.2v5.6h3.4L13 19.2V4.8L7.8 9.2H4.4zm10.9-1a5 5 0 0 1 0 7.6M17.8 5.6a8.2 8.2 0 0 1 0 12.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>""",

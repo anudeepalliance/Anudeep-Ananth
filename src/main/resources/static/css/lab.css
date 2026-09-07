@@ -1044,6 +1044,32 @@ h3 { margin: 0; font-size: 1.05rem; }
   to { transform: rotate(360deg); }
 }
 .voice-status:empty { display: none; }
+.voice-record-btn {
+  --voice-level: 0;
+  position: relative;
+  transition: box-shadow 70ms linear, border-color 70ms linear, background-color 120ms ease;
+}
+.voice-record-btn .voice-icon-stop { display: none; }
+.voice-record-btn.is-recording .voice-icon-mic { display: none; }
+.voice-record-btn.is-recording .voice-icon-stop { display: block; }
+.btn.btn-ghost.voice-record-btn.is-recording {
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--accent) !important;
+  color: var(--accent-ink);
+  background-color: var(--accent-soft);
+}
+.voice-record-btn.is-recording::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+  opacity: calc(0.3 + (var(--voice-level) * 0.7));
+  transform: scale(calc(1 + (var(--voice-level) * 0.12)));
+}
 .fit-result { display: grid; gap: 0.75rem; font-size: 0.92rem; }
 .fit-result-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; }
 .fit-score {

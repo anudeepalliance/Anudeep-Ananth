@@ -39,7 +39,7 @@ fun Routing.voiceHtmxRoutes() {
                 }
                 else -> Unit
             }
-            part.dispose()
+            part.release()
         }
         val transcript = audioBytes?.let { bytes ->
             transcribeEnglishAudioWithSarvam(
