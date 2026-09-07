@@ -1,5 +1,6 @@
 package web
 
+import knowledge.AchievementHighlight
 import knowledge.AchievementHighlights
 import knowledge.AgentRosterEntries
 import knowledge.ContactDetails
@@ -132,52 +133,75 @@ private fun FlowContent.renderPortraitFold() {
 }
 
 private fun FlowContent.renderAchievementsSection() {
-    section(classes = "section") {
+    val outcomeHighlightsWithProof = AchievementHighlights.highlights.filter { highlight ->
+        highlight.proofImagePath != null
+    }
+    val outcomeHighlightsWithoutProof = AchievementHighlights.highlights.filter { highlight ->
+        highlight.proofImagePath == null
+    }
+    section(classes = "section achievements-stage") {
         id = "achievements"
         p(classes = "eyebrow") { +"Achievements" }
         h2 { +"Timeline and outcomes" }
-        p(classes = "muted") { +HomepageSalesPitch.PARAGRAPH }
-        div(classes = "panel proof-grid") {
-            div(classes = "panel-head") {
-                span(classes = "prompt") { +"Selected outcomes" }
-                span { +"from published work" }
-            }
-            h3 { +"Results" }
-            div(classes = "achievements") {
-                AchievementHighlights.highlights.forEach { highlight ->
-                    div(classes = "achievement-card") {
-                        highlight.proofImagePath?.let { proofImagePath ->
-                            button(classes = "proof-image-button") {
-                                type = ButtonType.button
-                                attributes["data-lightbox-src"] = proofImagePath
-                                attributes["data-lightbox-alt"] = "${highlight.metricLabel} — ${highlight.contextLabel}"
-                                img(classes = "proof-image") {
-                                    src = proofImagePath
-                                    alt = "${highlight.metricLabel} achievement"
-                                    attributes["loading"] = "lazy"
-                                }
-                            }
-                        }
-                        div(classes = "metric") { +highlight.metricLabel }
-                        div(classes = "context") { +highlight.contextLabel }
-                        div(classes = "chip-row") {
-                            span(classes = "chip") { +highlight.category }
-                        }
-                        highlight.proofExternalUrl?.let { proofExternalUrl ->
-                            a(href = proofExternalUrl, classes = "proof-external-link") {
-                                attributes["target"] = "_blank"
-                                attributes["rel"] = "noopener noreferrer"
-                                +"View Facebook post"
-                            }
-                        }
-                    }
+        p(classes = "muted achievements-lede") { +HomepageSalesPitch.PARAGRAPH }
+        div(classes = "receipt-board") {
+            p(classes = "receipt-kicker") { +"From published work" }
+            div(classes = "receipt-headliners") {
+                outcomeHighlightsWithProof.forEach { highlight ->
+                    renderPublishedOutcomeTicket(highlight, isFeatured = true)
                 }
             }
-            h3 {
-                attributes["style"] = "margin-top:1.25rem;"
-                +"Experience, drawn as a path"
+            div(classes = "receipt-stubs") {
+                outcomeHighlightsWithoutProof.forEach { highlight ->
+                    renderPublishedOutcomeTicket(highlight, isFeatured = false)
+                }
             }
+        }
+        div(classes = "path-stage") {
+            p(classes = "receipt-kicker") { +"Newest first" }
+            h3(classes = "path-heading") { +"Experience, drawn as a path" }
             renderDrawnExperienceJourney()
+        }
+    }
+}
+
+/**
+ * One published outcome as a festival ticket. Featured tickets clip on a proof photo that opens in the lightbox.
+ */
+private fun FlowContent.renderPublishedOutcomeTicket(
+    highlight: AchievementHighlight,
+    isFeatured: Boolean,
+) {
+    article(classes = "outcome-ticket${if (isFeatured) " is-featured" else ""}") {
+        if (isFeatured) {
+            span(classes = "outcome-tape")
+        }
+        highlight.proofImagePath?.let { proofImagePath ->
+            button(classes = "outcome-polaroid") {
+                type = ButtonType.button
+                attributes["data-lightbox-src"] = proofImagePath
+                attributes["data-lightbox-alt"] = "${highlight.metricLabel} — ${highlight.contextLabel}"
+                attributes["aria-label"] = "Open proof image for ${highlight.metricLabel}"
+                img {
+                    src = proofImagePath
+                    alt = "${highlight.metricLabel} achievement"
+                    attributes["loading"] = "lazy"
+                    attributes["width"] = "640"
+                    attributes["height"] = "400"
+                }
+            }
+        }
+        div(classes = "ticket-stub") {
+            h3(classes = "outcome-metric") { +highlight.metricLabel }
+            span(classes = "outcome-stamp") { +highlight.category }
+        }
+        p(classes = "outcome-context") { +highlight.contextLabel }
+        highlight.proofExternalUrl?.let { proofExternalUrl ->
+            a(href = proofExternalUrl, classes = "proof-external-link") {
+                attributes["target"] = "_blank"
+                attributes["rel"] = "noopener noreferrer"
+                +"View Facebook post"
+            }
         }
     }
 }
