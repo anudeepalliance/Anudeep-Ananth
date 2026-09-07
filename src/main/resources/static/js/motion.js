@@ -5,9 +5,23 @@
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
+  var SCROLL_MOTION_SELECTOR = [
+    "#achievements .outcome-ticket",
+    "#achievements .journey-stop",
+    "#achievements .journey-spine",
+    "#job-matching .job-matching-portrait",
+    "#job-matching .fit-panel",
+    "#agents .agent-poster",
+    "#agents .agent-desk",
+    "#tech-stack .stack-card",
+    "#contact .contact-portrait",
+    "#contact .contact-copy",
+    ".site-footer",
+  ].join(",");
+
   function revealMotionSections() {
-    var motionSections = document.querySelectorAll("[data-motion]");
-    if (!motionSections.length) return;
+    var motionItems = document.querySelectorAll(SCROLL_MOTION_SELECTOR);
+    if (!motionItems.length) return;
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
@@ -16,10 +30,10 @@
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.18, rootMargin: "0px 0px -22% 0px" },
     );
-    motionSections.forEach(function (motionSection) {
-      observer.observe(motionSection);
+    motionItems.forEach(function (motionItem) {
+      observer.observe(motionItem);
     });
   }
 

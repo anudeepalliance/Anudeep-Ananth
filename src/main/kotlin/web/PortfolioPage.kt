@@ -160,7 +160,6 @@ private fun FlowContent.renderAchievementsSection() {
         h2 { +"Timeline and outcomes" }
         p(classes = "muted achievements-lede") { +HomepageSalesPitch.PARAGRAPH }
         div(classes = "receipt-board") {
-            attributes["data-motion"] = "board"
             p(classes = "receipt-kicker") { +"From published work" }
             div(classes = "receipt-headliners") {
                 outcomeHighlightsWithProof.forEach { highlight ->
@@ -174,7 +173,6 @@ private fun FlowContent.renderAchievementsSection() {
             }
         }
         div(classes = "path-stage") {
-            attributes["data-motion"] = "path"
             h3(classes = "path-heading") { +"My Experience" }
             renderDrawnExperienceJourney()
         }
@@ -280,7 +278,6 @@ private fun FlowContent.renderJobMatchingSection() {
     val jobMatchingAgent = AgentRosterEntries.agents.first { it.agentId == "job_matching" }
     section(classes = "section") {
         id = "job-matching"
-        attributes["data-motion"] = "job"
         p(classes = "eyebrow") { +"Job Matching" }
         h2 { +"Paste your role. See the fit." }
         p(classes = "muted") {
@@ -354,7 +351,6 @@ private fun FlowContent.renderAgentsSection() {
     val defaultChatAgent = workingAgents.first()
     section(classes = "section agents-stage") {
         id = "agents"
-        attributes["data-motion"] = "agents"
         p(classes = "eyebrow") { +"Agents" }
         h2 { +"The AI agents I've built and use day to day" }
         p(classes = "muted agents-lede") {
@@ -450,7 +446,6 @@ private fun FlowContent.renderAgentsSection() {
 private fun FlowContent.renderAiTechStackSection() {
     section(classes = "section") {
         id = "tech-stack"
-        attributes["data-motion"] = "stack"
         p(classes = "eyebrow") { +"Tools" }
         h2 { +"My AI tech stack" }
         p(classes = "muted agents-lede") {
@@ -479,7 +474,6 @@ private fun FlowContent.renderAiTechStackSection() {
 private fun FlowContent.renderContactSection() {
     section(classes = "section") {
         id = "contact"
-        attributes["data-motion"] = "contact"
         p(classes = "eyebrow") { +"Contact" }
         div(classes = "panel contact-panel") {
             div(classes = "contact-layout") {
@@ -514,7 +508,6 @@ private fun FlowContent.renderContactSection() {
 
 private fun FlowContent.renderSiteFooter() {
     div(classes = "site-footer") {
-        attributes["data-motion"] = "footer"
         span { +"© ${ContactDetails.FULL_NAME}" }
         span { +"Personal portfolio · Kotlin HTMX" }
     }
