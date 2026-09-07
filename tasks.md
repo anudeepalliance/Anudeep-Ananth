@@ -5,6 +5,8 @@ Tracker for building the portfolio agent site. Run one task (or a tight group) a
 Design reference: `docs/superpowers/specs/2026-09-07-portfolio-agent-site-design.md`  
 Project rules: `CLAUDE.md`
 
+Order rule: build and fully test locally first. Purchase domain, link DNS, and deploy to VPS only in Phase 9.
+
 ---
 
 ## Phase 0 — Foundations
@@ -78,22 +80,31 @@ Project rules: `CLAUDE.md`
 - [ ] Voice failure fallback to text-only with clear message
 - [ ] Verify voice round-trip on Job Matching and one other agent
 
-## Phase 7 — SEO, deploy, harden
+## Phase 7 — SEO & local harden
 
 - [ ] Title, meta description, canonical, robots, Open Graph, Twitter cards
 - [ ] JSON-LD Person + WebSite with sameAs LinkedIn
 - [ ] `robots.txt` + `sitemap.xml`
-- [ ] Deploy Ktor app to Hostinger VPS behind TLS reverse proxy
-- [ ] Point `anudeepananth.com` / `www` at the VPS
-- [ ] Static asset caching headers
-- [ ] Smoke test production: homepage, JD fit, agent chat, voice, contact links
-- [ ] PageSpeed pass review (fix paint visible; images/video deferred)
+- [ ] Static asset caching headers (ready for prod reverse proxy)
+- [ ] Local PageSpeed-oriented pass (first paint visible; images/video deferred)
 - [ ] Optional: n8n health ping / light cron only
 
-## Phase 8 — Polish & launch
+## Phase 8 — Local polish & full test
 
 - [ ] Copy pass on pitch, agent descriptions, fit-output wording
-- [ ] Recruiter walkthrough dry run (cold visit → JD → second agent → contact)
 - [ ] Fix visual bugs on mobile + desktop
+- [ ] Full local recruiter walkthrough (cold visit → JD → second agent → voice → contact)
+- [ ] Regression check: all seven agents respond; Job Matching soft-reject + in-scope paths
 - [ ] Confirm no secrets in repo
-- [ ] Mark site launch-ready and update README with run/deploy notes
+- [ ] Update README with local run notes
+- [ ] Mark build locally launch-ready (do not buy domain or deploy yet)
+
+## Phase 9 — Domain, VPS deploy, go live (final)
+
+- [ ] Purchase `anudeepananth.com`
+- [ ] Link domain DNS to Hostinger VPS
+- [ ] Copy `ConfidentialObjects.kt` / app build onto VPS
+- [ ] Deploy Ktor app behind TLS reverse proxy
+- [ ] Point `anudeepananth.com` / `www` at the app
+- [ ] Production smoke test: homepage, JD fit, agent chat, voice, contact links
+- [ ] Mark site live
