@@ -29,6 +29,10 @@ fun Application.configureRouting() {
         llmTxtRoutes()
         voiceHtmxRoutes()
 
+        get("/health") {
+            call.respondText("ok")
+        }
+
         get("/") {
             call.respondHtml {
                 renderPortfolioHtmlDocument()

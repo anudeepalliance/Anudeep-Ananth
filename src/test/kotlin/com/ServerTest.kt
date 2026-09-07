@@ -13,6 +13,16 @@ import kotlin.test.assertTrue
 class ServerTest {
 
     @Test
+    fun `health endpoint returns ok`() = testApplication {
+        application {
+            configureRouting()
+        }
+        val response = client.get("/health")
+        assertEquals(HttpStatusCode.OK, response.status)
+        assertEquals("ok", response.bodyAsText())
+    }
+
+    @Test
     fun `homepage renders portfolio shell from knowledge pack`() = testApplication {
         application {
             configureRouting()
@@ -27,6 +37,7 @@ class ServerTest {
         assertTrue(html.contains("anudeeps3@gmail.com"))
         assertTrue(html.contains("href=\"mailto:anudeeps3@gmail.com\""))
         assertTrue(html.contains("/static/css/lab.css"))
+        assertTrue(html.contains("anudeep-intro-captioned.mp4"))
         assertTrue(html.contains("active-agent-id"))
         assertTrue(html.contains("hx-indicator"))
         assertTrue(!html.contains("opacity:0") || html.contains("htmx-indicator"))

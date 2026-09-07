@@ -1,0 +1,48 @@
+# ==============================================================================
+# ANUDEEP ANANTH PORTFOLIO — DOCKER COMPOSE
+# ==============================================================================
+# Joins the existing Hostinger docker network so hostname peekopals-mongo
+# resolves (same community Mongo as PeekoPals, database Anudeep-Ananth).
+# Nginx on shared-nginx routes anudeepananth.com here. Do not publish 8484.
+# ==============================================================================
+
+services:
+  anudeep-ananth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: anudeep-ananth:latest
+    container_name: anudeep-ananth
+    restart: unless-stopped
+
+    expose:
+      - "8484"
+
+    environment:
+      - PORT=8484
+
+    volumes:
+      - ./logs:/app/logs
+
+    networks:
+      - baedrop_default
+
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8484/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 45s
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+    mem_limit: 1024m
+    cpus: 0.40
+
+networks:
+  baedrop_default:
+    external: true

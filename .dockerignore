@@ -1,0 +1,15 @@
+build/
+.gradle/
+.idea/
+.git/
+.kotlin/
+.superpowers/
+*.log
+*.iml
+.DS_Store
+docs/
+content/
+temporary-output.md
+"Anudeep Resume.pdf"
+Anudeep Resume.pdf
+intro-video/

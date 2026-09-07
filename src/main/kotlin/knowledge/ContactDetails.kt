@@ -12,6 +12,6 @@ object ContactDetails {
     const val LINKEDIN_URL = "https://www.linkedin.com/in/anudeepananth"
     const val PORTFOLIO_URL = "https://www.anudeepananth.com"
 
-    /** Intro video already hosted on the Hostinger VPS. */
-    const val INTRO_VIDEO_URL = "https://www.reaptive.in/media/peekopals-web/mark-intro.mp4"
+    /** Captioned intro on VPS media, served by shared nginx at /media/. */
+    const val INTRO_VIDEO_URL = "https://www.reaptive.in/media/anudeep-ananth/anudeep-intro-captioned.mp4?v=2"
 }
