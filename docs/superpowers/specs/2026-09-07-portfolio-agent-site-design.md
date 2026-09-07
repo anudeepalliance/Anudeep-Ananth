@@ -23,7 +23,7 @@ Recruiters should quickly answer:
 - Job Matching on hard skips: soft reject (strong misalignment + transferable strengths)
 - Voice: Sarvam STT in, ElevenLabs TTS out, English only
 - Rate limits: none (accepted cost risk)
-- Usage logging: MongoDB Atlas `Cluster0`, dedicated `anudeepananth` DB, usage-event collection; PeekoPals-style Kotlin Mongo client; URI in `ConfidentialObjects.kt`
+- Usage logging: MongoDB community on Hostinger VPS, dedicated `anudeepananth` DB, usage-event collection; PeekoPals-style Kotlin Mongo client + dual VPS/tunnel URIs in `ConfidentialObjects.kt`
 - Hosting: Hostinger VPS ready; domain purchase + DNS + deploy only after full local testing (final phase)
 - Secrets: `src/main/kotlin/util/ConfidentialObjects.kt` only (gitignored) — no env/secrets pattern
 - Assets ready: professional photo (source for agent portraits)
@@ -111,13 +111,14 @@ Other agents: text + voice chat with streaming replies and optional spoken playb
 - Agent errors: inline message + retry
 - Voice failures: fall back to text
 - Missing early assets: placeholders
-- No rate limits; monitor MiniMax/voice spend via Mongo usage documents (queryable in Atlas)
+- No rate limits; monitor MiniMax/voice spend via Mongo usage documents on the VPS
 
 ## Usage logging
 
 - Persist one Mongo document per billable-ish call: agent, STT, TTS
 - PeekoPals-inspired wiring: Mongo coroutine client singleton, typed collections, kotlinx codecs
-- Atlas UI / `mongosh` for inspection; optional later n8n daily count summary
+- Same VPS community Mongo instance PeekoPals uses; separate database name
+- Inspect via `mongosh` (SSH tunnel from Mac, or on VPS); optional later n8n daily count summary
 
 ## Success bar
 

@@ -69,15 +69,16 @@ Every agent can use:
 
 **On hard-skip JDs:** soft reject — strong misalignment + transferable strengths.
 
-**Rate limits:** none (cost risk accepted). Log every agent/STT/TTS call to **MongoDB Atlas** (see Usage logging).
+**Rate limits:** none (cost risk accepted). Log every agent/STT/TTS call to **MongoDB community on the Hostinger VPS** (see Usage logging).
 
 ## Usage logging (MongoDB)
 
-Mirror the PeekoPals Mongo pattern (`util/mongoDB`: client singleton, collection constants, kotlinx serialization codecs). Connection string lives in `ConfidentialObjects.kt`.
+Mirror the PeekoPals Mongo pattern (`util/mongoDB`: client singleton, collection constants, kotlinx serialization codecs). Connection string(s) live in `ConfidentialObjects.kt`.
 
-- **Cluster:** MongoDB Atlas `Cluster0` (same Atlas project the user manages in the UI)
-- **Database:** dedicated DB for this site (e.g. `anudeepananth`) — not the PeekoPals DB
+- **Server:** MongoDB **community edition already on the Hostinger VPS** (same ops model as PeekoPals — not Atlas for this app)
+- **Database:** dedicated DB for this site (e.g. `anudeepananth`) — not the PeekoPals `peekopals` DB
 - **Collection:** usage events (e.g. `agent_usage_logs`)
+- **Connectivity:** PeekoPals-style dual URI — in-VPS hostname/network string for production, SSH-tunnel/`localhost` string for local Mac; optional hostname probe if sharing the same docker network pattern
 - **When:** insert one document after each agent run, Sarvam STT call, and ElevenLabs TTS call
 - **Fields (minimum):** `createdAt`, `kind` (`agent` | `stt` | `tts`), `agentId` (nullable for pure voice), `ok`, `durationMs`, `inputChars`, `errorMessage` (nullable), optional client IP / coarse session id
 - **Rules:** no rate limiting; logging must not break the user request (catch/log failures); never hardcode Mongo field name strings — use data-class property `.name` references
@@ -115,7 +116,7 @@ Mirror the PeekoPals Mongo pattern (`util/mongoDB`: client singleton, collection
 
 - Official Ktor HTMX APIs are experimental — use `@OptIn(ExperimentalKtorApi::class)`
 - Public agents with no rate limits can burn MiniMax/voice budget; persist usage to Mongo early
-- Do not reuse the PeekoPals database — keep a dedicated Atlas DB for this portfolio site
+- Do not reuse the PeekoPals database — keep a dedicated DB (e.g. `anudeepananth`) on the VPS community Mongo
 - Lazy-load video and heavy images; keep first paint HTML light
 - n8n must not become the live agent runtime
 
