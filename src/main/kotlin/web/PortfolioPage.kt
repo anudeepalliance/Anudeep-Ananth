@@ -52,17 +52,18 @@ fun FlowContent.renderPortfolioPageBody() {
 
 private fun FlowContent.renderTopBar() {
     header(classes = "topbar") {
-        div(classes = "brand") {
+        a(href = "#hook", classes = "brand") {
             span(classes = "brand-dot")
-            span { +"anudeepananth.com // agent_os" }
+            +"ANUDEEP"
         }
         navLinkRow()
+        a(href = "#agents", classes = "join-orb") { +"Hire" }
     }
 }
 
 private fun FlowContent.navLinkRow() {
     div(classes = "topnav") {
-        a(href = "#hook") { +"Hook" }
+        a(href = "#hook") { +"Intro" }
         a(href = "#proof") { +"Proof" }
         a(href = "#agents") { +"Agents" }
         a(href = "#contact") { +"Contact" }
@@ -70,56 +71,57 @@ private fun FlowContent.navLinkRow() {
 }
 
 private fun FlowContent.renderHookSection() {
-    section(classes = "section") {
+    section(classes = "hero-stage") {
         id = "hook"
-        p(classes = "eyebrow") { +"01 / hook" }
-        div(classes = "hero-grid") {
-            div(classes = "panel hero-copy") {
-                div(classes = "panel-head") {
-                    span(classes = "prompt") { +"> identity.boot" }
-                    span { +"visible_html=true" }
-                }
-                h1 { +ContactDetails.FULL_NAME }
-                p {
-                    attributes["style"] =
-                        "margin-top:0.85rem;color:var(--text);font-size:1.15rem;font-family:var(--font-display);"
-                    +HomepageSalesPitch.HEADLINE
-                }
-                p { +HomepageSalesPitch.PARAGRAPH }
-                div(classes = "cta-row") {
-                    a(href = "#agents", classes = "btn btn-primary") { +"Paste a JD → Job Matching" }
-                    a(href = "#proof", classes = "btn btn-ghost") { +"See proof" }
-                }
-                div(classes = "chip-row") {
-                    span(classes = "chip") { +"Remote from India" }
-                    span(classes = "chip") { +"Lifecycle + demand gen" }
-                    span(classes = "chip") { +"Custom AI agents" }
+        span(classes = "hero-giant") { +"GROWTH" }
+        img(classes = "hero-portrait") {
+            src = "/static/images/anudeep-hero.jpg"
+            alt = "${ContactDetails.FULL_NAME} portrait"
+            attributes["loading"] = "eager"
+            attributes["width"] = "840"
+            attributes["height"] = "1040"
+        }
+        span(classes = "hero-script") { +ContactDetails.FULL_NAME }
+        span(classes = "float-pill pill-left") {
+            span(classes = "pill-dot")
+            +"Remote · India"
+        }
+        span(classes = "float-pill pill-right") {
+            span(classes = "pill-dot")
+            +"AI agents"
+        }
+        div(classes = "float-card float-jd") {
+            h3 { +"Job Matching" }
+            p { +"Paste a JD. Get a live fit score against my real work." }
+            div(classes = "mini-row") {
+                a(href = "#agents", classes = "play-orb") { +"▶" }
+                span { +"Run the agent" }
+            }
+        }
+        div(classes = "float-card float-video") {
+            div(classes = "hero-video-wrap") {
+                iframe {
+                    src = "https://www.youtube-nocookie.com/embed/${ContactDetails.PLACEHOLDER_INTRO_YOUTUBE_VIDEO_ID}"
+                    attributes["title"] = "Placeholder intro video (YouTube) until Seedance cut is ready"
+                    attributes["allow"] =
+                        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    attributes["allowfullscreen"] = "true"
+                    attributes["loading"] = "lazy"
+                    attributes["referrerpolicy"] = "strict-origin-when-cross-origin"
                 }
             }
-            div(classes = "panel hero-media") {
-                div(classes = "panel-head") {
-                    span(classes = "prompt") { +"> media.slots" }
-                    span { +"photo + youtube placeholder" }
-                }
-                img(classes = "hero-photo") {
-                    src = "/static/images/anudeep-hero.jpg"
-                    alt = "${ContactDetails.FULL_NAME} portrait"
-                    attributes["loading"] = "eager"
-                    attributes["width"] = "640"
-                    attributes["height"] = "640"
-                }
-                div(classes = "hero-video-wrap") {
-                    iframe {
-                        src = "https://www.youtube-nocookie.com/embed/${ContactDetails.PLACEHOLDER_INTRO_YOUTUBE_VIDEO_ID}"
-                        attributes["title"] = "Placeholder intro video (YouTube) until Seedance cut is ready"
-                        attributes["allow"] =
-                            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        attributes["allowfullscreen"] = "true"
-                        attributes["loading"] = "lazy"
-                        attributes["referrerpolicy"] = "strict-origin-when-cross-origin"
-                    }
-                }
+        }
+        div(classes = "float-card dark float-contact") {
+            h3 { +"Don't miss out" }
+            p { +"Email or LinkedIn — walk a JD live with the Job Matching agent." }
+            div(classes = "mini-row") {
+                a(href = "#contact", classes = "play-orb") { +"→" }
+                span { +"Let's talk" }
             }
+        }
+        div(classes = "hero-bottom") {
+            span(classes = "date-pill") { +"Open to remote B2B SaaS roles" }
+            h1 { +"SHIPS AGENTS, NOT SLIDE DECKS" }
         }
     }
 }
@@ -127,8 +129,9 @@ private fun FlowContent.renderHookSection() {
 private fun FlowContent.renderProofSection() {
     section(classes = "section") {
         id = "proof"
-        p(classes = "eyebrow") { +"02 / proof" }
+        p(classes = "eyebrow") { +"Proof" }
         h2 { +"Timeline, outcomes, stack" }
+        p(classes = "muted") { +HomepageSalesPitch.PARAGRAPH }
         div(classes = "panel proof-grid") {
             div(classes = "panel-head") {
                 span(classes = "prompt") { +"> proof.render" }
@@ -180,8 +183,8 @@ private fun FlowContent.renderAgentsSection() {
     val primaryAgent = AgentRosterEntries.agents.first { it.isPrimary }
     section(classes = "section") {
         id = "agents"
-        p(classes = "eyebrow") { +"03 / agents" }
-        h2 { +"Agent OS console" }
+        p(classes = "eyebrow") { +"Agents" }
+        h2 { +"Talk to the bench" }
         div(classes = "panel") {
             div(classes = "panel-head") {
                 span(classes = "prompt") { +"> agent_os.online" }
@@ -317,7 +320,7 @@ private fun FlowContent.renderAgentsSection() {
 private fun FlowContent.renderContactSection() {
     section(classes = "section") {
         id = "contact"
-        p(classes = "eyebrow") { +"04 / contact" }
+        p(classes = "eyebrow") { +"Contact" }
         div(classes = "panel contact-panel") {
             div(classes = "panel-head") {
                 span(classes = "prompt") { +"> contact.open" }

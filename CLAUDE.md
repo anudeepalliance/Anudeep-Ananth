@@ -20,7 +20,7 @@ That project is already set up to work with this same VPS and the MongoDB commun
 - Domain: `www.anudeepananth.com` (buy + deploy only in the final phase after local sign-off)
 - Single page: Hook → Proof → Agents → Contact
 - Feel: special, AI-native marketer who ships agents
-- Visual: dark AI lab / terminal
+- Visual: light festival/editorial landing (Odyssey-style) — giant type, script name, floating cards; not the old dark terminal look
 - Primary interaction: Job Matching agent (paste JD → fit analysis)
 - Visitors can chat with all listed agents via text or voice
 
