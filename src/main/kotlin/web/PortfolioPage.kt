@@ -330,7 +330,7 @@ private fun FlowContent.renderAgentsSection() {
     section(classes = "section agents-stage") {
         id = "agents"
         p(classes = "eyebrow") { +"Agents" }
-        h2 { +"Working agents, not a pitch deck." }
+        h2 { +"The AI agents I've built and use day to day" }
         p(classes = "muted agents-lede") {
             +"I built these and I use them. Pick one and talk to it. Job Matching has its own section above."
         }
