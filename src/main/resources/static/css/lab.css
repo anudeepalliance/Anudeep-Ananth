@@ -597,7 +597,7 @@ h3 { margin: 0; font-size: 1.05rem; }
   }
 }
 
-.chip-row, .tech-strip {
+.chip-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;

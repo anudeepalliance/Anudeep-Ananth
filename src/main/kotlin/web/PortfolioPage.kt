@@ -30,17 +30,6 @@ import kotlinx.html.ul
 import kotlinx.html.unsafe
 import kotlinx.html.video
 
-private val techStackLabels = listOf(
-    "Koog",
-    "MiniMax",
-    "Firecrawl",
-    "Higgsfield",
-    "n8n",
-    "ElevenLabs",
-    "Sarvam",
-    "Ktor HTMX",
-)
-
 /**
  * Renders the single-page portfolio body sections (Hook → Achievements → Agents → Contact).
  */
@@ -141,7 +130,7 @@ private fun FlowContent.renderAchievementsSection() {
     section(classes = "section") {
         id = "achievements"
         p(classes = "eyebrow") { +"Achievements" }
-        h2 { +"Timeline, outcomes, stack" }
+        h2 { +"Timeline and outcomes" }
         p(classes = "muted") { +HomepageSalesPitch.PARAGRAPH }
         div(classes = "panel proof-grid") {
             div(classes = "panel-head") {
@@ -184,15 +173,6 @@ private fun FlowContent.renderAchievementsSection() {
                 +"Experience, drawn as a path"
             }
             renderDrawnExperienceJourney()
-            h3 {
-                attributes["style"] = "margin-top:1.25rem;"
-                +"Tech stack"
-            }
-            div(classes = "tech-strip") {
-                techStackLabels.forEach { label ->
-                    span(classes = "chip") { +label }
-                }
-            }
         }
     }
 }
