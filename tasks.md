@@ -7,33 +7,53 @@ Project rules: `CLAUDE.md`
 
 Order rule: build and fully test locally first. Purchase domain, link DNS, and deploy to VPS only in Phase 9.
 
+**Session handoff rule:** when completing a task, add short notes under it (paths, decisions, gotchas) so the next session can continue without re-discovery.
+
 ---
 
 ## Phase 0 — Foundations
 
 - [x] Init git repo, add `.gitignore` (`.gradle`, `build`, `.idea`, `.superpowers`, `ConfidentialObjects.kt`)
+  - Notes: repo on `main`; `ConfidentialObjects.kt` must never be committed.
 - [x] Confirm local `./gradlew run` still serves the Ktor hello-world baseline
+  - Notes: `GET /` → 200 `Hello, World!` on `:8080`.
 - [x] Confirm `ConfidentialObjects.kt` stays gitignored and is present locally; wire new keys there only (no env/secrets pattern)
+  - Notes: secrets pattern locked — companion consts only, no env files.
 - [x] Add VPS community Mongo connection strings to `ConfidentialObjects.kt` (in-VPS + local SSH-tunnel URIs; database `Anudeep-Ananth`)
+  - Notes: dual URIs (VPS `peekopals-mongo` + localhost tunnel). Same Mongo instance as PeekoPals.
+  - Tunnel: `ssh -L 27017:localhost:27017 -p 1379 reaptive@72.60.219.67 -N`
 - [x] Port a slim PeekoPals-style Mongo helper (client singleton + collections + kotlinx codecs; hostname/tunnel pick like PeekoPals)
+  - Notes: `src/main/kotlin/util/mongoDB/MongoDatabase.kt`, `Collections.kt`. Hostname probe on `peekopals-mongo`.
 - [x] Define usage-event data class + `agent_usage_logs` collection
+  - Notes: `src/main/kotlin/util/usage/AgentUsageLogDocument.kt`; kinds `agent` | `stt` | `tts`.
 - [x] Implement insert helper for agent / STT / TTS usage (never fail the user request if logging fails)
+  - Notes: `persistAgentUsageLogToMongo()` swallows errors. Sample docs seeded in Mongo (5 docs).
+  - Ops fix done: granted `peekopals_app` **readWrite** on DB `Anudeep-Ananth` (role was missing). Reference PeekoPals for VPS/Mongo ops.
 
 ## Phase 1 — Content & knowledge pack
 
-- [ ] Extract structured Anudeep profile from resume (roles, skills, metrics, preferences, hard skips)
-- [ ] Write short homepage sales pitch paragraph
-- [ ] Draft experience timeline content (visual-ready milestones)
-- [ ] Draft achievements content (ARR, ROAS, CAC, pipeline, etc.)
-- [ ] Write 2–4 case-study / campaign corpus entries agents can retrieve
-- [ ] Encode Job Matching targeting rules as structured config the agent reads
-- [ ] Collect final contact block (email + LinkedIn) for the page and JSON-LD
+- [x] Extract structured Anudeep profile from resume (roles, skills, metrics, preferences, hard skips)
+  - Notes: `src/main/kotlin/knowledge/AnudeepProfile.kt` — from current `Anudeep Resume.pdf` (lifecycle/demand-gen/community track, not the older perf-marketing PDF narrative).
+- [x] Write short homepage sales pitch paragraph
+  - Notes: `src/main/kotlin/knowledge/HomepageSalesPitch.kt` — headline + paragraph for Hook CTA into Job Matching.
+- [x] Draft experience timeline content (visual-ready milestones)
+  - Notes: `src/main/kotlin/knowledge/ExperienceTimelineEntries.kt` — 7 roles (DigitalOcean → Frankfinn).
+- [x] Draft achievements content (ARR, ROAS, CAC, pipeline, etc.)
+  - Notes: `src/main/kotlin/knowledge/AchievementHighlights.kt` — metric chips aligned to resume outcomes (+25% engagement, −40% CPL, $1.2M, etc.).
+- [x] Write 2–4 case-study / campaign corpus entries agents can retrieve
+  - Notes: `src/main/kotlin/knowledge/CaseStudyCorpusEntries.kt` — 4 studies (DO lifecycle, Elucidata community DG, Jiva HubSpot, Telebu Lucid POS).
+- [x] Encode Job Matching targeting rules as structured config the agent reads
+  - Notes: `src/main/kotlin/knowledge/JobMatchingTargetingRules.kt` — in-scope / hard-skips / preferences / `soft_reject`.
+- [x] Collect final contact block (email + LinkedIn) for the page and JSON-LD
+  - Notes: `src/main/kotlin/knowledge/ContactDetails.kt` — email `anudeeps3@gmail.com`, LinkedIn `https://www.linkedin.com/in/anudeepananth`, phone `+91-9741701504`.
+  - Facade: `AnudeepKnowledgePack` + `formatFullAgentGroundingText()` for Phase 4 agents.
 
 ## Phase 2 — Design system & static page shell
 
 - [ ] Set up Kotlin HTML DSL + Ktor HTMX dependencies (`ktor-htmx`, `ktor-htmx-html`, `ktor-server-htmx`)
 - [ ] Create AI lab / terminal visual design system (CSS tokens, typography, panels, glow)
 - [ ] Build server-rendered single-page shell: Hook → Proof → Agents → Contact
+  - Hint: wire copy from `AnudeepKnowledgePack` (do not hardcode new pitch/timeline strings).
 - [ ] Hook section: name, pitch, photo slot, video slot, JD CTA
 - [ ] Proof section: timeline + achievements + tech stack strip
 - [ ] Agents section: roster cards + empty chat/fit panels
@@ -54,6 +74,7 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 
 - [ ] Integrate Koog + MiniMax provider wiring in Ktor
 - [ ] Build shared Anudeep knowledge loader (profile + resume + corpus)
+  - Hint: start from `AnudeepKnowledgePack.formatFullAgentGroundingText()`.
 - [ ] Add Firecrawl tool integration
 - [ ] Add MiniMax web search tool integration
 - [ ] Wire usage-log inserts on every agent invocation
