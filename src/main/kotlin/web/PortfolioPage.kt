@@ -183,7 +183,7 @@ private fun FlowContent.renderAchievementsSection() {
 }
 
 private fun FlowContent.renderDrawnExperienceJourney() {
-    val chronologicalEntries = ExperienceTimelineEntries.entries.asReversed()
+    val timelineEntriesNewestFirst = ExperienceTimelineEntries.entries
     div(classes = "journey-map") {
         unsafe {
             +"""
@@ -201,9 +201,9 @@ private fun FlowContent.renderDrawnExperienceJourney() {
             </svg>
             """.trimIndent()
         }
-        chronologicalEntries.forEachIndexed { index, entry ->
+        timelineEntriesNewestFirst.forEachIndexed { index, entry ->
             val sideClass = if (index % 2 == 0) "is-left" else "is-right"
-            val isLatest = index == chronologicalEntries.lastIndex
+            val isLatest = index == 0
             article(classes = "journey-stop $sideClass${if (isLatest) " is-now" else ""}") {
                 span(classes = "journey-pin") {
                     span { +"${index + 1}" }
