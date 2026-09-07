@@ -4,11 +4,11 @@ package knowledge
  * Short homepage sales pitch for recruiters and hiring managers.
  */
 object HomepageSalesPitch {
-    const val HEADLINE = "AI-native lifecycle & demand gen marketer who ships agents, not slide decks."
+    const val HEADLINE = "Senior marketing leader for B2B SaaS — lifecycle, demand, and AI-native execution."
 
     const val PARAGRAPH =
-        "I help B2B SaaS teams grow pipeline and retention with lifecycle systems, community-led demand, " +
-            "and custom AI agents. At DigitalOcean I run AI/ML portfolio engagement across email, in-app, and " +
-            "multi-channel journeys. Paste a job description below — my Job Matching agent will score the fit " +
-            "against my real experience, then you can chat with specialized marketing agents I built."
+        "I lead lifecycle and demand programs for B2B SaaS: customer journeys, community-led pipeline, " +
+            "and measurement that holds up in a leadership room. I also build working marketing agents " +
+            "so teams can move faster without adding headcount. This page is a public portfolio — " +
+            "hiring partners can use the Job Matching agent to test role fit against published experience."
 }

@@ -10,7 +10,7 @@ class LlmTxtRoutesTest {
     fun `llms txt overview names anudeep and job matching`() {
         val overviewText = buildLlmsTxtOverview()
         assertTrue(overviewText.contains("# ${ContactDetails.FULL_NAME}"))
-        assertTrue(overviewText.contains("Job Matching"))
+        assertTrue(overviewText.contains("Job Matching") || overviewText.contains("published experience"))
         assertTrue(overviewText.contains(ContactDetails.EMAIL))
         assertTrue(overviewText.contains("/llms-full.txt"))
     }

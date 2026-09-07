@@ -57,7 +57,7 @@ private fun FlowContent.renderTopBar() {
             +"ANUDEEP"
         }
         navLinkRow()
-        a(href = "#agents", classes = "join-orb") { +"Hire" }
+        a(href = "#contact", classes = "join-orb") { +"Talk" }
     }
 }
 
@@ -73,7 +73,7 @@ private fun FlowContent.navLinkRow() {
 private fun FlowContent.renderHookSection() {
     section(classes = "hero-stage") {
         id = "hook"
-        span(classes = "hero-giant") { +"GROWTH" }
+        span(classes = "hero-giant") { +"ANUDEEP" }
         img(classes = "hero-portrait") {
             src = "/static/images/anudeep-hero.jpg"
             alt = "${ContactDetails.FULL_NAME} portrait"
@@ -91,11 +91,11 @@ private fun FlowContent.renderHookSection() {
             +"AI agents"
         }
         div(classes = "float-card float-jd") {
-            h3 { +"Job Matching" }
-            p { +"Paste a JD. Get a live fit score against my real work." }
+            h3 { +"Role fit" }
+            p { +"Hiring partners can check published experience against a job description." }
             div(classes = "mini-row") {
                 a(href = "#agents", classes = "play-orb") { +"▶" }
-                span { +"Run the agent" }
+                span { +"Open Job Matching" }
             }
         }
         div(classes = "float-card float-video") {
@@ -112,16 +112,16 @@ private fun FlowContent.renderHookSection() {
             }
         }
         div(classes = "float-card dark float-contact") {
-            h3 { +"Don't miss out" }
-            p { +"Email or LinkedIn — walk a JD live with the Job Matching agent." }
+            h3 { +"Start a conversation" }
+            p { +"Email or LinkedIn for hiring partners and peer marketing leaders." }
             div(classes = "mini-row") {
                 a(href = "#contact", classes = "play-orb") { +"→" }
-                span { +"Let's talk" }
+                span { +"Get in touch" }
             }
         }
         div(classes = "hero-bottom") {
-            span(classes = "date-pill") { +"Open to remote B2B SaaS roles" }
-            h1 { +"SHIPS AGENTS, NOT SLIDE DECKS" }
+            span(classes = "date-pill") { +"Lifecycle · demand gen · B2B SaaS" }
+            h1 { +"SENIOR MARKETING LEADERSHIP" }
         }
     }
 }
@@ -134,10 +134,10 @@ private fun FlowContent.renderProofSection() {
         p(classes = "muted") { +HomepageSalesPitch.PARAGRAPH }
         div(classes = "panel proof-grid") {
             div(classes = "panel-head") {
-                span(classes = "prompt") { +"> proof.render" }
-                span { +"from AnudeepKnowledgePack" }
+                span(classes = "prompt") { +"Selected outcomes" }
+                span { +"from published work" }
             }
-            h3 { +"Achievement signals" }
+            h3 { +"Results" }
             div(classes = "achievements") {
                 AchievementHighlights.highlights.forEach { highlight ->
                     div(classes = "achievement-card") {
@@ -184,11 +184,11 @@ private fun FlowContent.renderAgentsSection() {
     section(classes = "section") {
         id = "agents"
         p(classes = "eyebrow") { +"Agents" }
-        h2 { +"Talk to the bench" }
+        h2 { +"Working agents, not a pitch deck" }
         div(classes = "panel") {
             div(classes = "panel-head") {
-                span(classes = "prompt") { +"> agent_os.online" }
-                span { +"koog + minimax live" }
+                span(classes = "prompt") { +"Live demonstration" }
+                span { +"built for hiring partners" }
             }
             div(classes = "agents-layout") {
                 div(classes = "agent-roster") {
@@ -219,9 +219,9 @@ private fun FlowContent.renderAgentsSection() {
                 div(classes = "console-panel") {
                     div(classes = "fit-panel") {
                         id = "job-matching-panel"
-                        h3 { +"Job Matching — paste JD" }
+                        h3 { +"Job Matching" }
                         p(classes = "muted") {
-                            +"Primary agent: ${primaryAgent.displayName}. Soft-reject rules loaded from knowledge pack."
+                            +"${primaryAgent.displayName} compares a role to published experience. It is a demonstration for recruiters and hiring managers — not an internal company tool."
                         }
                         form {
                             id = "job-matching-form"
@@ -248,11 +248,11 @@ private fun FlowContent.renderAgentsSection() {
                         }
                         div(classes = "htmx-indicator thinking-indicator") {
                             id = "job-match-indicator"
-                            +"Thinking — scoring fit against AnudeepKnowledgePack…"
+                            +"Scoring the role against published experience…"
                         }
                         div(classes = "output-slot") {
                             id = "job-match-output"
-                            +"Paste a JD and run fit analysis. Soft-reject hard skips still surface transferable strengths."
+                            +"Paste a job description to see strengths, gaps, and talking points."
                         }
                     }
                     div(classes = "chat-panel") {
@@ -323,12 +323,12 @@ private fun FlowContent.renderContactSection() {
         p(classes = "eyebrow") { +"Contact" }
         div(classes = "panel contact-panel") {
             div(classes = "panel-head") {
-                span(classes = "prompt") { +"> contact.open" }
-                span { +"hiring managers welcome" }
+                span(classes = "prompt") { +"Direct" }
+                span { +"hiring partners and peers" }
             }
-            h2 { +"Let's talk" }
+            h2 { +"Get in touch" }
             p(classes = "muted") {
-                +"Email or LinkedIn — happy to walk through a JD live with the Job Matching agent."
+                +"Email or LinkedIn. Happy to walk a role live if that is useful."
             }
             div(classes = "contact-links") {
                 a(href = "mailto:${ContactDetails.EMAIL}", classes = "btn btn-primary") {
@@ -347,6 +347,6 @@ private fun FlowContent.renderContactSection() {
 private fun FlowContent.renderSiteFooter() {
     div(classes = "site-footer") {
         span { +"© ${ContactDetails.FULL_NAME}" }
-        span { +"Built with Ktor + Kotlin HTMX · grounded by AnudeepKnowledgePack" }
+        span { +"Personal portfolio · Kotlin HTMX" }
     }
 }

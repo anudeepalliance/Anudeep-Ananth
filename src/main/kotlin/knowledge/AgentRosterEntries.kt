@@ -8,7 +8,7 @@ object AgentRosterEntries {
         AgentRosterEntry(
             agentId = "job_matching",
             displayName = "Job Matching",
-            shortDescription = "Paste a JD. Get a fit score, gaps, and talking points against Anudeep's real profile.",
+            shortDescription = "Compares a job description to published experience: strengths, gaps, talking points.",
             isPrimary = true,
         ),
         AgentRosterEntry(

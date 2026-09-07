@@ -35,7 +35,7 @@ internal fun buildLlmsTxtOverview(): String {
         appendLine("## Site")
         appendLine()
         appendLine("- [Home]($siteUrl/): Single-page portfolio — hook, proof, live agents, contact.")
-        appendLine("- [Job Matching agent]($siteUrl/#agents): Paste a JD; get a fit score grounded in Anudeep's resume.")
+        appendLine("- [Job Matching agent]($siteUrl/#agents): Hiring partners can compare a role to published experience.")
         appendLine("- [Sitemap]($siteUrl/sitemap.xml)")
         appendLine("- [Detailed overview]($siteUrl/llms-full.txt)")
         appendLine()
