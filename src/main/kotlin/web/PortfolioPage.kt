@@ -80,14 +80,6 @@ private fun FlowContent.renderHookSection() {
             }
         }
         span(classes = "hero-script") { +ContactDetails.FULL_NAME }
-        span(classes = "float-pill pill-left") {
-            span(classes = "pill-dot")
-            +"Remote · India"
-        }
-        span(classes = "float-pill pill-right") {
-            span(classes = "pill-dot")
-            +"AI agents"
-        }
         div(classes = "float-card float-jd") {
             h3 { +"Agents I use" }
             p { +"Custom agents I built for marketing work. Start with Job Matching." }

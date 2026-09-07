@@ -193,28 +193,6 @@ a:hover { text-decoration: underline; }
   text-shadow: 0 8px 24px var(--accent-glow);
 }
 
-.float-pill {
-  position: absolute;
-  z-index: 3;
-  background: #fff;
-  border-radius: 999px;
-  padding: 0.55rem 1rem;
-  font-weight: 700;
-  font-size: 0.88rem;
-  box-shadow: var(--shadow);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.pill-left { left: 11%; top: 28%; }
-.pill-right { right: 10%; top: 22%; }
-.pill-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
 .float-card {
   position: absolute;
   z-index: 3;
@@ -799,7 +777,7 @@ h3 { margin: 0; font-size: 1.05rem; }
   .topnav { display: none; }
   .hero-stage { min-height: auto; padding-bottom: 1.5rem; }
   .hero-script { top: 42%; }
-  .float-pill, .float-card { position: static; width: 100%; margin-top: 0.75rem; }
+  .float-card { position: static; width: 100%; margin-top: 0.75rem; }
   .hero-bottom { position: static; margin-top: 1.25rem; }
   .agents-layout { grid-template-columns: 1fr; }
 }
