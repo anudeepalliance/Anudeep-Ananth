@@ -24,6 +24,7 @@ Recruiters should quickly answer:
 - Voice: Sarvam STT in, ElevenLabs TTS out, English only
 - Rate limits: none (accepted cost risk); still log usage
 - Hosting: Hostinger VPS ready; domain to purchase
+- Secrets: `src/main/kotlin/util/ConfidentialObjects.kt` only (gitignored) — no env/secrets pattern
 - Assets ready: professional photo (source for agent portraits)
 - Assets to create: Seedance intro video, case studies/corpus, 7 portrait variants
 
