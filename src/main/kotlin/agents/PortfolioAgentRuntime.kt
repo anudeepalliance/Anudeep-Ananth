@@ -93,7 +93,7 @@ class PortfolioAgentRuntime(
                 ?: return failJobMatch(
                     errorMessage = "Job Matching returned unparseable output. Retry in a moment.",
                     startedAtMs = startedAtMs,
-                    inputChars = trimmedJobDescriptionText.length,
+                    visitorEnteredQueryText = trimmedJobDescriptionText,
                     clientIpAddress = clientIpAddress,
                     sessionId = sessionId,
                     eligibilityPrecheck = eligibilityPrecheck,
@@ -110,6 +110,7 @@ class PortfolioAgentRuntime(
                 durationMs = System.currentTimeMillis() - startedAtMs,
                 agentId = "job_matching",
                 inputChars = trimmedJobDescriptionText.length,
+                visitorEnteredQueryText = trimmedJobDescriptionText,
                 clientIpAddress = clientIpAddress,
                 sessionId = sessionId,
             )
@@ -123,7 +124,7 @@ class PortfolioAgentRuntime(
             failJobMatch(
                 errorMessage = exception.message ?: "Job Matching failed. Retry in a moment.",
                 startedAtMs = startedAtMs,
-                inputChars = trimmedJobDescriptionText.length,
+                visitorEnteredQueryText = trimmedJobDescriptionText,
                 clientIpAddress = clientIpAddress,
                 sessionId = sessionId,
                 eligibilityPrecheck = eligibilityPrecheck,
@@ -175,6 +176,7 @@ class PortfolioAgentRuntime(
                 durationMs = System.currentTimeMillis() - startedAtMs,
                 agentId = normalizedAgentId,
                 inputChars = trimmedUserMessageText.length,
+                visitorEnteredQueryText = trimmedUserMessageText,
                 clientIpAddress = clientIpAddress,
                 sessionId = sessionId,
             )
@@ -191,6 +193,7 @@ class PortfolioAgentRuntime(
                 durationMs = System.currentTimeMillis() - startedAtMs,
                 agentId = normalizedAgentId,
                 inputChars = trimmedUserMessageText.length,
+                visitorEnteredQueryText = trimmedUserMessageText,
                 errorMessage = exception.message,
                 clientIpAddress = clientIpAddress,
                 sessionId = sessionId,
@@ -233,7 +236,7 @@ class PortfolioAgentRuntime(
     private suspend fun failJobMatch(
         errorMessage: String,
         startedAtMs: Long,
-        inputChars: Int,
+        visitorEnteredQueryText: String,
         clientIpAddress: String?,
         sessionId: String?,
         eligibilityPrecheck: JobMatchEligibilityPrecheckResult?,
@@ -243,7 +246,8 @@ class PortfolioAgentRuntime(
             ok = false,
             durationMs = System.currentTimeMillis() - startedAtMs,
             agentId = "job_matching",
-            inputChars = inputChars,
+            inputChars = visitorEnteredQueryText.length,
+            visitorEnteredQueryText = visitorEnteredQueryText,
             errorMessage = errorMessage,
             clientIpAddress = clientIpAddress,
             sessionId = sessionId,

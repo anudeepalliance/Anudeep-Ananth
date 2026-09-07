@@ -29,6 +29,7 @@ suspend fun persistAgentUsageLogToMongo(
     durationMs: Long,
     agentId: String? = null,
     inputChars: Int? = null,
+    visitorEnteredQueryText: String? = null,
     errorMessage: String? = null,
     clientIpAddress: String? = null,
     sessionId: String? = null,
@@ -40,9 +41,23 @@ suspend fun persistAgentUsageLogToMongo(
             ok = ok,
             durationMs = durationMs,
             inputChars = inputChars,
+            visitorEnteredQueryText = clippedVisitorEnteredQueryText(visitorEnteredQueryText),
             errorMessage = errorMessage,
             clientIpAddress = clientIpAddress,
             sessionId = sessionId,
         ),
     )
+}
+
+internal const val MAX_VISITOR_ENTERED_QUERY_TEXT_CHARACTERS = 20_000
+
+/**
+ * Keeps visitor query text from blowing past a single Mongo document. Blank input becomes null.
+ */
+internal fun clippedVisitorEnteredQueryText(visitorEnteredQueryText: String?): String? {
+    val trimmedVisitorEnteredQueryText = visitorEnteredQueryText?.trim().orEmpty()
+    if (trimmedVisitorEnteredQueryText.isEmpty()) {
+        return null
+    }
+    return trimmedVisitorEnteredQueryText.take(MAX_VISITOR_ENTERED_QUERY_TEXT_CHARACTERS)
 }

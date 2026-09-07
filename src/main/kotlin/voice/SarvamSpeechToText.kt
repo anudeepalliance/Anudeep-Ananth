@@ -94,6 +94,7 @@ suspend fun transcribeEnglishAudioWithSarvam(
             durationMs = System.currentTimeMillis() - startedAtMs,
             agentId = agentId,
             inputChars = transcript.length,
+            visitorEnteredQueryText = transcript,
             errorMessage = if (transcript.isBlank()) "blank transcript" else null,
             clientIpAddress = clientIpAddress,
             sessionId = sessionId,
