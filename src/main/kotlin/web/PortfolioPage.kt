@@ -81,6 +81,18 @@ private fun FlowContent.renderHookSection() {
                 type = "video/mp4"
             }
         }
+        span(classes = "float-pill pill-a") {
+            span(classes = "pill-dot")
+            +"Growth Marketing"
+        }
+        span(classes = "float-pill pill-b") {
+            span(classes = "pill-dot")
+            +"Demand Generation"
+        }
+        span(classes = "float-pill pill-c") {
+            span(classes = "pill-dot")
+            +"AI Native Marketer"
+        }
         div(classes = "float-card float-jd") {
             h3 { +"Agents I use" }
             p { +"Custom agents I built for marketing work. Start with Job Matching." }
