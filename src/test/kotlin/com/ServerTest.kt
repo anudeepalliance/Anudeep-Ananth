@@ -36,6 +36,8 @@ class ServerTest {
         assertTrue(html.contains("Job Matching"))
         assertTrue(html.contains("anudeeps3@gmail.com"))
         assertTrue(html.contains("href=\"mailto:anudeeps3@gmail.com\""))
+        assertTrue(html.contains("https://www.linkedin.com/in/anudeep-ananth/"))
+        assertTrue(!html.contains("linkedin.com/in/anudeepananth"))
         assertTrue(html.contains("/static/css/lab.css"))
         assertTrue(html.contains("anudeep-intro-captioned-v4.mp4"))
         assertTrue(html.contains("hero-video-replay"))
@@ -43,6 +45,7 @@ class ServerTest {
         assertTrue(!html.contains("loop=\"true\""))
         assertTrue(html.contains("active-agent-id"))
         assertTrue(html.contains("hx-indicator"))
+        assertTrue(html.contains("hx-disabled-elt"))
         assertTrue(!html.contains("opacity:0") || html.contains("htmx-indicator"))
         // First-byte page body must stay visible; only indicators may use display:none via CSS class.
         assertTrue(!html.contains("style=\"opacity:0"))

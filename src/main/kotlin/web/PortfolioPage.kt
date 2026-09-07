@@ -326,6 +326,7 @@ private fun FlowContent.renderJobMatchingSection() {
                         attributes["hx-target"] = "#job-match-output"
                         attributes["hx-swap"] = "innerHTML"
                         attributes["hx-indicator"] = "#job-match-indicator"
+                        attributes["hx-disabled-elt"] = "find .btn-primary"
                         textArea {
                             name = "jobDescription"
                             placeholder = "Paste the full job description here…"
@@ -418,6 +419,7 @@ private fun FlowContent.renderAgentsSection() {
                 attributes["hx-target"] = "#agent-chat-output"
                 attributes["hx-swap"] = "innerHTML"
                 attributes["hx-indicator"] = "#agent-chat-indicator"
+                attributes["hx-disabled-elt"] = "find .btn-primary"
                 input {
                     id = "active-agent-id"
                     type = InputType.hidden

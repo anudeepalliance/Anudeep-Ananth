@@ -100,7 +100,7 @@ Mirror the PeekoPals Mongo pattern (`util/mongoDB`: client singleton, collection
 
 - Knowledge pack (Phase 1): `src/main/kotlin/knowledge/` — load via `AnudeepKnowledgePack`
 - Pitch + timeline + achievements + case studies derived from current `Anudeep Resume.pdf`
-- Contact on site: `anudeeps3@gmail.com`, LinkedIn `https://www.linkedin.com/in/anudeepananth`, phone `+91-9741701504`
+- Contact on site: `anudeeps3@gmail.com`, LinkedIn `https://www.linkedin.com/in/anudeep-ananth/`, phone `+91-9741701504`
 - Resume source of truth: `Anudeep Resume.pdf` (lifecycle / demand-gen / community track — DigitalOcean → Elucidata → Jiva → Telebu → …)
 
 ## SEO

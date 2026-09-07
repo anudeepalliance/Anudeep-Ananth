@@ -45,7 +45,7 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 - [x] Encode Job Matching targeting rules as structured config the agent reads
   - Notes: `src/main/kotlin/knowledge/JobMatchingTargetingRules.kt` — in-scope / hard-skips / preferences / `soft_reject`.
 - [x] Collect final contact block (email + LinkedIn) for the page and JSON-LD
-  - Notes: `src/main/kotlin/knowledge/ContactDetails.kt` — email `anudeeps3@gmail.com`, LinkedIn `https://www.linkedin.com/in/anudeepananth`, phone `+91-9741701504`.
+  - Notes: `src/main/kotlin/knowledge/ContactDetails.kt` — email `anudeeps3@gmail.com`, LinkedIn `https://www.linkedin.com/in/anudeep-ananth/`, phone `+91-9741701504`.
   - Facade: `AnudeepKnowledgePack` + `formatFullAgentGroundingText()` for Phase 4 agents.
 
 ## Phase 2 — Design system & static page shell
@@ -178,10 +178,16 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 
 ## Phase 9 — Domain, VPS deploy, go live (final)
 
-- [ ] Purchase `anudeepananth.com`
-- [ ] Link domain DNS to Hostinger VPS
-- [ ] Copy `ConfidentialObjects.kt` / app build onto VPS
-- [ ] Deploy Ktor app behind TLS reverse proxy
-- [ ] Point `anudeepananth.com` / `www` at the app
-- [ ] Production smoke test: homepage, JD fit, agent chat, voice, contact links
-- [ ] Mark site live
+- [x] Purchase `anudeepananth.com`
+- [x] Link domain DNS to Hostinger VPS
+  - Notes: registrar NS at Cloudflare (`pat.ns.cloudflare.com` / `rob.ns.cloudflare.com`). Orange-cloud A records already reach VPS `72.60.219.67`. Some resolvers still cache Hostinger parking (`2.57.91.91`) — flush DNS or use 1.1.1.1 if the parking page still shows.
+- [x] Copy `ConfidentialObjects.kt` / app build onto VPS
+  - Notes: rsync via `scripts/deploy-vps-build.sh` to `/root/anudeep-ananth` (includes gitignored secrets).
+- [x] Deploy Ktor app behind TLS reverse proxy
+  - Notes: container `anudeep-ananth` on `baedrop_default:8484`. Vhost `nginx/anudeepananth.conf` on `nginx-conf-vol` (not the stale `/root/unicrew-server/nginx/nginx.conf`). Self-signed origin cert, same as PeekoPals. `GET /health` → `ok`.
+- [x] Point `anudeepananth.com` / `www` at the app
+  - Notes: apex 301 → `https://www.anudeepananth.com`. Confirmed via Cloudflare anycast and Host-header on the VPS.
+- [x] Production smoke test: homepage, JD fit, agent chat, voice, contact links
+  - Notes: homepage + CSS/images + `/llms.txt` + `/sitemap.xml` + blank-JD error + live MiniMax fit (score 80 on a remote Head of Demand Gen JD). Voice not browser-checked (needs mic). PeekoPals `/health` and reaptive homepage still OK.
+- [x] Mark site live
+  - Notes: container healthy on `:8484`. Cloudflare `1.1.1.1` / `8.8.8.8` serve the site (`/health` ok, 4:3 CSS `lab.css?v=20260907c`). Some local resolvers still cache Hostinger parking `2.57.91.91` — flush DNS or use 1.1.1.1.

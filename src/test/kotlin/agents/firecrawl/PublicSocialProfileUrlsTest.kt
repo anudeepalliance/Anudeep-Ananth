@@ -48,7 +48,7 @@ class PublicSocialProfileUrlsTest {
         assertFalse(PublicSocialProfileUrls.isPublicSocialProfileUrl("https://linkedin.com/jobs/view/123"))
         assertFalse(PublicSocialProfileUrls.isPublicSocialProfileUrl("https://twitter.com/intent/tweet"))
         assertFalse(PublicSocialProfileUrls.isPublicSocialProfileUrl("https://youtube.com/watch?v=abc"))
-        assertTrue(PublicSocialProfileUrls.isPublicSocialProfileUrl("https://linkedin.com/in/anudeepananth"))
+        assertTrue(PublicSocialProfileUrls.isPublicSocialProfileUrl("https://linkedin.com/in/anudeep-ananth"))
         assertTrue(PublicSocialProfileUrls.isPublicSocialProfileUrl("https://youtube.com/@inspektlabs"))
     }
 }

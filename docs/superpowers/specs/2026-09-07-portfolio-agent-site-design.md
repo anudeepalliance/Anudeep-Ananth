@@ -72,7 +72,7 @@ Other agents: text + voice chat with streaming replies and optional spoken playb
 ### Contact
 
 - Email: anudeeps3@gmail.com (from current resume)
-- LinkedIn: https://www.linkedin.com/in/anudeepananth
+- LinkedIn: https://www.linkedin.com/in/anudeep-ananth/
 - Phone: +91-9741701504
 
 ## Job Matching targeting rules
