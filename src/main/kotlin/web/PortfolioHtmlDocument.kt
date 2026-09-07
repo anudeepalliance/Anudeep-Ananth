@@ -30,6 +30,17 @@ fun HTML.renderPortfolioHtmlDocument() {
         meta(name = "description", content = HomepageSalesPitch.PARAGRAPH.take(160))
         meta(name = "robots", content = "index, follow")
         link(rel = "canonical", href = "${ContactDetails.PORTFOLIO_URL}/")
+        link(rel = "icon", href = "/static/favicon-32.png") {
+            attributes["type"] = "image/png"
+            attributes["sizes"] = "32x32"
+        }
+        link(rel = "icon", href = "/static/favicon-16.png") {
+            attributes["type"] = "image/png"
+            attributes["sizes"] = "16x16"
+        }
+        link(rel = "apple-touch-icon", href = "/static/apple-touch-icon.png") {
+            attributes["sizes"] = "180x180"
+        }
         meta(content = "${ContactDetails.FULL_NAME} — AI-native lifecycle & demand gen") {
             attributes["property"] = "og:title"
         }
@@ -139,6 +150,9 @@ fun HTML.renderPortfolioHtmlDocument() {
                     chatHint.textContent = card.getAttribute('data-agent-use') ||
                       ('Ask my ' + displayName + ' agent something I use it for.');
                   }
+                  var chatInput = document.querySelector('#agent-chat-form textarea');
+                  var inputHint = card.getAttribute('data-agent-hint');
+                  if (chatInput && inputHint) chatInput.placeholder = inputHint;
                 });
                 """.trimIndent()
             }

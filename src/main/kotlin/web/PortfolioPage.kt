@@ -3,6 +3,7 @@ package web
 import knowledge.AchievementHighlight
 import knowledge.AchievementHighlights
 import knowledge.AgentRosterEntries
+import knowledge.AiTechStackEntries
 import knowledge.ContactDetails
 import knowledge.ExperienceTimelineEntries
 import knowledge.HomepageSalesPitch
@@ -32,7 +33,7 @@ import kotlinx.html.unsafe
 import kotlinx.html.video
 
 /**
- * Renders the single-page portfolio body sections (Hook → Achievements → Job Matching → Agents → Contact).
+ * Renders the single-page portfolio body sections (Hook → Achievements → Job Matching → Agents → Tech stack → Contact).
  */
 fun FlowContent.renderPortfolioPageBody() {
     renderTopBar()
@@ -40,6 +41,7 @@ fun FlowContent.renderPortfolioPageBody() {
     renderAchievementsSection()
     renderJobMatchingSection()
     renderAgentsSection()
+    renderAiTechStackSection()
     renderContactSection()
     renderSiteFooter()
 }
@@ -61,6 +63,7 @@ private fun FlowContent.navLinkRow() {
         a(href = "#achievements") { +"Achievements" }
         a(href = "#job-matching") { +"Job Matching" }
         a(href = "#agents") { +"Agents" }
+        a(href = "#tech-stack") { +"Stack" }
         a(href = "#contact") { +"Contact" }
     }
 }
@@ -169,8 +172,7 @@ private fun FlowContent.renderAchievementsSection() {
             }
         }
         div(classes = "path-stage") {
-            p(classes = "receipt-kicker") { +"Newest first" }
-            h3(classes = "path-heading") { +"Experience, drawn as a path" }
+            h3(classes = "path-heading") { +"My Experience" }
             renderDrawnExperienceJourney()
         }
     }
@@ -249,7 +251,15 @@ private fun FlowContent.renderDrawnExperienceJourney() {
                         span(classes = "journey-now") { +"now" }
                     }
                     span(classes = "journey-year") { +entry.dateRangeLabel }
-                    h3 { +entry.companyName }
+                    div(classes = "journey-company") {
+                        img(classes = "journey-logo") {
+                            src = entry.logoImagePath
+                            alt = ""
+                            attributes["width"] = "40"
+                            attributes["height"] = "40"
+                        }
+                        h3 { +entry.companyName }
+                    }
                     p(classes = "journey-role") { +entry.roleTitle }
                     ul {
                         entry.summaryBullets.take(3).forEach { bullet ->
@@ -267,7 +277,7 @@ private fun FlowContent.renderJobMatchingSection() {
     section(classes = "section") {
         id = "job-matching"
         p(classes = "eyebrow") { +"Job Matching" }
-        h2 { +"Paste a role. See the fit." }
+        h2 { +"Paste your role. See the fit." }
         p(classes = "muted") {
             +"I built this agent and I use it to score a job description against published experience. It has its own input and output — separate from the other agents."
         }
@@ -307,21 +317,26 @@ private fun FlowContent.renderJobMatchingSection() {
                         div(classes = "console-actions") {
                             button(classes = "btn btn-primary") {
                                 type = ButtonType.submit
+                                renderButtonIcon(ButtonIconKind.SEARCH)
                                 +"Run fit analysis"
                             }
                             button(classes = "btn btn-ghost") {
                                 type = ButtonType.button
                                 attributes["data-voice-jd"] = "true"
+                                renderButtonIcon(ButtonIconKind.MICROPHONE)
                                 +"Voice input"
                             }
                         }
                     }
                     p(classes = "muted voice-status") {
-                        +"Voice: English only. Falls back to typing if the mic or speech API fails."
+                        attributes["aria-live"] = "polite"
                     }
                     div(classes = "htmx-indicator thinking-indicator") {
                         id = "job-match-indicator"
-                        +"Scoring the role against published experience…"
+                        span(classes = "thinking-spinner") {
+                            attributes["aria-hidden"] = "true"
+                        }
+                        span { +"Scoring the role against published experience…" }
                     }
                     div(classes = "output-slot") {
                         id = "job-match-output"
@@ -356,6 +371,7 @@ private fun FlowContent.renderAgentsSection() {
                     attributes["data-agent-id"] = agent.agentId
                     attributes["data-agent-name"] = agent.displayName
                     attributes["data-agent-use"] = agent.shortDescription
+                    attributes["data-agent-hint"] = agent.inputHintText
                     attributes["aria-checked"] = if (isActive) "true" else "false"
                     img(classes = "agent-poster-photo") {
                         src = agent.portraitImagePath
@@ -395,37 +411,70 @@ private fun FlowContent.renderAgentsSection() {
                 }
                 textArea {
                     name = "message"
-                    placeholder = "Ask about channels, lifecycle, ABM, scoring, social, analytics…"
+                    placeholder = defaultChatAgent.inputHintText
                     attributes["aria-label"] = "Agent chat message"
                 }
                 div(classes = "console-actions") {
                     button(classes = "btn btn-primary") {
                         type = ButtonType.submit
+                        renderButtonIcon(ButtonIconKind.SEND)
                         +"Send"
                     }
                     button(classes = "btn btn-ghost") {
                         type = ButtonType.button
                         attributes["data-voice-chat"] = "true"
+                        renderButtonIcon(ButtonIconKind.MICROPHONE)
                         +"Voice input"
                     }
                     button(classes = "btn btn-ghost") {
                         type = ButtonType.button
                         attributes["data-speak-reply"] = "true"
+                        renderButtonIcon(ButtonIconKind.SPEAKER)
                         +"Play spoken reply"
                     }
                 }
             }
             p(classes = "muted voice-status") {
                 id = "voice-status"
-                +"Voice: English only. Falls back to typing if the mic or speech API fails."
+                attributes["aria-live"] = "polite"
             }
             div(classes = "htmx-indicator thinking-indicator") {
                 id = "agent-chat-indicator"
-                +"Thinking — agent drafting reply…"
+                span(classes = "thinking-spinner") {
+                    attributes["aria-hidden"] = "true"
+                }
+                span { +"Thinking — agent drafting reply…" }
             }
             div(classes = "output-slot") {
                 id = "agent-chat-output"
                 +"Replies from the agent I built land here."
+            }
+        }
+    }
+}
+
+private fun FlowContent.renderAiTechStackSection() {
+    section(classes = "section") {
+        id = "tech-stack"
+        p(classes = "eyebrow") { +"Tools" }
+        h2 { +"My AI tech stack" }
+        p(classes = "muted agents-lede") {
+            +"What I use to build the agents on this page, the intro video, and the rest of the site."
+        }
+        div(classes = "stack-grid") {
+            AiTechStackEntries.entries.forEach { stackEntry ->
+                a(href = stackEntry.siteUrl, classes = "stack-card") {
+                    attributes["target"] = "_blank"
+                    attributes["rel"] = "noopener noreferrer"
+                    img(classes = "stack-logo") {
+                        src = stackEntry.logoImagePath
+                        alt = ""
+                        attributes["width"] = "48"
+                        attributes["height"] = "48"
+                    }
+                    h3 { +stackEntry.displayName }
+                    p { +stackEntry.useLabel }
+                }
             }
         }
     }
@@ -450,12 +499,14 @@ private fun FlowContent.renderContactSection() {
                     }
                     div(classes = "contact-links") {
                         a(href = "mailto:${ContactDetails.EMAIL}", classes = "btn btn-primary") {
-                            +ContactDetails.EMAIL
+                            renderButtonIcon(ButtonIconKind.MAIL)
+                            +"Email me"
                         }
                         a(href = ContactDetails.LINKEDIN_URL, classes = "btn btn-ghost") {
                             attributes["target"] = "_blank"
                             attributes["rel"] = "noopener noreferrer"
-                            +"LinkedIn"
+                            renderButtonIcon(ButtonIconKind.LINKEDIN)
+                            +"DM on LinkedIn"
                         }
                     }
                 }

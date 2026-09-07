@@ -90,7 +90,7 @@ a:hover { text-decoration: underline; }
 
 .topnav {
   display: flex;
-  gap: 1.4rem;
+  gap: 1.15rem;
   font-size: 0.92rem;
   color: var(--muted);
 }
@@ -604,10 +604,11 @@ h3 { margin: 0; font-size: 1.05rem; }
 }
 .path-heading {
   margin: 0 0 0.35rem;
-  font-family: "Caveat", cursive;
-  font-size: clamp(1.85rem, 3vw, 2.45rem);
-  line-height: 1;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  font-weight: 400;
 }
 
 .journey-map {
@@ -710,6 +711,19 @@ h3 { margin: 0; font-size: 1.05rem; }
   color: var(--accent-text);
   margin-bottom: 0.15rem;
 }
+.journey-company {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.journey-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 8px;
+}
 .journey-card h3 {
   font-family: "Caveat", cursive;
   font-size: 1.7rem;
@@ -776,6 +790,16 @@ h3 { margin: 0; font-size: 1.05rem; }
   font-weight: 800;
   cursor: pointer;
   text-decoration: none;
+}
+.btn-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+.btn-icon [fill="none"] {
+  fill: none;
+  stroke: currentColor;
 }
 .btn-primary {
   background: var(--accent);
@@ -977,7 +1001,11 @@ h3 { margin: 0; font-size: 1.05rem; }
 
 .htmx-indicator { display: none; }
 .htmx-request .htmx-indicator,
-.htmx-indicator.htmx-request { display: block; }
+.htmx-indicator.htmx-request {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
 .thinking-indicator {
   margin-top: 0.65rem;
   padding: 0.55rem 0.75rem;
@@ -987,6 +1015,19 @@ h3 { margin: 0; font-size: 1.05rem; }
   font-size: 0.82rem;
   font-weight: 700;
 }
+.thinking-spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2.5px solid rgba(22, 23, 28, 0.16);
+  border-top-color: var(--accent-ink);
+  animation: thinking-spin 0.7s linear infinite;
+}
+@keyframes thinking-spin {
+  to { transform: rotate(360deg); }
+}
+.voice-status:empty { display: none; }
 .fit-result { display: grid; gap: 0.75rem; font-size: 0.92rem; }
 .fit-result-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; }
 .fit-score {
@@ -1022,6 +1063,44 @@ h3 { margin: 0; font-size: 1.05rem; }
 .chat-meta { display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; }
 .chat-bubble { margin: 0; white-space: pre-wrap; font-size: 0.95rem; }
 
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.stack-card {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.05rem 1rem 1.15rem;
+  background: #fffaf1;
+  border: 2px solid #1f1a17;
+  border-radius: 6px 16px 10px 14px;
+  box-shadow: 5px 6px 0 rgba(31, 26, 23, 0.08);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.18s ease;
+}
+.stack-card:hover {
+  text-decoration: none;
+  transform: translateY(-3px);
+}
+.stack-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 10px;
+}
+.stack-card h3 {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+.stack-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
 .contact-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
 .site-footer {
   margin-top: 2rem;
@@ -1038,6 +1117,7 @@ h3 { margin: 0; font-size: 1.05rem; }
 @media (max-width: 1200px) {
   .receipt-stubs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .agent-kit { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .stack-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 980px) {
@@ -1061,10 +1141,13 @@ h3 { margin: 0; font-size: 1.05rem; }
   .outcome-polaroid { transform: none; }
   .agent-kit { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .agent-poster { transform: none; }
+  .stack-grid { grid-template-columns: 1fr 1fr; }
+  .stack-card { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .thinking-spinner { animation: none; }
   .outcome-ticket,
   .outcome-polaroid,
   .agent-poster {
@@ -1072,7 +1155,8 @@ h3 { margin: 0; font-size: 1.05rem; }
     transition: none;
   }
   .outcome-ticket:hover,
-  .agent-poster:hover {
+  .agent-poster:hover,
+  .stack-card:hover {
     transform: none;
   }
 }
