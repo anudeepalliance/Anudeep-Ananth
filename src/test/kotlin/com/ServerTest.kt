@@ -41,6 +41,8 @@ class ServerTest {
         assertTrue(html.contains("/static/css/lab.css"))
         assertTrue(html.contains("anudeep-intro-captioned-v4.mp4"))
         assertTrue(html.contains("hero-video-replay"))
+        assertTrue(html.contains("hero-video-replay-control"))
+        assertTrue(html.contains("Replay intro"))
         assertTrue(html.contains("id=\"agent-live\""))
         assertTrue(!html.contains("loop=\"true\""))
         assertTrue(html.contains("active-agent-id"))

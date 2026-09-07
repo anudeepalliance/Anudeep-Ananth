@@ -96,10 +96,18 @@ private fun FlowContent.renderHookSection() {
             }
             button(classes = "hero-video-replay") {
                 type = ButtonType.button
-                attributes["aria-label"] = "Play intro again"
-                span(classes = "hero-video-replay-orb") { +"▶" }
+                attributes["aria-label"] = "Replay intro"
+                span(classes = "hero-video-replay-orb") {
+                    renderButtonIcon(ButtonIconKind.REPLAY)
+                }
             }
             div(classes = "hero-video-controls") {
+                button(classes = "hero-video-replay-control") {
+                    type = ButtonType.button
+                    attributes["aria-label"] = "Replay intro"
+                    renderButtonIcon(ButtonIconKind.REPLAY)
+                    span { +"Replay" }
+                }
                 button(classes = "hero-video-mute is-muted") {
                     type = ButtonType.button
                     attributes["aria-label"] = "Unmute intro video"

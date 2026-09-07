@@ -162,13 +162,39 @@ a:hover { text-decoration: underline; }
   left: 4.6rem;
   right: 4.6rem;
   bottom: 0.7rem;
-  z-index: 4;
+  z-index: 6;
   display: flex;
   align-items: center;
   gap: 0.65rem;
   padding: 0.35rem 0.45rem;
   border-radius: 999px;
   background: rgba(17, 18, 22, 0.58);
+}
+.hero-video-replay-control {
+  display: none;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.35rem;
+  height: 44px;
+  padding: 0 0.9rem 0 0.7rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.hero-video-frame.is-ended .hero-video-replay-control {
+  display: inline-flex;
+}
+.hero-video-replay-control .btn-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.hero-video-replay-control:focus-visible {
+  outline: 3px solid var(--accent-ink);
+  outline-offset: 2px;
 }
 .hero-video-mute {
   flex: 0 0 44px;
@@ -228,8 +254,11 @@ a:hover { text-decoration: underline; }
   place-items: center;
   background: var(--accent);
   color: var(--accent-ink);
-  font-size: 1.45rem;
   box-shadow: 0 12px 24px var(--accent-glow);
+}
+.hero-video-replay-orb .btn-icon {
+  width: 2rem;
+  height: 2rem;
 }
 .hero-video-replay:focus-visible .hero-video-replay-orb {
   outline: 3px solid var(--accent);

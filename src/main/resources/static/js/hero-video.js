@@ -4,9 +4,11 @@
   var introVideo = videoFrame.querySelector("video");
   var muteToggleButton = videoFrame.querySelector(".hero-video-mute");
   var seekBar = videoFrame.querySelector(".hero-video-seek");
-  var replayButton = videoFrame.querySelector(".hero-video-replay");
+  var replayOverlayButton = videoFrame.querySelector(".hero-video-replay");
+  var replayControlButton = videoFrame.querySelector(".hero-video-replay-control");
   if (!introVideo || !muteToggleButton || !seekBar) return;
 
+  introVideo.removeAttribute("loop");
   introVideo.loop = false;
   introVideo.muted = true;
   muteToggleButton.classList.add("is-muted");
@@ -18,7 +20,7 @@
 
   function showReplayOverlay() {
     videoFrame.classList.add("is-ended");
-    if (replayButton) replayButton.removeAttribute("hidden");
+    if (replayOverlayButton) replayOverlayButton.removeAttribute("hidden");
   }
 
   function hideReplayOverlay() {
@@ -66,11 +68,13 @@
     }
   });
 
-  if (replayButton) {
-    replayButton.addEventListener("click", function () {
+  [replayOverlayButton, replayControlButton].forEach(function (replayButton) {
+    if (!replayButton) return;
+    replayButton.addEventListener("click", function (clickEvent) {
+      clickEvent.stopPropagation();
       playIntroFromStart();
     });
-  }
+  });
 
   seekBar.addEventListener("pointerdown", function () {
     seekBar.dataset.isDragging = "true";

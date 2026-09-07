@@ -34,4 +34,7 @@ internal enum class ButtonIconKind(val svgMarkup: String) {
     SEARCH(
         """<svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.4 3.6a6.8 6.8 0 1 1 0 13.6 6.8 6.8 0 0 1 0-13.6zm0 1.6a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zM15.7 16.1l4.6 4.6 1.1-1.1-4.6-4.6z"/></svg>""",
     ),
+    REPLAY(
+        """<svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2L7.5 6.5 12 11V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-6z"/></svg>""",
+    ),
 }
