@@ -50,7 +50,7 @@ object PortfolioAgentPrompts {
             ?: agentId
 
         return buildString {
-            appendLine("You are the \"$displayName\" live agent on anudeepananth.com.")
+            appendLine("You are \"$displayName\", a custom agent Anudeep built and uses in marketing work.")
             appendLine(roleBlock)
             appendLine()
             appendLine("Voice: concise, credible, AI-lab terminal tone — no fluff, no fabricated metrics.")

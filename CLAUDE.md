@@ -22,6 +22,7 @@ That project is already set up to work with this same VPS and the MongoDB commun
 - Feel: senior marketing leader at a company; public-safe language only (no internal org words such as GROWTH)
 - Giant hero word: ANUDEEP (not GROWTH)
 - Visual: light festival/editorial landing (Odyssey-style) — giant type, script name, floating cards; not the old dark terminal look
+- Agents section: showcase that Anudeep built these custom agents and uses them in the work (live, not a mockup)
 - Primary interaction: Job Matching agent (paste JD → fit analysis)
 - Visitors can chat with all listed agents via text or voice
 

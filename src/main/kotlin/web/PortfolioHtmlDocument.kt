@@ -132,8 +132,8 @@ fun HTML.renderPortfolioHtmlDocument() {
                   var chatHint = document.getElementById('active-agent-chat-hint');
                   if (chatHint) {
                     chatHint.textContent = agentId === 'job_matching'
-                      ? 'Job Matching follow-ups and clarifications about the fit card.'
-                      : 'Chatting with ' + displayName + '. Ask practical marketing questions.';
+                      ? 'Follow-up with the Job Matching agent I built.'
+                      : 'This is my ' + displayName + ' agent. Ask it something I use it for.';
                   }
                   var jobPanel = document.getElementById('job-matching-panel');
                   if (jobPanel) {

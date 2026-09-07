@@ -89,11 +89,11 @@ private fun FlowContent.renderHookSection() {
             +"AI agents"
         }
         div(classes = "float-card float-jd") {
-            h3 { +"Role fit" }
-            p { +"Hiring partners can check published experience against a job description." }
+            h3 { +"Agents I use" }
+            p { +"Custom agents I built for marketing work. Start with Job Matching." }
             div(classes = "mini-row") {
                 a(href = "#agents", classes = "play-orb") { +"▶" }
-                span { +"Open Job Matching" }
+                span { +"Open agents" }
             }
         }
         div(classes = "float-card dark float-contact") {
@@ -227,11 +227,14 @@ private fun FlowContent.renderAgentsSection() {
     section(classes = "section") {
         id = "agents"
         p(classes = "eyebrow") { +"Agents" }
-        h2 { +"Working agents, not a pitch deck" }
+        h2 { +"I built these. I use them." }
+        p(classes = "muted") {
+            +"Custom agents for performance, research, prospecting, scoring, social, and analytics. They are live here because that is how I work — not a mockup."
+        }
         div(classes = "panel") {
             div(classes = "panel-head") {
-                span(classes = "prompt") { +"Live demonstration" }
-                span { +"built for hiring partners" }
+                span(classes = "prompt") { +"Built by me" }
+                span { +"used in the work" }
             }
             div(classes = "agents-layout") {
                 div(classes = "agent-roster") {
@@ -264,7 +267,7 @@ private fun FlowContent.renderAgentsSection() {
                         id = "job-matching-panel"
                         h3 { +"Job Matching" }
                         p(classes = "muted") {
-                            +"${primaryAgent.displayName} compares a role to published experience. It is a demonstration for recruiters and hiring managers — not an internal company tool."
+                            +"I built this agent to score a role against published experience. Paste a job description."
                         }
                         form {
                             id = "job-matching-form"
@@ -305,7 +308,7 @@ private fun FlowContent.renderAgentsSection() {
                         }
                         p(classes = "muted") {
                             id = "active-agent-chat-hint"
-                            +"Select an agent card to switch persona. Job Matching follow-ups stay here too."
+                            +"Talk to an agent I built. Ask it something I would actually use it for."
                         }
                         form {
                             id = "agent-chat-form"
@@ -351,7 +354,7 @@ private fun FlowContent.renderAgentsSection() {
                         }
                         div(classes = "output-slot") {
                             id = "agent-chat-output"
-                            +"Chat replies land here. Switch agents from the roster on the left."
+                            +"Replies from the agent I built land here."
                         }
                     }
                 }

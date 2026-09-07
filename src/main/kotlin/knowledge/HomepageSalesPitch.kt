@@ -8,7 +8,7 @@ object HomepageSalesPitch {
 
     const val PARAGRAPH =
         "I lead lifecycle and demand programs for B2B SaaS: customer journeys, community-led pipeline, " +
-            "and measurement that holds up in a leadership room. I also build working marketing agents " +
-            "so teams can move faster without adding headcount. This page is a public portfolio — " +
-            "hiring partners can use the Job Matching agent to test role fit against published experience."
+            "and measurement that holds up in a leadership room. I also build custom marketing agents " +
+            "and I use them in the work — live on this page, not a slide. Job Matching will score a role " +
+            "against published experience."
 }
