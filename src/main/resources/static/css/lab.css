@@ -1395,7 +1395,22 @@ html.motion-on .fit-result {
   50% { box-shadow: 6px 8px 0 rgba(255, 204, 0, 0.45); }
 }
 
-.contact-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+.contact-links {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.contact-links a { pointer-events: auto; }
+.contact-email-line {
+  position: relative;
+  z-index: 2;
+  margin: 0.65rem 0 0;
+  font-weight: 700;
+}
+.contact-email-line a { pointer-events: auto; }
 .site-footer {
   margin-top: 2rem;
   padding-top: 1rem;

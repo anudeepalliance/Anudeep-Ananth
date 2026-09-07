@@ -208,6 +208,14 @@ fun HTML.renderPortfolioHtmlDocument() {
                   });
                 });
                 document.addEventListener('click', function (event) {
+                  var emailLink = event.target.closest('a[data-gmail-compose]');
+                  if (emailLink) {
+                    var gmailComposeUrl = emailLink.getAttribute('data-gmail-compose');
+                    if (gmailComposeUrl) {
+                      window.open(gmailComposeUrl, '_blank', 'noopener,noreferrer');
+                    }
+                    return;
+                  }
                   var card = event.target.closest('#agents [data-agent-id]');
                   if (!card) return;
                   var agentId = card.getAttribute('data-agent-id');

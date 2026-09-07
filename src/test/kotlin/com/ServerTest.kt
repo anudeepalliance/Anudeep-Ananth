@@ -25,6 +25,7 @@ class ServerTest {
         assertTrue(html.contains("job description") || html.contains("Job description"))
         assertTrue(html.contains("Job Matching"))
         assertTrue(html.contains("anudeeps3@gmail.com"))
+        assertTrue(html.contains("href=\"mailto:anudeeps3@gmail.com\""))
         assertTrue(html.contains("/static/css/lab.css"))
         assertTrue(html.contains("active-agent-id"))
         assertTrue(html.contains("hx-indicator"))

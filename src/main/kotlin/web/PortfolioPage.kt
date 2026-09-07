@@ -498,7 +498,9 @@ private fun FlowContent.renderContactSection() {
                         +"Email or LinkedIn. Happy to walk a role live if that is useful."
                     }
                     div(classes = "contact-links") {
-                        a(href = "mailto:${ContactDetails.EMAIL}", classes = "btn btn-primary") {
+                        a(href = ContactDetails.MAILTO_HREF, classes = "btn btn-primary") {
+                            attributes["aria-label"] = "Email ${ContactDetails.EMAIL}"
+                            attributes["data-gmail-compose"] = ContactDetails.GMAIL_COMPOSE_URL
                             renderButtonIcon(ButtonIconKind.MAIL)
                             +"Email me"
                         }
@@ -507,6 +509,11 @@ private fun FlowContent.renderContactSection() {
                             attributes["rel"] = "me noopener noreferrer"
                             renderButtonIcon(ButtonIconKind.LINKEDIN)
                             +"DM on LinkedIn"
+                        }
+                    }
+                    p(classes = "contact-email-line") {
+                        a(href = ContactDetails.MAILTO_HREF) {
+                            +ContactDetails.EMAIL
                         }
                     }
                 }
