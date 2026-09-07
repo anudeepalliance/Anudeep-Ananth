@@ -46,6 +46,7 @@ object AchievementHighlights {
             contextLabel = "Honeycomb social programs in 6 months",
             category = "ROAS-style efficiency",
             proofImagePath = "/static/images/proof/honeycomb-revenue.jpg",
+            proofExternalUrl = "https://www.facebook.com/photo.php?fbid=10215222361291409&set=a.2069073445506&type=3&theater",
         ),
         AchievementHighlight(
             metricLabel = "Amazon Star Award",
@@ -71,4 +72,5 @@ data class AchievementHighlight(
     val contextLabel: String,
     val category: String,
     val proofImagePath: String? = null,
+    val proofExternalUrl: String? = null,
 )

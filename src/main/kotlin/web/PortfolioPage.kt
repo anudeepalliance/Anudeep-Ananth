@@ -169,6 +169,13 @@ private fun FlowContent.renderProofSection() {
                         div(classes = "chip-row") {
                             span(classes = "chip") { +highlight.category }
                         }
+                        highlight.proofExternalUrl?.let { proofExternalUrl ->
+                            a(href = proofExternalUrl, classes = "proof-external-link") {
+                                attributes["target"] = "_blank"
+                                attributes["rel"] = "noopener noreferrer"
+                                +"View Facebook post"
+                            }
+                        }
                     }
                 }
             }

@@ -291,6 +291,12 @@ a:hover { text-decoration: underline; }
 .proof-image-button:hover .proof-image {
   filter: brightness(1.04);
 }
+.proof-external-link {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
 
 body.lightbox-open {
   overflow: hidden;
