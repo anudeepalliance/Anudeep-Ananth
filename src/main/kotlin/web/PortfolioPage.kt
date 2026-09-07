@@ -436,10 +436,6 @@ private fun FlowContent.renderContactSection() {
         id = "contact"
         p(classes = "eyebrow") { +"Contact" }
         div(classes = "panel contact-panel") {
-            div(classes = "panel-head") {
-                span(classes = "prompt") { +"Direct" }
-                span { +"hiring partners and peers" }
-            }
             div(classes = "contact-layout") {
                 img(classes = "contact-portrait") {
                     src = "/static/images/anudeep-hero.jpg"
