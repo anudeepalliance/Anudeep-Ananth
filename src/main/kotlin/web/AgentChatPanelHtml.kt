@@ -8,6 +8,7 @@ import kotlinx.html.div
 import kotlinx.html.p
 import kotlinx.html.span
 import kotlinx.html.stream.createHTML
+import kotlinx.html.unsafe
 
 /**
  * Renders one HTMX agent chat turn (success bubble or retryable error).
@@ -30,7 +31,9 @@ private fun renderSuccessfulChatTurnHtml(outcome: AgentChatTurnOutcome.Success):
             span(classes = "chip") { +displayName }
             span(classes = "muted") { +"agent reply" }
         }
-        p(classes = "chat-bubble") { +outcome.replyText }
+        div(classes = "chat-bubble chat-markdown") {
+            unsafe { +MarkdownToSafeHtml.render(outcome.replyText) }
+        }
     }
 }
 

@@ -32,6 +32,9 @@ dependencies {
     implementation(libs.mongodb.driver.kotlin.coroutine)
     implementation(libs.mongodb.bson.kotlinx)
     implementation(libs.koog.agents)
+    implementation(libs.commonmark)
+    implementation(libs.commonmark.tables)
+    implementation(libs.commonmark.autolink)
 
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)
