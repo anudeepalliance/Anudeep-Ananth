@@ -93,7 +93,7 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 - [x] Build shared Anudeep knowledge loader (profile + resume + corpus)
   - Notes: prompts pull `AnudeepKnowledgePack.formatFullAgentGroundingText()` via `PortfolioAgentPrompts`.
 - [x] Add Firecrawl tool integration
-  - Notes: `agents/firecrawl/FirecrawlScrapeClient.kt` → `POST https://api.firecrawl.dev/v1/scrape`; Koog `FirecrawlScrapeToolSet.scrapePublicPageToMarkdown`. URL prefetch also injects markdown into prompts.
+  - Notes: `agents/firecrawl/FirecrawlScrapeClient.kt` → `POST https://api.firecrawl.dev/v1/scrape` with markdown+links (full page, not main-content only). Prefetch scrapes pasted URLs then follows LinkedIn/X/Instagram/etc. Koog tool is on every agent.
 - [x] Add MiniMax web search tool integration
   - Notes: **Skipped for v1** — no MiniMax web-search MCP. Firecrawl scrape + agent reasoning cover research/JD URLs. Revisit if MCP packaging is needed later.
 - [x] Wire usage-log inserts on every agent invocation

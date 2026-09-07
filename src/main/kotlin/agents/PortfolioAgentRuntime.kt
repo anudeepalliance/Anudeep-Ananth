@@ -1,6 +1,9 @@
 package agents
 
+import agents.firecrawl.FirecrawlPageScrapeResult
+import agents.firecrawl.FirecrawlPageScraper
 import agents.firecrawl.FirecrawlScrapeClient
+import agents.firecrawl.PublicSocialProfileUrls
 import agents.firecrawl.buildFirecrawlScrapeToolRegistry
 import agents.minimax.runPortfolioMiniMaxAgentTurn
 import ai.koog.agents.core.tools.ToolRegistry
@@ -20,10 +23,8 @@ private val lenientJsonParser = Json {
     coerceInputValues = true
 }
 
-private val httpUrlInTextRegex = Regex(
-    """https?://[^\s<>"')\]]+""",
-    RegexOption.IGNORE_CASE,
-)
+private const val MAX_SEED_URLS_TO_SCRAPE = 3
+private const val MAX_SOCIAL_PROFILE_FOLLOW_UP_SCRAPES = 4
 
 /**
  * Runs one MiniMax agent turn. Injectable so unit tests can mock the LLM.
@@ -55,7 +56,7 @@ object MiniMaxPortfolioLlmTextRunner : PortfolioLlmTextRunner {
  */
 class PortfolioAgentRuntime(
     private val llmTextRunner: PortfolioLlmTextRunner = MiniMaxPortfolioLlmTextRunner,
-    private val firecrawlScrapeClient: FirecrawlScrapeClient = FirecrawlScrapeClient(),
+    private val firecrawlScrapeClient: FirecrawlPageScraper = FirecrawlScrapeClient(),
     private val firecrawlToolRegistry: ToolRegistry = buildFirecrawlScrapeToolRegistry(),
 ) {
     /**
@@ -158,13 +159,7 @@ class PortfolioAgentRuntime(
         return try {
             val enrichedUserMessageText = enrichTextWithScrapedUrlsIfPresent(trimmedUserMessageText)
             val systemPrompt = PortfolioAgentPrompts.systemPromptForAgentId(normalizedAgentId)
-            val toolRegistry = if (
-                PortfolioAgentPrompts.agentIdsThatShouldReceiveFirecrawlTool().contains(normalizedAgentId)
-            ) {
-                firecrawlToolRegistry
-            } else {
-                null
-            }
+            val toolRegistry = firecrawlToolRegistry
 
             val replyText = llmTextRunner.runAgentTurn(
                 systemPrompt = systemPrompt,
@@ -211,28 +206,50 @@ class PortfolioAgentRuntime(
     }
 
     private suspend fun enrichTextWithScrapedUrlsIfPresent(sourceText: String): String {
-        val discoveredUrls = httpUrlInTextRegex.findAll(sourceText)
-            .map { matchResult ->
-                matchResult.value.trimEnd('.', ',', ';')
-            }
-            .distinct()
-            .take(2)
-            .toList()
-
-        if (discoveredUrls.isEmpty()) {
+        val seedPageUrls = PublicSocialProfileUrls.extractHttpUrlsFromText(sourceText)
+            .take(MAX_SEED_URLS_TO_SCRAPE)
+        if (seedPageUrls.isEmpty()) {
             return sourceText
         }
 
-        val scrapedBlocks = discoveredUrls.map { pageUrl ->
-            firecrawlScrapeClient.scrapeUrlToMarkdownOrErrorMessage(pageUrl = pageUrl)
+        val scrapeResultsByCanonicalUrl = linkedMapOf<String, FirecrawlPageScrapeResult>()
+        seedPageUrls.forEach { pageUrl ->
+            scrapeResultsByCanonicalUrl[pageUrl] = firecrawlScrapeClient.scrapePublicPage(pageUrl)
+        }
+
+        val socialProfileFollowUpUrls = scrapeResultsByCanonicalUrl.values
+            .flatMap { scrapeResult ->
+                PublicSocialProfileUrls.extractFromMarkdownAndLinks(
+                    markdown = scrapeResult.markdown,
+                    discoveredLinks = scrapeResult.discoveredLinks,
+                )
+            }
+            .distinct()
+            .filter { socialProfileUrl ->
+                socialProfileUrl !in scrapeResultsByCanonicalUrl
+            }
+            .take(MAX_SOCIAL_PROFILE_FOLLOW_UP_SCRAPES)
+
+        if (socialProfileFollowUpUrls.isNotEmpty()) {
+            portfolioAgentRuntimeLogger.info(
+                "Firecrawl prefetch following social profiles: $socialProfileFollowUpUrls",
+            )
+        }
+        socialProfileFollowUpUrls.forEach { socialProfileUrl ->
+            scrapeResultsByCanonicalUrl[socialProfileUrl] =
+                firecrawlScrapeClient.scrapePublicPage(socialProfileUrl)
+        }
+
+        if (scrapeResultsByCanonicalUrl.isEmpty()) {
+            return sourceText
         }
 
         return buildString {
             appendLine(sourceText)
             appendLine()
             appendLine("=== FIRECRAWL PREFETCH ===")
-            scrapedBlocks.forEach { scrapedBlock ->
-                appendLine(scrapedBlock)
+            scrapeResultsByCanonicalUrl.values.forEach { scrapeResult ->
+                appendLine(scrapeResult.formatAsPrefetchBlock())
                 appendLine()
             }
         }
