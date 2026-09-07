@@ -125,19 +125,21 @@ private fun FlowContent.renderHookSection() {
             span(classes = "pill-dot")
             +"AI Native Marketer"
         }
-        div(classes = "float-card float-jd") {
+        a(href = "#job-matching", classes = "float-card float-jd") {
+            attributes["aria-label"] = "Open Job Matching"
             h3 { +"Agents I use" }
             p { +"Custom agents I built for marketing work. Start with Job Matching." }
             div(classes = "mini-row") {
-                a(href = "#job-matching", classes = "play-orb") { +"▶" }
+                span(classes = "play-orb") { +"▶" }
                 span { +"Open Job Matching" }
             }
         }
-        div(classes = "float-card dark float-contact") {
+        a(href = "#contact", classes = "float-card dark float-contact") {
+            attributes["aria-label"] = "Get in touch"
             h3 { +"Start a conversation" }
             p { +"Email or LinkedIn for hiring partners and peer marketing leaders." }
             div(classes = "mini-row") {
-                a(href = "#contact", classes = "play-orb") { +"→" }
+                span(classes = "play-orb") { +"→" }
                 span { +"Get in touch" }
             }
         }
