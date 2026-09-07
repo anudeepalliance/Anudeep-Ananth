@@ -1,33 +1,33 @@
-# Anudeep-Ananth
+# anudeepananth.com
 
-This project was created using the [Ktor Project Generator](https://start.ktor.io).
+Recruiter-facing portfolio for **Anudeep Ananth**: a single-page AI-lab site with live Koog + MiniMax agents.
 
-Here are some useful links to get you started:
+## Local run
 
-* [Ktor Documentation](https://ktor.io/docs/home.html)
-* [Ktor GitHub page](https://github.com/ktorio/ktor)
-* [Ktor Slack chat](https://app.slack.com/client/T09229ZC6/C0A974TJ9). [Request an invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up).
+```bash
+# Optional: PeekoPals-style Mongo tunnel (usage logs)
+ssh -L 27017:localhost:27017 -p 1379 reaptive@72.60.219.67 -N
 
-## Features
-
-Here's a list of features included in this project:
-
-| Name | Description |
-|------|-------------|
-
-## Building & Running
-
-To build or run the project, use one of the following tasks:
-
-| Task              | Description       |
-|-------------------|-------------------|
-| `./gradlew test`  | Run the tests     |
-| `./gradlew build` | Build the project |
-| `./gradlew run`   | Run the server    |
-
-If the server starts successfully, you'll see the following output:
-
+./gradlew run
 ```
-2024-12-04 14:32:45.584 [main] INFO  Application - Application started in 0.303 seconds.
-2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
-```
+
+Open http://127.0.0.1:8080
+
+- `./gradlew test` — unit + HTMX + Job Matching tests
+- Secrets: `src/main/kotlin/util/ConfidentialObjects.kt` (gitignored)
+- Tracker: `tasks.md`
+- Rules: `CLAUDE.md`
+
+## Surfaces
+
+- `/` — Hook → Proof → Agents → Contact (visible HTML on first byte)
+- `/llms.txt` and `/llms-full.txt` — LLM/Google-AI crawlable overviews
+- `/robots.txt`, `/sitemap.xml`
+- `POST /htmx/job-match`, `POST /htmx/agent-chat`
+- `POST /htmx/voice/stt`, `POST /htmx/voice/tts`
+
+## Notes
+
+- Domain purchase + VPS deploy is **Phase 9 only** after local sign-off.
+- Intro video: script in `content/SeedanceIntroScript.md` (generation blocked under ZDR; poster uses hero still).
+- Hero still is a generated stand-in until the real professional photo is dropped in `src/main/resources/static/images/anudeep-hero.jpg`.

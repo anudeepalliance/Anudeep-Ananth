@@ -3,12 +3,14 @@ kotlin = "2.4.0"
 kotlinxSerialization = "1.11.0"
 logback = "1.5.37"
 mongodbDriver = "5.9.0"
+koog = "1.0.0"
 
 [libraries]
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 mongodb-driver-kotlin-coroutine = { module = "org.mongodb:mongodb-driver-kotlin-coroutine", version.ref = "mongodbDriver" }
 mongodb-bson-kotlinx = { module = "org.mongodb:bson-kotlinx", version.ref = "mongodbDriver" }
+koog-agents = { module = "ai.koog:koog-agents", version.ref = "koog" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

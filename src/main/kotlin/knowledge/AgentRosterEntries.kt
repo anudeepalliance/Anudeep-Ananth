@@ -55,4 +55,5 @@ data class AgentRosterEntry(
     val displayName: String,
     val shortDescription: String,
     val isPrimary: Boolean,
+    val portraitImagePath: String = "/static/images/agents/${agentId}.jpg",
 )

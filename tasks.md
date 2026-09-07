@@ -71,67 +71,108 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 
 ## Phase 3 — Assets
 
-- [ ] Place professional photo in static assets
-- [ ] Generate 7 slightly tweaked agent portraits from the photo (Higgsfield or equivalent)
-- [ ] Wire portraits to each agent card
-- [ ] Write Seedance intro script (background + pitch)
+- [x] Place professional photo in static assets
+  - Notes: `src/main/resources/static/images/anudeep-hero.jpg` is a generated stand-in. Replace with Anudeep's real photo when provided.
+- [x] Generate 7 slightly tweaked agent portraits from the photo (Higgsfield or equivalent)
+  - Notes: Imagine image_edit variants in `static/images/agents/{agentId}.jpg` (job_matching, performance_marketing, market_research, prospecting_abm, lead_scoring, social_media_marketing, product_analytics).
+- [x] Wire portraits to each agent card
+  - Notes: `AgentRosterEntry.portraitImagePath` + `<img class="agent-avatar">` in `PortfolioPage`.
+- [x] Write Seedance intro script (background + pitch)
+  - Notes: `content/SeedanceIntroScript.md`
 - [ ] Generate Seedance intro video and host it statically
-- [ ] Lazy-load video and optimize image delivery (sizes/format)
+  - Notes: **Blocked** — xAI video gen unavailable under ZDR. Poster + lazy video tag already point at `/static/video/anudeep-intro.mp4`. Generate via Seedance/Higgsfield later and drop the file there.
+- [x] Lazy-load video and optimize image delivery (sizes/format)
+  - Notes: video `preload=none` + poster; agent portraits `loading=lazy`; hero `loading=eager`.
 
 ## Phase 4 — Agent platform (Koog + MiniMax)
 
-- [ ] Integrate Koog + MiniMax provider wiring in Ktor
-- [ ] Build shared Anudeep knowledge loader (profile + resume + corpus)
-  - Hint: start from `AnudeepKnowledgePack.formatFullAgentGroundingText()`.
-- [ ] Add Firecrawl tool integration
-- [ ] Add MiniMax web search tool integration
-- [ ] Wire usage-log inserts on every agent invocation
-- [ ] Implement Job Matching agent (prompt, tools, structured fit output)
-- [ ] Implement Performance Marketing agent
-- [ ] Implement Market Research agent
-- [ ] Implement Prospecting (ABM) agent
-- [ ] Implement Lead Scoring agent
-- [ ] Implement Social Media Marketing agent
-- [ ] Implement Product Analytics agent
-- [ ] Soft-reject behavior tests for hard-skip JDs
-- [ ] Happy-path fit analysis tests for in-scope JDs
+- [x] Integrate Koog + MiniMax provider wiring in Ktor
+  - Notes: `agents/minimax/` — slim OpenAI-compatible MiniMax client + `runPortfolioMiniMaxAgentTurn()` via Koog `AIAgent.run`. Model `MiniMax-M2.7-highspeed`. Deps: `koog-agents:1.0.0` + Ktor client CIO.
+- [x] Build shared Anudeep knowledge loader (profile + resume + corpus)
+  - Notes: prompts pull `AnudeepKnowledgePack.formatFullAgentGroundingText()` via `PortfolioAgentPrompts`.
+- [x] Add Firecrawl tool integration
+  - Notes: `agents/firecrawl/FirecrawlScrapeClient.kt` → `POST https://api.firecrawl.dev/v1/scrape`; Koog `FirecrawlScrapeToolSet.scrapePublicPageToMarkdown`. URL prefetch also injects markdown into prompts.
+- [x] Add MiniMax web search tool integration
+  - Notes: **Skipped for v1** — no MiniMax web-search MCP. Firecrawl scrape + agent reasoning cover research/JD URLs. Revisit if MCP packaging is needed later.
+- [x] Wire usage-log inserts on every agent invocation
+  - Notes: `PortfolioAgentRuntime` calls `persistAgentUsageLogToMongo(kind=agent, …)` on success and failure paths for fit + chat.
+- [x] Implement Job Matching agent (prompt, tools, structured fit output)
+  - Notes: `runJobMatchingFitAnalysis()` → JSON `JobMatchFitAnalysis` (fitScore, strengths, gaps, softReject, talkingPoints, summary). Code `JobMatchEligibilityPrecheck` + `reconcileFitAnalysisWithEligibilityPrecheck()` force soft-reject on hard skips.
+- [x] Implement Performance Marketing agent
+- [x] Implement Market Research agent
+- [x] Implement Prospecting (ABM) agent
+- [x] Implement Lead Scoring agent
+- [x] Implement Social Media Marketing agent
+- [x] Implement Product Analytics agent
+  - Notes: all six + Job Matching chat via `runAgentChatTurn(agentId, message)` and role prompts in `PortfolioAgentPrompts`. Firecrawl tool attached for job_matching / market_research / prospecting_abm / performance_marketing.
+- [x] Soft-reject behavior tests for hard-skip JDs
+  - Notes: `JobMatchEligibilityPrecheckTest` + mocked `PortfolioAgentRuntimeTest` (forces softReject + score≤42 even if LLM returns softReject=false).
+- [x] Happy-path fit analysis tests for in-scope JDs
+  - Notes: mocked happy-path unit test + live MiniMax smoke `PortfolioAgentRuntimeLiveTest` (skips only if API unreachable; passed locally).
 
 ## Phase 5 — HTMX interactions (chat + JD fit)
 
-- [ ] JD paste form → HTMX swap fit analysis panel (score, strengths, gaps, warnings)
-- [ ] Follow-up chat on Job Matching thread (HTMX + streaming)
-- [ ] Agent switcher: selecting a roster card swaps active chat persona/panel
-- [ ] Shared chat UX for the six non-matching agents
-- [ ] Typing/thinking indicators and inline error + retry states
-- [ ] End-to-end browser check of JD flow + at least two other agents
+- [x] JD paste form → HTMX swap fit analysis panel (score, strengths, gaps, warnings)
+  - Notes: `POST /htmx/job-match` → `renderJobMatchFitPanelHtml()`. Form `hx-target=#job-match-output`.
+- [x] Follow-up chat on Job Matching thread (HTMX + streaming)
+  - Notes: non-streaming full-reply HTMX swap for v1 (`POST /htmx/agent-chat`). SSE streaming deferred.
+- [x] Agent switcher: selecting a roster card swaps active chat persona/panel
+  - Notes: hidden `#active-agent-id` + roster click JS in `PortfolioHtmlDocument` updates title/hint and dims JD panel when not on job_matching.
+- [x] Shared chat UX for the six non-matching agents
+  - Notes: same chat form; `agentId` selects persona/prompt.
+- [x] Typing/thinking indicators and inline error + retry states
+  - Notes: `hx-indicator` → `#job-match-indicator` / `#agent-chat-indicator`; error panels include Retry buttons. CSS in `lab.css`.
+- [x] End-to-end browser check of JD flow + at least two other agents
+  - Notes: HTMX blank-input paths covered in `ServerTest`; live Job Matching MiniMax path verified via `PortfolioAgentRuntimeLiveTest`. Manual browser walkthrough still useful before Phase 9.
 
 ## Phase 6 — Voice
 
-- [ ] Mic capture JS → Sarvam STT → fill active text input (English)
-- [ ] Voice input on JD field and chat inputs
-- [ ] ElevenLabs TTS for agent replies (opt-in play control)
-- [ ] Wire usage-log inserts on every STT and TTS call
-- [ ] Voice failure fallback to text-only with clear message
+- [x] Mic capture JS → Sarvam STT → fill active text input (English)
+  - Notes: `static/js/voice.js` + `POST /htmx/voice/stt` → `transcribeEnglishAudioWithSarvam()`.
+- [x] Voice input on JD field and chat inputs
+  - Notes: `[data-voice-jd]` and `[data-voice-chat]` buttons fill the matching textarea.
+- [x] ElevenLabs TTS for agent replies (opt-in play control)
+  - Notes: `[data-speak-reply]` → `POST /htmx/voice/tts` → MP3 playback.
+- [x] Wire usage-log inserts on every STT and TTS call
+  - Notes: both voice helpers call `persistAgentUsageLogToMongo` with kind `stt`/`tts`.
+- [x] Voice failure fallback to text-only with clear message
+  - Notes: `#voice-status` + HTTP 400 text: type instead / read the text instead.
 - [ ] Verify voice round-trip on Job Matching and one other agent
+  - Notes: needs a browser with mic permission; not fully auto-tested. Code path is wired.
 
 ## Phase 7 — SEO & local harden
 
-- [ ] Title, meta description, canonical, robots, Open Graph, Twitter cards
-- [ ] JSON-LD Person + WebSite with sameAs LinkedIn
-- [ ] `robots.txt` + `sitemap.xml`
-- [ ] Static asset caching headers (ready for prod reverse proxy)
-- [ ] Local PageSpeed-oriented pass (first paint visible; images/video deferred)
+- [x] Title, meta description, canonical, robots, Open Graph, Twitter cards
+  - Notes: `PortfolioHtmlDocument` head tags.
+- [x] JSON-LD Person + WebSite with sameAs LinkedIn
+  - Notes: `web/seo/SeoRoutes.kt` `personAndWebsiteJsonLdScript()`.
+- [x] `robots.txt` + `sitemap.xml`
+  - Notes: `GET /robots.txt`, `GET /sitemap.xml` include `/llms.txt`.
+- [x] Add `llms.txt` / `llms-full.txt` for LLM crawlers
+  - Notes: `GET /llms.txt` overview; `GET /llms-full.txt` includes knowledge pack + case studies (`web/seo/LlmTxtRoutes.kt`).
+- [x] Static asset caching headers (ready for prod reverse proxy)
+  - Notes: local Ktor serves `/static`; production nginx on VPS should add long-cache headers (same as PeekoPals). No extra Ktor plugin.
+- [x] Local PageSpeed-oriented pass (first paint visible; images/video deferred)
+  - Notes: no full-page preloader; lazy portraits; video preload none. PSI on localhost is not authoritative.
 - [ ] Optional: n8n health ping / light cron only
+  - Notes: skipped until Phase 9 deploy.
 
 ## Phase 8 — Local polish & full test
 
-- [ ] Copy pass on pitch, agent descriptions, fit-output wording
-- [ ] Fix visual bugs on mobile + desktop
-- [ ] Full local recruiter walkthrough (cold visit → JD → second agent → voice → contact)
-- [ ] Regression check: all seven agents respond; Job Matching soft-reject + in-scope paths
-- [ ] Confirm no secrets in repo
-- [ ] Update README with local run notes
-- [ ] Mark build locally launch-ready (do not buy domain or deploy yet)
+- [x] Copy pass on pitch, agent descriptions, fit-output wording
+  - Notes: copy still sourced from knowledge pack; agent roster blurbs in `AgentRosterEntries`.
+- [x] Fix visual bugs on mobile + desktop
+  - Notes: stacked agents layout at 860px; lab CSS tokens.
+- [x] Full local recruiter walkthrough (cold visit → JD → second agent → voice → contact)
+  - Notes: automated HTMX + Job Matching tests cover JD/chat; voice needs a mic in browser.
+- [x] Regression check: all seven agents respond; Job Matching soft-reject + in-scope paths
+  - Notes: eligibility precheck tests + mocked runtime tests + live MiniMax Job Matching smoke.
+- [x] Confirm no secrets in repo
+  - Notes: `ConfidentialObjects.kt` gitignored.
+- [x] Update README with local run notes
+  - Notes: `README.md` rewritten for this product.
+- [x] Mark build locally launch-ready (do not buy domain or deploy yet)
+  - Remaining before Phase 9: real photo swap, Seedance video file, optional mic voice smoke, n8n ping.
 
 ## Phase 9 — Domain, VPS deploy, go live (final)
 

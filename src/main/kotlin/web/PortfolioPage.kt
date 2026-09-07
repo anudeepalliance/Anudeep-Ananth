@@ -7,6 +7,7 @@ import knowledge.ExperienceTimelineEntries
 import knowledge.HomepageSalesPitch
 import kotlinx.html.ButtonType
 import kotlinx.html.FlowContent
+import kotlinx.html.InputType
 import kotlinx.html.a
 import kotlinx.html.button
 import kotlinx.html.div
@@ -16,12 +17,16 @@ import kotlinx.html.h2
 import kotlinx.html.h3
 import kotlinx.html.header
 import kotlinx.html.id
+import kotlinx.html.img
+import kotlinx.html.input
 import kotlinx.html.li
 import kotlinx.html.p
 import kotlinx.html.section
+import kotlinx.html.source
 import kotlinx.html.span
 import kotlinx.html.textArea
 import kotlinx.html.ul
+import kotlinx.html.video
 
 private val techStackLabels = listOf(
     "Koog",
@@ -97,11 +102,23 @@ private fun FlowContent.renderHookSection() {
                     span(classes = "prompt") { +"> media.slots" }
                     span { +"phase_3_assets" }
                 }
-                div(classes = "media-slot") {
-                    +"Photo slot — professional portrait lands in Phase 3"
+                img(classes = "hero-photo") {
+                    src = "/static/images/anudeep-hero.jpg"
+                    alt = "${ContactDetails.FULL_NAME} professional portrait"
+                    attributes["loading"] = "eager"
+                    attributes["width"] = "640"
+                    attributes["height"] = "800"
                 }
-                div(classes = "media-slot") {
-                    +"Video slot — Seedance intro lazy-loads in Phase 3"
+                video(classes = "hero-video") {
+                    attributes["controls"] = "true"
+                    attributes["preload"] = "none"
+                    attributes["poster"] = "/static/images/anudeep-hero.jpg"
+                    attributes["playsinline"] = "true"
+                    source {
+                        src = "/static/video/anudeep-intro.mp4"
+                        type = "video/mp4"
+                    }
+                    +"Intro video pending Seedance generation — see content/SeedanceIntroScript.md"
                 }
             }
         }
@@ -169,7 +186,7 @@ private fun FlowContent.renderAgentsSection() {
         div(classes = "panel") {
             div(classes = "panel-head") {
                 span(classes = "prompt") { +"> agent_os.online" }
-                span { +"chat wiring: phase 4–5" }
+                span { +"koog + minimax live" }
             }
             div(classes = "agents-layout") {
                 div(classes = "agent-roster") {
@@ -178,7 +195,13 @@ private fun FlowContent.renderAgentsSection() {
                         button(classes = activeClass.trim()) {
                             type = ButtonType.button
                             attributes["data-agent-id"] = agent.agentId
-                            div(classes = "agent-avatar") { +"IMG" }
+                            img(classes = "agent-avatar") {
+                                src = agent.portraitImagePath
+                                alt = "${agent.displayName} agent portrait of ${ContactDetails.FULL_NAME}"
+                                attributes["loading"] = "lazy"
+                                attributes["width"] = "104"
+                                attributes["height"] = "104"
+                            }
                             div {
                                 h3 {
                                     +agent.displayName
@@ -193,6 +216,7 @@ private fun FlowContent.renderAgentsSection() {
                 }
                 div(classes = "console-panel") {
                     div(classes = "fit-panel") {
+                        id = "job-matching-panel"
                         h3 { +"Job Matching — paste JD" }
                         p(classes = "muted") {
                             +"Primary agent: ${primaryAgent.displayName}. Soft-reject rules loaded from knowledge pack."
@@ -202,6 +226,7 @@ private fun FlowContent.renderAgentsSection() {
                             attributes["hx-post"] = "/htmx/job-match"
                             attributes["hx-target"] = "#job-match-output"
                             attributes["hx-swap"] = "innerHTML"
+                            attributes["hx-indicator"] = "#job-match-indicator"
                             textArea {
                                 name = "jobDescription"
                                 placeholder = "Paste the full job description here…"
@@ -214,22 +239,41 @@ private fun FlowContent.renderAgentsSection() {
                                 }
                                 button(classes = "btn btn-ghost") {
                                     type = ButtonType.button
-                                    +"Voice (Phase 6)"
+                                    attributes["data-voice-jd"] = "true"
+                                    +"Voice input"
                                 }
                             }
                         }
+                        div(classes = "htmx-indicator thinking-indicator") {
+                            id = "job-match-indicator"
+                            +"Thinking — scoring fit against AnudeepKnowledgePack…"
+                        }
                         div(classes = "output-slot") {
                             id = "job-match-output"
-                            +"Fit score panel waits here — agent brain in Phase 4, HTMX swap live in Phase 5."
+                            +"Paste a JD and run fit analysis. Soft-reject hard skips still surface transferable strengths."
                         }
                     }
                     div(classes = "chat-panel") {
-                        h3 { +"Follow-up / agent chat" }
+                        h3 {
+                            id = "active-agent-chat-title"
+                            +"Chat — ${primaryAgent.displayName}"
+                        }
+                        p(classes = "muted") {
+                            id = "active-agent-chat-hint"
+                            +"Select an agent card to switch persona. Job Matching follow-ups stay here too."
+                        }
                         form {
                             id = "agent-chat-form"
                             attributes["hx-post"] = "/htmx/agent-chat"
                             attributes["hx-target"] = "#agent-chat-output"
                             attributes["hx-swap"] = "innerHTML"
+                            attributes["hx-indicator"] = "#agent-chat-indicator"
+                            input {
+                                id = "active-agent-id"
+                                type = InputType.hidden
+                                name = "agentId"
+                                value = primaryAgent.agentId
+                            }
                             textArea {
                                 name = "message"
                                 placeholder = "Ask a follow-up about fit, channels, lifecycle, ABM…"
@@ -242,13 +286,27 @@ private fun FlowContent.renderAgentsSection() {
                                 }
                                 button(classes = "btn btn-ghost") {
                                     type = ButtonType.button
-                                    +"Voice (Phase 6)"
+                                    attributes["data-voice-chat"] = "true"
+                                    +"Voice input"
+                                }
+                                button(classes = "btn btn-ghost") {
+                                    type = ButtonType.button
+                                    attributes["data-speak-reply"] = "true"
+                                    +"Play spoken reply"
                                 }
                             }
                         }
+                        p(classes = "muted") {
+                            id = "voice-status"
+                            +"Voice: English only. Falls back to typing if the mic or speech API fails."
+                        }
+                        div(classes = "htmx-indicator thinking-indicator") {
+                            id = "agent-chat-indicator"
+                            +"Thinking — agent drafting reply…"
+                        }
                         div(classes = "output-slot") {
                             id = "agent-chat-output"
-                            +"Chat thread waits here — streaming replies land in Phase 5."
+                            +"Chat replies land here. Switch agents from the roster on the left."
                         }
                     }
                 }

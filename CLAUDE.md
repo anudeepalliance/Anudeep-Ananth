@@ -107,6 +107,7 @@ Mirror the PeekoPals Mongo pattern (`util/mongoDB`: client singleton, collection
 - Title, description, canonical, Open Graph, Twitter cards
 - JSON-LD `Person` + `WebSite` with `sameAs` LinkedIn
 - `robots.txt` + `sitemap.xml`
+- `GET /llms.txt` and `GET /llms-full.txt` (llmstxt.org) for Google AI / LLM crawlers
 
 ## Commands
 
