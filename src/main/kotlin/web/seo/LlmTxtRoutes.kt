@@ -4,10 +4,14 @@ import io.ktor.http.ContentType
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
+import knowledge.AchievementHighlights
 import knowledge.AgentRosterEntries
+import knowledge.AiTechStackEntries
 import knowledge.AnudeepKnowledgePack
+import knowledge.AnudeepProfile
 import knowledge.CaseStudyCorpusEntries
 import knowledge.ContactDetails
+import knowledge.ExperienceTimelineEntries
 import knowledge.HomepageSalesPitch
 import knowledge.JobMatchingTargetingRules
 
@@ -32,13 +36,21 @@ internal fun buildLlmsTxtOverview(): String {
         appendLine(">")
         appendLine("> ${HomepageSalesPitch.PARAGRAPH}")
         appendLine()
+        appendLine(AnudeepProfile.CAREER_SUMMARY)
+        appendLine()
+        appendLine("Location: ${AnudeepProfile.LOCATION_SUMMARY}. ${AnudeepProfile.YEARS_EXPERIENCE_SUMMARY}.")
+        appendLine("Current role: ${ExperienceTimelineEntries.entries.first().roleTitle} at ${ExperienceTimelineEntries.entries.first().companyName}.")
+        appendLine()
         appendLine("## Site")
         appendLine()
-        appendLine("- [Home]($siteUrl/): Single-page portfolio — hook, achievements, live agents, contact.")
-        appendLine("- [Job Matching]($siteUrl/#job-matching): Dedicated agent with its own job-description input and fit output.")
+        appendLine("- [Home]($siteUrl/): Single-page portfolio — hook, achievements, Job Matching, live agents, AI stack, contact.")
+        appendLine("- [Job Matching]($siteUrl/#job-matching): Paste a job description. A live agent scores fit against published experience.")
         appendLine("- [Agents]($siteUrl/#agents): Custom marketing agents Anudeep built and uses for performance, research, prospecting, scoring, social, and analytics.")
+        appendLine("- [Achievements]($siteUrl/#achievements): Published outcomes and experience, newest role first.")
+        appendLine("- [AI tech stack]($siteUrl/#tech-stack): Tools used to build this site and the agents.")
+        appendLine("- [Contact]($siteUrl/#contact): Email and LinkedIn.")
         appendLine("- [Sitemap]($siteUrl/sitemap.xml)")
-        appendLine("- [Detailed overview]($siteUrl/llms-full.txt)")
+        appendLine("- [Detailed overview]($siteUrl/llms-full.txt): Full grounding pack, case studies, and targeting rules.")
         appendLine()
         appendLine("## Who this is for")
         appendLine()
@@ -56,11 +68,42 @@ internal fun buildLlmsTxtOverview(): String {
             appendLine("- $skipSignal")
         }
         appendLine()
+        appendLine("## Preferences")
+        appendLine()
+        JobMatchingTargetingRules.preferences.forEach { preference ->
+            appendLine("- $preference")
+        }
+        appendLine()
+        appendLine("Hard-skip JDs get a soft reject: strong misalignment plus transferable strengths. LinkedIn Remote counts as remote-eligible.")
+        appendLine()
+        appendLine("## Experience (newest first)")
+        appendLine()
+        ExperienceTimelineEntries.entries.forEach { timelineEntry ->
+            appendLine("- ${timelineEntry.dateRangeLabel} — ${timelineEntry.roleTitle}, ${timelineEntry.companyName}")
+            timelineEntry.summaryBullets.forEach { bullet ->
+                appendLine("  - $bullet")
+            }
+        }
+        appendLine()
+        appendLine("## Published outcomes")
+        appendLine()
+        AchievementHighlights.highlights.forEach { highlight ->
+            appendLine("- ${highlight.metricLabel} — ${highlight.contextLabel} (${highlight.category})")
+        }
+        appendLine()
         appendLine("## Agents on this site")
+        appendLine()
+        appendLine("These are live custom agents (not mockups). Visitors can chat by text or voice.")
         appendLine()
         AgentRosterEntries.agents.forEach { agent ->
             val primaryMark = if (agent.isPrimary) " (primary)" else ""
             appendLine("- ${agent.displayName}$primaryMark — ${agent.shortDescription}")
+        }
+        appendLine()
+        appendLine("## AI tech stack")
+        appendLine()
+        AiTechStackEntries.entries.forEach { stackEntry ->
+            appendLine("- [${stackEntry.displayName}](${stackEntry.siteUrl}): ${stackEntry.useLabel}")
         }
         appendLine()
         appendLine("## Contact")
@@ -72,10 +115,7 @@ internal fun buildLlmsTxtOverview(): String {
         appendLine()
         appendLine("## Keywords")
         appendLine()
-        appendLine(
-            "Anudeep Ananth, lifecycle marketing, demand generation, growth marketing, " +
-                "B2B SaaS, DigitalOcean, AI agents, Koog, MiniMax, Job Matching agent",
-        )
+        appendLine(PortfolioSeo.KEYWORDS)
     }
 }
 
@@ -93,6 +133,7 @@ internal fun buildLlmsFullTxt(): String {
             appendLine("Problem: ${caseStudy.problemStatement}")
             appendLine("What Anudeep did: ${caseStudy.whatAnudeepDid}")
             appendLine("Outcomes: ${caseStudy.outcomes.joinToString("; ")}")
+            appendLine("Skills: ${caseStudy.skillsDemonstrated.joinToString("; ")}")
             appendLine()
         }
         appendLine("## Full grounding pack")

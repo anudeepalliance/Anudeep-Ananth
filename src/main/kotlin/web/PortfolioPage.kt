@@ -14,6 +14,7 @@ import kotlinx.html.a
 import kotlinx.html.article
 import kotlinx.html.button
 import kotlinx.html.div
+import kotlinx.html.footer
 import kotlinx.html.form
 import kotlinx.html.h1
 import kotlinx.html.h2
@@ -23,6 +24,8 @@ import kotlinx.html.id
 import kotlinx.html.img
 import kotlinx.html.input
 import kotlinx.html.li
+import kotlinx.html.main
+import kotlinx.html.nav
 import kotlinx.html.ol
 import kotlinx.html.p
 import kotlinx.html.section
@@ -38,12 +41,15 @@ import kotlinx.html.video
  */
 fun FlowContent.renderPortfolioPageBody() {
     renderTopBar()
-    renderHookSection()
-    renderAchievementsSection()
-    renderJobMatchingSection()
-    renderAgentsSection()
-    renderAiTechStackSection()
-    renderContactSection()
+    main {
+        id = "main"
+        renderHookSection()
+        renderAchievementsSection()
+        renderJobMatchingSection()
+        renderAgentsSection()
+        renderAiTechStackSection()
+        renderContactSection()
+    }
     renderSiteFooter()
 }
 
@@ -59,7 +65,8 @@ private fun FlowContent.renderTopBar() {
 }
 
 private fun FlowContent.navLinkRow() {
-    div(classes = "topnav") {
+    nav(classes = "topnav") {
+        attributes["aria-label"] = "Primary"
         a(href = "#hook") { +"Intro" }
         a(href = "#achievements") { +"Achievements" }
         a(href = "#job-matching") { +"Job Matching" }
@@ -144,7 +151,7 @@ private fun FlowContent.renderHookSection() {
             }
         }
         div(classes = "hero-bottom") {
-            span(classes = "date-pill") { +"Lifecycle · demand gen · B2B SaaS" }
+            span(classes = "date-pill") { +"Anudeep Ananth · lifecycle · demand gen · B2B SaaS" }
         }
     }
 }
@@ -460,7 +467,7 @@ private fun FlowContent.renderAiTechStackSection() {
                     attributes["rel"] = "noopener noreferrer"
                     img(classes = "stack-logo") {
                         src = stackEntry.logoImagePath
-                        alt = ""
+                        alt = "${stackEntry.displayName} logo"
                         attributes["width"] = "48"
                         attributes["height"] = "48"
                     }
@@ -497,7 +504,7 @@ private fun FlowContent.renderContactSection() {
                         }
                         a(href = ContactDetails.LINKEDIN_URL, classes = "btn btn-ghost") {
                             attributes["target"] = "_blank"
-                            attributes["rel"] = "noopener noreferrer"
+                            attributes["rel"] = "me noopener noreferrer"
                             renderButtonIcon(ButtonIconKind.LINKEDIN)
                             +"DM on LinkedIn"
                         }
@@ -509,7 +516,7 @@ private fun FlowContent.renderContactSection() {
 }
 
 private fun FlowContent.renderSiteFooter() {
-    div(classes = "site-footer") {
+    footer(classes = "site-footer") {
         span { +"© ${ContactDetails.FULL_NAME}" }
         span { +"Personal portfolio · Kotlin HTMX" }
     }

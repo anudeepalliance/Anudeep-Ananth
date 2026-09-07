@@ -31,6 +31,20 @@ class ServerTest {
         assertTrue(!html.contains("opacity:0") || html.contains("htmx-indicator"))
         // First-byte page body must stay visible; only indicators may use display:none via CSS class.
         assertTrue(!html.contains("style=\"opacity:0"))
+        assertTrue(html.contains("lang=\"en\""))
+        assertTrue(html.contains("<title>Anudeep Ananth — B2B SaaS marketing &amp; live AI agents</title>") || html.contains("<title>Anudeep Ananth — B2B SaaS marketing & live AI agents</title>"))
+        assertTrue(html.contains("og:image"))
+        assertTrue(html.contains("/static/images/og-cover.jpg"))
+        assertTrue(html.contains("og:image:width"))
+        assertTrue(html.contains("1200"))
+        assertTrue(html.contains("twitter:image"))
+        assertTrue(html.contains("application/ld+json"))
+        assertTrue(html.contains("rel=\"me\""))
+        assertTrue(html.contains("/llms.txt"))
+        assertTrue(html.contains("<main"))
+        assertTrue(html.contains("aria-label=\"Primary\""))
+        assertTrue(html.contains("<footer"))
+        assertTrue(html.contains("theme-color"))
     }
 
     @Test
@@ -66,10 +80,13 @@ class ServerTest {
         val robotsTxt = client.get("/robots.txt")
         assertEquals(HttpStatusCode.OK, robotsTxt.status)
         assertTrue(robotsTxt.bodyAsText().contains("Sitemap:"))
+        assertTrue(robotsTxt.bodyAsText().contains("GPTBot"))
 
         val sitemapXml = client.get("/sitemap.xml")
         assertEquals(HttpStatusCode.OK, sitemapXml.status)
         assertTrue(sitemapXml.bodyAsText().contains("llms.txt"))
+        assertTrue(sitemapXml.bodyAsText().contains("lastmod"))
+        assertTrue(sitemapXml.bodyAsText().contains("og-cover.jpg"))
     }
 
     @Test

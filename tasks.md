@@ -145,13 +145,13 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 ## Phase 7 — SEO & local harden
 
 - [x] Title, meta description, canonical, robots, Open Graph, Twitter cards
-  - Notes: `PortfolioHtmlDocument` head tags.
+  - Notes: `web/seo/PortfolioSeo.kt` + `PortfolioHtmlDocument` head. Title ~53 chars, description ~151. OG/Twitter use `/static/images/og-cover.jpg` (1200×630) with width/height/alt, `og:locale`, `og:site_name`, `og:type=profile`. `html lang=en`. `rel=me` LinkedIn. `rel=alternate` for `/llms.txt`. Fonts preconnect. `theme-color` `#ffcc00`.
 - [x] JSON-LD Person + WebSite with sameAs LinkedIn
-  - Notes: `web/seo/SeoRoutes.kt` `personAndWebsiteJsonLdScript()`.
+  - Notes: `buildPortfolioJsonLdScript()` — Person (image, worksFor DigitalOcean, knowsAbout, contactPoint), WebSite, ProfilePage, BreadcrumbList, ItemList of agents.
 - [x] `robots.txt` + `sitemap.xml`
-  - Notes: `GET /robots.txt`, `GET /sitemap.xml` include `/llms.txt`.
+  - Notes: explicit Allow for GPTBot / Google-Extended / ClaudeBot / PerplexityBot / Applebot-Extended. Sitemap lastmod + image for OG cover. No `#fragment` locs.
 - [x] Add `llms.txt` / `llms-full.txt` for LLM crawlers
-  - Notes: `GET /llms.txt` overview; `GET /llms-full.txt` includes knowledge pack + case studies (`web/seo/LlmTxtRoutes.kt`).
+  - Notes: overview now includes experience, published outcomes, stack URLs, preferences. Full file still appends knowledge pack + case studies.
 - [x] Static asset caching headers (ready for prod reverse proxy)
   - Notes: local Ktor serves `/static`; production nginx on VPS should add long-cache headers (same as PeekoPals). No extra Ktor plugin.
 - [x] Local PageSpeed-oriented pass (first paint visible; images/video deferred)

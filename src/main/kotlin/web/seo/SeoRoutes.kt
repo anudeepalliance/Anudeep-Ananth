@@ -5,76 +5,91 @@ import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
 import knowledge.ContactDetails
-import knowledge.HomepageSalesPitch
 
 /**
  * Crawl surfaces: robots.txt and sitemap.xml.
+ *
+ * LLM crawlers are listed with an explicit Allow so training/answer bots
+ * that check their own user-agent still treat the site as open.
  */
 fun Routing.seoDiscoveryRoutes() {
     get("/robots.txt") {
-        val robotsText = buildString {
-            appendLine("User-agent: *")
-            appendLine("Allow: /")
-            appendLine()
-            appendLine("Sitemap: ${ContactDetails.PORTFOLIO_URL}/sitemap.xml")
-            appendLine()
-            appendLine("# LLM-readable overview")
-            appendLine("# ${ContactDetails.PORTFOLIO_URL}/llms.txt")
-        }
-        call.respondText(robotsText, ContentType.Text.Plain)
+        call.respondText(buildRobotsTxt(), ContentType.Text.Plain)
     }
 
     get("/sitemap.xml") {
-        val sitemapXml = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-              <url>
-                <loc>${ContactDetails.PORTFOLIO_URL}/</loc>
-                <changefreq>weekly</changefreq>
-                <priority>1.0</priority>
-              </url>
-              <url>
-                <loc>${ContactDetails.PORTFOLIO_URL}/llms.txt</loc>
-                <changefreq>weekly</changefreq>
-                <priority>0.8</priority>
-              </url>
-              <url>
-                <loc>${ContactDetails.PORTFOLIO_URL}/llms-full.txt</loc>
-                <changefreq>weekly</changefreq>
-                <priority>0.6</priority>
-              </url>
-            </urlset>
-        """.trimIndent()
-        call.respondText(sitemapXml, ContentType.Application.Xml)
+        call.respondText(buildSitemapXml(), ContentType.Application.Xml)
     }
 }
 
-fun personAndWebsiteJsonLdScript(): String {
-    val jsonLd = """
-        {
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "Person",
-              "name": "${ContactDetails.FULL_NAME}",
-              "url": "${ContactDetails.PORTFOLIO_URL}/",
-              "email": "mailto:${ContactDetails.EMAIL}",
-              "telephone": "${ContactDetails.PHONE_DISPLAY}",
-              "jobTitle": "Lifecycle Marketing Manager",
-              "description": ${HomepageSalesPitch.PARAGRAPH.take(220).jsonStringLiteral()},
-              "sameAs": ["${ContactDetails.LINKEDIN_URL}"]
-            },
-            {
-              "@type": "WebSite",
-              "name": "${ContactDetails.FULL_NAME}",
-              "url": "${ContactDetails.PORTFOLIO_URL}/"
-            }
-          ]
+internal fun buildRobotsTxt(): String {
+    val siteUrl = ContactDetails.PORTFOLIO_URL
+    val llmCrawlerUserAgents = listOf(
+        "GPTBot",
+        "ChatGPT-User",
+        "Google-Extended",
+        "ClaudeBot",
+        "anthropic-ai",
+        "PerplexityBot",
+        "Applebot-Extended",
+        "CCBot",
+    )
+    return buildString {
+        appendLine("User-agent: *")
+        appendLine("Allow: /")
+        appendLine()
+        llmCrawlerUserAgents.forEach { userAgent ->
+            appendLine("User-agent: $userAgent")
+            appendLine("Allow: /")
+            appendLine()
         }
-    """.trimIndent()
-    return jsonLd
+        appendLine("Sitemap: $siteUrl/sitemap.xml")
+        appendLine()
+        appendLine("# LLM-readable overview (llmstxt.org)")
+        appendLine("# $siteUrl/llms.txt")
+        appendLine("# $siteUrl/llms-full.txt")
+    }
 }
 
-private fun String.jsonStringLiteral(): String {
-    return "\"" + replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", " ") + "\""
+internal fun buildSitemapXml(): String {
+    val siteUrl = ContactDetails.PORTFOLIO_URL
+    val lastmod = PortfolioSeo.SITEMAP_LASTMOD
+    val ogImageUrl = PortfolioSeo.ogImageUrl()
+    return """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+                xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+          <url>
+            <loc>$siteUrl/</loc>
+            <lastmod>$lastmod</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>1.0</priority>
+            <image:image>
+              <image:loc>$ogImageUrl</image:loc>
+              <image:title>${ContactDetails.FULL_NAME}</image:title>
+              <image:caption>${escapeXml(PortfolioSeo.OG_IMAGE_ALT)}</image:caption>
+            </image:image>
+          </url>
+          <url>
+            <loc>$siteUrl/llms.txt</loc>
+            <lastmod>$lastmod</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.8</priority>
+          </url>
+          <url>
+            <loc>$siteUrl/llms-full.txt</loc>
+            <lastmod>$lastmod</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.6</priority>
+          </url>
+        </urlset>
+    """.trimIndent()
+}
+
+private fun escapeXml(value: String): String {
+    return value
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace("\"", "&quot;")
 }
