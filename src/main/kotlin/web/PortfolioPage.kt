@@ -87,6 +87,8 @@ private fun FlowContent.renderHookSection() {
                 attributes["loop"] = "true"
                 attributes["playsinline"] = "true"
                 attributes["preload"] = "auto"
+                attributes["width"] = "960"
+                attributes["height"] = "720"
                 attributes["aria-label"] = "Intro video"
                 source {
                     src = ContactDetails.INTRO_VIDEO_URL
