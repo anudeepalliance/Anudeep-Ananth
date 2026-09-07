@@ -117,15 +117,17 @@ a:hover { text-decoration: underline; }
   min-height: 760px;
   display: grid;
   place-items: center;
-  padding: 1.5rem 0 8.5rem;
+  padding: 1.5rem 0 4.5rem;
 }
 
 .hero-giant {
   position: absolute;
   inset: 2% 0 auto;
+  margin: 0;
   text-align: center;
   font-family: var(--font-display);
   font-size: clamp(6rem, 22vw, 17rem);
+  font-weight: 400;
   line-height: 0.8;
   letter-spacing: 0.02em;
   color: rgba(255, 255, 255, 0.55);
@@ -145,25 +147,20 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 30px 60px rgba(22, 23, 28, 0.22);
 }
 
-.fold-portrait {
-  width: min(420px, 78vw);
-  aspect-ratio: 1;
+.contact-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem 1.8rem;
+  align-items: center;
+}
+.contact-portrait {
+  width: 220px;
+  height: 220px;
+  justify-self: start;
   object-fit: cover;
   object-position: center 18%;
   border-radius: 18px;
   filter: grayscale(0.08) contrast(1.04);
-  box-shadow: 0 30px 60px rgba(22, 23, 28, 0.16);
-}
-
-.portrait-fold {
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 2.5rem 0 1rem;
-}
-.portrait-caption {
-  max-width: 36rem;
-  margin: 1rem 0 0;
 }
 
 .hero-portrait {
@@ -348,14 +345,6 @@ body.lightbox-open {
   padding: 0.4rem 0.9rem;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
-  margin-bottom: 0.7rem;
-}
-.hero-bottom h1 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 7vw, 5.4rem);
-  line-height: 0.9;
-  letter-spacing: 0.02em;
 }
 
 .section {
@@ -1005,6 +994,12 @@ h3 { margin: 0; font-size: 1.05rem; }
   .float-pill, .float-card { position: static; width: 100%; margin-top: 0.75rem; }
   .float-pill { width: auto; justify-content: center; }
   .hero-bottom { position: static; margin-top: 1.25rem; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-portrait {
+    width: min(280px, 100%);
+    height: auto;
+    aspect-ratio: 1;
+  }
   .job-matching-layout { grid-template-columns: 1fr; }
   .receipt-headliners { grid-template-columns: 1fr; }
   .receipt-stubs { grid-template-columns: 1fr 1fr; }

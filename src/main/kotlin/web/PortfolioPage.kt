@@ -37,7 +37,6 @@ import kotlinx.html.video
 fun FlowContent.renderPortfolioPageBody() {
     renderTopBar()
     renderHookSection()
-    renderPortraitFold()
     renderAchievementsSection()
     renderJobMatchingSection()
     renderAgentsSection()
@@ -69,7 +68,7 @@ private fun FlowContent.navLinkRow() {
 private fun FlowContent.renderHookSection() {
     section(classes = "hero-stage") {
         id = "hook"
-        span(classes = "hero-giant") { +"ANUDEEP" }
+        h1(classes = "hero-giant") { +"ANUDEEP" }
         video(classes = "hero-stage-video") {
             attributes["autoplay"] = "true"
             attributes["muted"] = "true"
@@ -112,23 +111,7 @@ private fun FlowContent.renderHookSection() {
         }
         div(classes = "hero-bottom") {
             span(classes = "date-pill") { +"Lifecycle · demand gen · B2B SaaS" }
-            h1 { +"SENIOR MARKETING LEADERSHIP" }
         }
-    }
-}
-
-private fun FlowContent.renderPortraitFold() {
-    section(classes = "portrait-fold") {
-        id = "portrait"
-        p(classes = "eyebrow") { +"Portrait" }
-        img(classes = "fold-portrait") {
-            src = "/static/images/anudeep-hero.jpg"
-            alt = "${ContactDetails.FULL_NAME} portrait"
-            attributes["loading"] = "lazy"
-            attributes["width"] = "840"
-            attributes["height"] = "840"
-        }
-        p(classes = "muted portrait-caption") { +HomepageSalesPitch.HEADLINE }
     }
 }
 
@@ -429,18 +412,28 @@ private fun FlowContent.renderContactSection() {
                 span(classes = "prompt") { +"Direct" }
                 span { +"hiring partners and peers" }
             }
-            h2 { +"Get in touch" }
-            p(classes = "muted") {
-                +"Email or LinkedIn. Happy to walk a role live if that is useful."
-            }
-            div(classes = "contact-links") {
-                a(href = "mailto:${ContactDetails.EMAIL}", classes = "btn btn-primary") {
-                    +ContactDetails.EMAIL
+            div(classes = "contact-layout") {
+                img(classes = "contact-portrait") {
+                    src = "/static/images/anudeep-hero.jpg"
+                    alt = "${ContactDetails.FULL_NAME} portrait"
+                    attributes["width"] = "480"
+                    attributes["height"] = "480"
                 }
-                a(href = ContactDetails.LINKEDIN_URL, classes = "btn btn-ghost") {
-                    attributes["target"] = "_blank"
-                    attributes["rel"] = "noopener noreferrer"
-                    +"LinkedIn"
+                div(classes = "contact-copy") {
+                    h2 { +"Get in touch" }
+                    p(classes = "muted") {
+                        +"Email or LinkedIn. Happy to walk a role live if that is useful."
+                    }
+                    div(classes = "contact-links") {
+                        a(href = "mailto:${ContactDetails.EMAIL}", classes = "btn btn-primary") {
+                            +ContactDetails.EMAIL
+                        }
+                        a(href = ContactDetails.LINKEDIN_URL, classes = "btn btn-ghost") {
+                            attributes["target"] = "_blank"
+                            attributes["rel"] = "noopener noreferrer"
+                            +"LinkedIn"
+                        }
+                    }
                 }
             }
         }
