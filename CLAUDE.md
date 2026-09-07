@@ -76,7 +76,7 @@ Every agent can use:
 Mirror the PeekoPals Mongo pattern (`util/mongoDB`: client singleton, collection constants, kotlinx serialization codecs). Connection string(s) live in `ConfidentialObjects.kt`.
 
 - **Server:** MongoDB **community edition already on the Hostinger VPS** (same ops model as PeekoPals — not Atlas for this app)
-- **Database:** dedicated DB for this site (e.g. `anudeepananth`) — not the PeekoPals `peekopals` DB
+- **Database:** existing VPS DB `Anudeep-Ananth` — not the PeekoPals `peekopals` DB
 - **Collection:** usage events (e.g. `agent_usage_logs`)
 - **Connectivity:** PeekoPals-style dual URI — in-VPS hostname/network string for production, SSH-tunnel/`localhost` string for local Mac; optional hostname probe if sharing the same docker network pattern
 - **When:** insert one document after each agent run, Sarvam STT call, and ElevenLabs TTS call
@@ -116,7 +116,7 @@ Mirror the PeekoPals Mongo pattern (`util/mongoDB`: client singleton, collection
 
 - Official Ktor HTMX APIs are experimental — use `@OptIn(ExperimentalKtorApi::class)`
 - Public agents with no rate limits can burn MiniMax/voice budget; persist usage to Mongo early
-- Do not reuse the PeekoPals database — keep a dedicated DB (e.g. `anudeepananth`) on the VPS community Mongo
+- Do not reuse the PeekoPals database — use the existing `Anudeep-Ananth` DB on the VPS community Mongo
 - Lazy-load video and heavy images; keep first paint HTML light
 - n8n must not become the live agent runtime
 
