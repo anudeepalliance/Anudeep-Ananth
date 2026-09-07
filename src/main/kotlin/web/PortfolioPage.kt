@@ -23,6 +23,7 @@ import kotlinx.html.id
 import kotlinx.html.img
 import kotlinx.html.input
 import kotlinx.html.li
+import kotlinx.html.ol
 import kotlinx.html.p
 import kotlinx.html.section
 import kotlinx.html.source
@@ -159,6 +160,7 @@ private fun FlowContent.renderAchievementsSection() {
         h2 { +"Timeline and outcomes" }
         p(classes = "muted achievements-lede") { +HomepageSalesPitch.PARAGRAPH }
         div(classes = "receipt-board") {
+            attributes["data-motion"] = "board"
             p(classes = "receipt-kicker") { +"From published work" }
             div(classes = "receipt-headliners") {
                 outcomeHighlightsWithProof.forEach { highlight ->
@@ -172,6 +174,7 @@ private fun FlowContent.renderAchievementsSection() {
             }
         }
         div(classes = "path-stage") {
+            attributes["data-motion"] = "path"
             h3(classes = "path-heading") { +"My Experience" }
             renderDrawnExperienceJourney()
         }
@@ -233,6 +236,7 @@ private fun FlowContent.renderDrawnExperienceJourney() {
                 C 44 950, 156 1010, 100 1090
                 C 30 1170, 170 1230, 100 1310
                 C 60 1370, 140 1430, 100 1510"
+                class="journey-ink"
                 fill="none" stroke="#ffcc00" stroke-width="3.2"
                 stroke-linecap="round" stroke-dasharray="11 7 3 8"/>
             </svg>
@@ -276,6 +280,7 @@ private fun FlowContent.renderJobMatchingSection() {
     val jobMatchingAgent = AgentRosterEntries.agents.first { it.agentId == "job_matching" }
     section(classes = "section") {
         id = "job-matching"
+        attributes["data-motion"] = "job"
         p(classes = "eyebrow") { +"Job Matching" }
         h2 { +"Paste your role. See the fit." }
         p(classes = "muted") {
@@ -331,13 +336,7 @@ private fun FlowContent.renderJobMatchingSection() {
                     p(classes = "muted voice-status") {
                         attributes["aria-live"] = "polite"
                     }
-                    div(classes = "htmx-indicator thinking-indicator") {
-                        id = "job-match-indicator"
-                        span(classes = "thinking-spinner") {
-                            attributes["aria-hidden"] = "true"
-                        }
-                        span { +"Scoring the role against published experience…" }
-                    }
+                    renderThinkingIndicator(indicatorId = "job-match-indicator")
                     div(classes = "output-slot") {
                         id = "job-match-output"
                         +"Paste a job description to see strengths, gaps, and talking points."
@@ -355,6 +354,7 @@ private fun FlowContent.renderAgentsSection() {
     val defaultChatAgent = workingAgents.first()
     section(classes = "section agents-stage") {
         id = "agents"
+        attributes["data-motion"] = "agents"
         p(classes = "eyebrow") { +"Agents" }
         h2 { +"The AI agents I've built and use day to day" }
         p(classes = "muted agents-lede") {
@@ -438,13 +438,7 @@ private fun FlowContent.renderAgentsSection() {
                 id = "voice-status"
                 attributes["aria-live"] = "polite"
             }
-            div(classes = "htmx-indicator thinking-indicator") {
-                id = "agent-chat-indicator"
-                span(classes = "thinking-spinner") {
-                    attributes["aria-hidden"] = "true"
-                }
-                span { +"Thinking — agent drafting reply…" }
-            }
+            renderThinkingIndicator(indicatorId = "agent-chat-indicator")
             div(classes = "output-slot") {
                 id = "agent-chat-output"
                 +"Replies from the agent I built land here."
@@ -456,6 +450,7 @@ private fun FlowContent.renderAgentsSection() {
 private fun FlowContent.renderAiTechStackSection() {
     section(classes = "section") {
         id = "tech-stack"
+        attributes["data-motion"] = "stack"
         p(classes = "eyebrow") { +"Tools" }
         h2 { +"My AI tech stack" }
         p(classes = "muted agents-lede") {
@@ -484,6 +479,7 @@ private fun FlowContent.renderAiTechStackSection() {
 private fun FlowContent.renderContactSection() {
     section(classes = "section") {
         id = "contact"
+        attributes["data-motion"] = "contact"
         p(classes = "eyebrow") { +"Contact" }
         div(classes = "panel contact-panel") {
             div(classes = "contact-layout") {
@@ -518,7 +514,39 @@ private fun FlowContent.renderContactSection() {
 
 private fun FlowContent.renderSiteFooter() {
     div(classes = "site-footer") {
+        attributes["data-motion"] = "footer"
         span { +"© ${ContactDetails.FULL_NAME}" }
         span { +"Personal portfolio · Kotlin HTMX" }
+    }
+}
+
+/**
+ * HTMX thinking bar: cycles [ThinkingProgressLines] every two seconds, then holds on the last line.
+ */
+private fun FlowContent.renderThinkingIndicator(indicatorId: String) {
+    div(classes = "htmx-indicator thinking-indicator") {
+        id = indicatorId
+        span(classes = "thinking-spinner") {
+            attributes["aria-hidden"] = "true"
+        }
+        span(classes = "thinking-spinner thinking-spinner-ring") {
+            attributes["aria-hidden"] = "true"
+        }
+        span(classes = "thinking-status") {
+            attributes["aria-live"] = "polite"
+            +ThinkingProgressLines.lines.first()
+        }
+        span(classes = "thinking-dots") {
+            attributes["aria-hidden"] = "true"
+            repeat(3) {
+                span {}
+            }
+        }
+        ol(classes = "thinking-steps") {
+            attributes["hidden"] = "hidden"
+            ThinkingProgressLines.lines.forEach { progressLine ->
+                li { +progressLine }
+            }
+        }
     }
 }

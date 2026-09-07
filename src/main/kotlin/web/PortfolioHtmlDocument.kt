@@ -69,6 +69,15 @@ fun HTML.renderPortfolioHtmlDocument() {
         )
         link(rel = "stylesheet", href = "/static/css/lab.css")
         script {
+            unsafe {
+                +"""
+                if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                  document.documentElement.classList.add("motion-on");
+                }
+                """.trimIndent()
+            }
+        }
+        script {
             src = "https://unpkg.com/htmx.org@2.0.4"
             attributes["defer"] = "true"
         }
@@ -82,6 +91,10 @@ fun HTML.renderPortfolioHtmlDocument() {
         }
         script {
             src = "/static/js/hero-video.js"
+            attributes["defer"] = "true"
+        }
+        script {
+            src = "/static/js/motion.js"
             attributes["defer"] = "true"
         }
     }
