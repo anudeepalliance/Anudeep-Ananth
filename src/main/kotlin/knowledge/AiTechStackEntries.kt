@@ -49,7 +49,7 @@ object AiTechStackEntries {
         ),
         AiTechStackEntry(
             displayName = "Grok Build",
-            useLabel = "Custom application",
+            useLabel = "Build custom internal apps",
             siteUrl = "https://x.ai",
             logoImagePath = "/static/images/stack/grok.png",
         ),
