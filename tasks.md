@@ -14,7 +14,10 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 - [x] Init git repo, add `.gitignore` (`.gradle`, `build`, `.idea`, `.superpowers`, `ConfidentialObjects.kt`)
 - [ ] Confirm local `./gradlew run` still serves the Ktor hello-world baseline
 - [ ] Confirm `ConfidentialObjects.kt` stays gitignored and is present locally; wire new keys there only (no env/secrets pattern)
-- [ ] Add usage logging hooks plan (no rate limits, but log agent/voice calls)
+- [ ] Add MongoDB Atlas connection string to `ConfidentialObjects.kt` (Cluster0 → dedicated `anudeepananth` DB)
+- [ ] Port a slim PeekoPals-style Mongo helper (client singleton + collections + kotlinx codecs)
+- [ ] Define usage-event data class + `agent_usage_logs` collection
+- [ ] Implement insert helper for agent / STT / TTS usage (never fail the user request if logging fails)
 
 ## Phase 1 — Content & knowledge pack
 
@@ -53,6 +56,7 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 - [ ] Build shared Anudeep knowledge loader (profile + resume + corpus)
 - [ ] Add Firecrawl tool integration
 - [ ] Add MiniMax web search tool integration
+- [ ] Wire usage-log inserts on every agent invocation
 - [ ] Implement Job Matching agent (prompt, tools, structured fit output)
 - [ ] Implement Performance Marketing agent
 - [ ] Implement Market Research agent
@@ -77,6 +81,7 @@ Order rule: build and fully test locally first. Purchase domain, link DNS, and d
 - [ ] Mic capture JS → Sarvam STT → fill active text input (English)
 - [ ] Voice input on JD field and chat inputs
 - [ ] ElevenLabs TTS for agent replies (opt-in play control)
+- [ ] Wire usage-log inserts on every STT and TTS call
 - [ ] Voice failure fallback to text-only with clear message
 - [ ] Verify voice round-trip on Job Matching and one other agent
 
