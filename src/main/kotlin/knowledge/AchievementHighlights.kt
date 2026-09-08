@@ -30,7 +30,7 @@ object AchievementHighlights {
             metricLabel = "₹1.25 Cr / ₹10 L",
             contextLabel = "Honeycomb social programs in 6 months",
             category = "ROAS-style efficiency",
-            proofImagePath = "/static/images/proof/honeycomb-revenue.jpg",
+            proofImagePath = "/static/images/proof/honeycomb-revenue.jpg?v=20260908e",
             proofExternalUrl = "https://www.facebook.com/photo.php?fbid=10215222361291409&set=a.2069073445506&type=3&theater",
         ),
         AchievementHighlight(
