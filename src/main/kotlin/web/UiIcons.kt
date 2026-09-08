@@ -37,4 +37,7 @@ internal enum class ButtonIconKind(val svgMarkup: String) {
     REPLAY(
         """<svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2L7.5 6.5 12 11V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-6z"/></svg>""",
     ),
+    PLAY(
+        """<svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg>""",
+    ),
 }

@@ -19,7 +19,7 @@ import kotlinx.html.unsafe
 import web.seo.PortfolioSeo
 import web.seo.buildPortfolioJsonLdScript
 
-private const val STATIC_ASSET_VERSION = "20260908b"
+private const val STATIC_ASSET_VERSION = "20260908d"
 
 /**
  * Full HTML document shell for the portfolio homepage.

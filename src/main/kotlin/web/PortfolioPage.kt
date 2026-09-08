@@ -81,6 +81,8 @@ private fun FlowContent.renderHookSection() {
         id = "hook"
         h1(classes = "hero-giant") { +"ANUDEEP" }
         div(classes = "hero-video-frame") {
+            attributes["tabindex"] = "0"
+            attributes["aria-label"] = "Pause intro"
             video(classes = "hero-stage-video") {
                 attributes["autoplay"] = "true"
                 attributes["muted"] = "true"
@@ -94,11 +96,15 @@ private fun FlowContent.renderHookSection() {
                     type = "video/mp4"
                 }
             }
-            button(classes = "hero-video-replay") {
-                type = ButtonType.button
-                attributes["aria-label"] = "Replay intro"
-                span(classes = "hero-video-replay-orb") {
-                    renderButtonIcon(ButtonIconKind.REPLAY)
+            div(classes = "hero-video-tap") {
+                attributes["aria-hidden"] = "true"
+                span(classes = "hero-video-tap-orb") {
+                    span(classes = "hero-video-tap-play") {
+                        renderButtonIcon(ButtonIconKind.PLAY)
+                    }
+                    span(classes = "hero-video-tap-replay") {
+                        renderButtonIcon(ButtonIconKind.REPLAY)
+                    }
                 }
             }
             div(classes = "hero-video-controls") {
