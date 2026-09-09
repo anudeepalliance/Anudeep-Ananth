@@ -25,6 +25,8 @@ class PortfolioSeoTest {
         assertTrue(PortfolioSeo.ogImageUrl().endsWith(PortfolioSeo.OG_IMAGE_PATH))
         assertEquals(1200, PortfolioSeo.OG_IMAGE_WIDTH)
         assertEquals(630, PortfolioSeo.OG_IMAGE_HEIGHT)
+        assertEquals("website", PortfolioSeo.OG_TYPE)
+        assertTrue(PortfolioSeo.OG_IMAGE_PATH.endsWith("og-share.jpg"))
     }
 
     @Test

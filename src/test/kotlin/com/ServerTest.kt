@@ -1,6 +1,7 @@
 package com
 
 import io.ktor.client.request.get
+import io.ktor.client.request.head
 import io.ktor.client.request.forms.submitForm
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
@@ -11,6 +12,17 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ServerTest {
+
+    @Test
+    fun `homepage head is ok so chat and imessage unfurlers can read og tags`() = testApplication {
+        application {
+            configureRouting()
+        }
+        val homepageHead = client.head("/")
+        assertEquals(HttpStatusCode.OK, homepageHead.status)
+        val healthHead = client.head("/health")
+        assertEquals(HttpStatusCode.OK, healthHead.status)
+    }
 
     @Test
     fun `health endpoint returns ok`() = testApplication {
@@ -57,7 +69,12 @@ class ServerTest {
         assertTrue(html.contains("lang=\"en\""))
         assertTrue(html.contains("<title>Anudeep Ananth — B2B SaaS marketing &amp; live AI agents</title>") || html.contains("<title>Anudeep Ananth — B2B SaaS marketing & live AI agents</title>"))
         assertTrue(html.contains("og:image"))
-        assertTrue(html.contains("/static/images/og-cover.jpg"))
+        assertTrue(html.contains("/static/images/og-share.jpg"))
+        assertTrue(html.contains("og:type"))
+        assertTrue(html.contains("website"))
+        assertTrue(html.contains("twitter:card"))
+        assertTrue(html.contains("summary_large_image"))
+        assertTrue(html.contains("rel=\"image_src\""))
         assertTrue(html.contains("og:image:width"))
         assertTrue(html.contains("1200"))
         assertTrue(html.contains("twitter:image"))
@@ -68,6 +85,8 @@ class ServerTest {
         assertTrue(html.contains("aria-label=\"Primary\""))
         assertTrue(html.contains("<footer"))
         assertTrue(html.contains("theme-color"))
+        assertTrue(html.contains("googletagmanager.com/gtag/js?id=G-YD30798M9B"))
+        assertTrue(html.contains("gtag('config', 'G-YD30798M9B')"))
     }
 
     @Test
@@ -109,7 +128,7 @@ class ServerTest {
         assertEquals(HttpStatusCode.OK, sitemapXml.status)
         assertTrue(sitemapXml.bodyAsText().contains("llms.txt"))
         assertTrue(sitemapXml.bodyAsText().contains("lastmod"))
-        assertTrue(sitemapXml.bodyAsText().contains("og-cover.jpg"))
+        assertTrue(sitemapXml.bodyAsText().contains("og-share.jpg"))
     }
 
     @Test

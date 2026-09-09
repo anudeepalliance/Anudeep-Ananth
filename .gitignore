@@ -13,3 +13,4 @@ out/
 
 src/main/kotlin/util/ConfidentialObjects.kt
 docker-build-cache/
+intro-video/

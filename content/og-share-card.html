@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #d5d8e2;
+    }
+    .card {
+      width: 1200px;
+      height: 630px;
+      display: grid;
+      grid-template-columns: 560px 1fr;
+      background:
+        radial-gradient(640px 420px at 78% 18%, #f7f8fb 0%, transparent 68%),
+        linear-gradient(180deg, #eceef4 0%, #d5d8e2 55%, #c9ced9 100%);
+      color: #16171c;
+      font-family: Manrope, system-ui, sans-serif;
+    }
+    .photo-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .photo-wrap img {
+      width: 560px;
+      height: 630px;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
+    }
+    .copy {
+      padding: 72px 64px 64px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+    .kicker {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #8a6200;
+    }
+    h1 {
+      margin: 0;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 108px;
+      line-height: 0.86;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+    .bar {
+      width: 76px;
+      height: 8px;
+      border-radius: 99px;
+      background: #ffcc00;
+    }
+    .role {
+      margin: 0;
+      max-width: 18em;
+      font-size: 26px;
+      line-height: 1.35;
+      font-weight: 600;
+      color: #5f6470;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="photo-wrap">
+      <img src="../src/main/resources/static/images/anudeep-hero.jpg" alt="">
+    </div>
+    <div class="copy">
+      <div class="kicker">anudeepananth.com</div>
+      <h1>ANUDEEP<br>ANANTH</h1>
+      <div class="bar"></div>
+      <p class="role">B2B SaaS marketing. Lifecycle, demand, live AI agents.</p>
+    </div>
+  </div>
+</body>
+</html>

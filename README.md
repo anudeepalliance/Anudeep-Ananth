@@ -23,7 +23,7 @@ Open http://127.0.0.1:8080
 - `/` — Hook → Achievements → Job Matching → Agents → Stack → Contact (visible HTML on first byte)
 - `/llms.txt` and `/llms-full.txt` — LLM/Google-AI crawlable overviews (llmstxt.org)
 - `/robots.txt`, `/sitemap.xml`
-- Share image: `/static/images/og-cover.jpg` (1200×630)
+- Share image: `/static/images/og-share.jpg` (1200×630)
 - `POST /htmx/job-match`, `POST /htmx/agent-chat`
 - `POST /htmx/voice/stt`, `POST /htmx/voice/tts`
 

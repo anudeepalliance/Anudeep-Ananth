@@ -31,6 +31,20 @@ fun HTML.renderPortfolioHtmlDocument() {
     head {
         meta(charset = "UTF-8")
         meta(name = "viewport", content = "width=device-width, initial-scale=1")
+        script {
+            async = true
+            src = "https://www.googletagmanager.com/gtag/js?id=${PortfolioSeo.GOOGLE_ANALYTICS_MEASUREMENT_ID}"
+        }
+        script {
+            unsafe {
+                +"""
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${PortfolioSeo.GOOGLE_ANALYTICS_MEASUREMENT_ID}');
+                """.trimIndent()
+            }
+        }
         title(PortfolioSeo.PAGE_TITLE)
         meta(name = "description", content = PortfolioSeo.META_DESCRIPTION)
         meta(name = "keywords", content = PortfolioSeo.KEYWORDS)
@@ -90,6 +104,9 @@ fun HTML.renderPortfolioHtmlDocument() {
             attributes["property"] = "og:image"
         }
         meta(content = PortfolioSeo.ogImageUrl()) {
+            attributes["property"] = "og:image:url"
+        }
+        meta(content = PortfolioSeo.ogImageUrl()) {
             attributes["property"] = "og:image:secure_url"
         }
         meta(content = PortfolioSeo.OG_IMAGE_MIME_TYPE) {
@@ -104,18 +121,11 @@ fun HTML.renderPortfolioHtmlDocument() {
         meta(content = PortfolioSeo.OG_IMAGE_ALT) {
             attributes["property"] = "og:image:alt"
         }
-        meta(content = "Anudeep") {
-            attributes["property"] = "profile:first_name"
-        }
-        meta(content = "Ananth") {
-            attributes["property"] = "profile:last_name"
-        }
-        meta(content = "anudeepananth") {
-            attributes["property"] = "profile:username"
-        }
+        link(rel = "image_src", href = PortfolioSeo.ogImageUrl())
         meta(name = "twitter:card", content = "summary_large_image")
         meta(name = "twitter:title", content = PortfolioSeo.OG_TITLE)
         meta(name = "twitter:description", content = PortfolioSeo.OG_DESCRIPTION)
+        meta(name = "twitter:url", content = PortfolioSeo.homepageUrl())
         meta(name = "twitter:image", content = PortfolioSeo.ogImageUrl())
         meta(name = "twitter:image:alt", content = PortfolioSeo.OG_IMAGE_ALT)
         script(type = "application/ld+json") {

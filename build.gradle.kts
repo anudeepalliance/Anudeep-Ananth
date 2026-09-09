@@ -23,6 +23,7 @@ dependencies {
     implementation(ktorLibs.htmx)
     implementation(ktorLibs.htmx.html)
     implementation(ktorLibs.server.htmx)
+    implementation(ktorLibs.server.autoHeadResponse)
     implementation(ktorLibs.client.core)
     implementation(ktorLibs.client.cio)
     implementation(ktorLibs.client.contentNegotiation)

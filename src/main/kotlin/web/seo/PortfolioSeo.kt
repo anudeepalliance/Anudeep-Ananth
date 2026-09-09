@@ -27,14 +27,14 @@ object PortfolioSeo {
 
     const val OG_TITLE = PAGE_TITLE
     const val OG_DESCRIPTION = META_DESCRIPTION
-    const val OG_TYPE = "profile"
+    const val OG_TYPE = "website"
     const val OG_LOCALE = "en_IN"
     const val SITE_NAME = ContactDetails.FULL_NAME
 
-    const val OG_IMAGE_PATH = "/static/images/og-cover.jpg"
+    const val OG_IMAGE_PATH = "/static/images/og-share.jpg"
     const val OG_IMAGE_WIDTH = 1200
     const val OG_IMAGE_HEIGHT = 630
-    const val OG_IMAGE_ALT = "Portrait of Anudeep Ananth, lifecycle marketing manager"
+    const val OG_IMAGE_ALT = "Anudeep Ananth, B2B SaaS marketing — lifecycle, demand, live AI agents"
     const val OG_IMAGE_MIME_TYPE = "image/jpeg"
 
     const val PERSON_IMAGE_PATH = "/static/images/anudeep-hero.jpg"
@@ -49,7 +49,8 @@ object PortfolioSeo {
     const val COLOR_SCHEME = "light"
     const val LANGUAGE_CODE = "en"
     const val ROBOTS_CONTENT = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-    const val SITEMAP_LASTMOD = "2026-09-07"
+    const val SITEMAP_LASTMOD = "2026-09-08"
+    const val GOOGLE_ANALYTICS_MEASUREMENT_ID = "G-YD30798M9B"
 
     const val KEYWORDS =
         "Anudeep Ananth, lifecycle marketing, demand generation, B2B SaaS, DigitalOcean, " +

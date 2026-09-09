@@ -3,7 +3,9 @@ package com
 import agents.PortfolioAgentRuntime
 import io.ktor.http.ContentType
 import io.ktor.server.application.Application
+import io.ktor.server.application.install
 import io.ktor.server.html.respondHtml
+import io.ktor.server.plugins.autohead.AutoHeadResponse
 import io.ktor.server.http.content.staticResources
 import io.ktor.server.request.receiveParameters
 import io.ktor.server.response.respondText
@@ -21,6 +23,7 @@ import web.seo.llmTxtRoutes
 import web.seo.seoDiscoveryRoutes
 
 fun Application.configureRouting() {
+    install(AutoHeadResponse)
     val portfolioAgentRuntime = PortfolioAgentRuntime()
 
     routing {
