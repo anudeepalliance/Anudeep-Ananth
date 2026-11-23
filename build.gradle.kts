@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
     alias(ktorLibs.plugins.ktor)
+    // Used by the projects/ modules (projects.anudeepananth.com); declared here so every module shares one version.
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.compose.multiplatform) apply false
 }
 
 group = "com"

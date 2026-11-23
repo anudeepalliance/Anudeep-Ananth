@@ -14,3 +14,8 @@ out/
 src/main/kotlin/util/ConfidentialObjects.kt
 docker-build-cache/
 intro-video/
+
+# projects/ module (projects.anudeepananth.com)
+projects/server/src/main/kotlin/com/anudeepananth/projects/util/ConfidentialObjects.kt
+projects/scripts/deploy.env
+.kotlin/

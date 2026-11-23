@@ -1,0 +1,24 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "projects-server",
+      "runtimeExecutable": "./gradlew",
+      "runtimeArgs": [
+        ":projects:server:run",
+        "--console=plain"
+      ],
+      "port": 9494
+    },
+    {
+      "name": "projects-web-dev",
+      "runtimeExecutable": "./gradlew",
+      "runtimeArgs": [
+        ":projects:composeApp:wasmJsBrowserDevelopmentRun",
+        "--continuous",
+        "--console=plain"
+      ],
+      "port": 9495
+    }
+  ]
+}

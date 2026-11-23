@@ -1,0 +1,176 @@
+{
+  "skill_name": "aiastro-code-style",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Create a user reviews feature where users can rate and review the app. It should have a screen showing existing reviews and a form to submit a new review.",
+      "expected_output": "Feature folder under composeApp with composable, viewmodel, ktor api co-located. Shared data class in shared/classes/. Uses design system components (PrimaryButton, BodyMedium, AddSpace, etc). No vanilla Text/Button/Spacer. CLAUDE.md in the feature folder.",
+      "files": [],
+      "assertions": [
+        {
+          "id": "feature-folder",
+          "text": "All client files are co-located in a single feature folder (e.g., reviews/ or userReviews/), not split across ui/, viewModels/, repositories/ folders",
+          "type": "manual"
+        },
+        {
+          "id": "claude-md-created",
+          "text": "A CLAUDE.md file is created in the feature folder listing all files with descriptions",
+          "type": "manual"
+        },
+        {
+          "id": "shared-data-class",
+          "text": "Data class for Review is placed in shared/src/commonMain/.../classes/, not in composeApp",
+          "type": "manual"
+        },
+        {
+          "id": "no-vanilla-text",
+          "text": "No vanilla Text() composable used — only HeadlineMedium, BodyMedium, LabelLarge, etc.",
+          "type": "manual"
+        },
+        {
+          "id": "no-vanilla-button",
+          "text": "No vanilla Button() used — only PrimaryButton, SecondaryButton, etc.",
+          "type": "manual"
+        },
+        {
+          "id": "no-hardcoded-dp",
+          "text": "No hardcoded dp values (16.dp, 8.dp) — uses dimens.kt values (paddingDefault, sixteenDp, etc.)",
+          "type": "manual"
+        },
+        {
+          "id": "addspace-not-spacer",
+          "text": "Uses AddSpace() instead of Spacer(modifier = Modifier.height/width(...))",
+          "type": "manual"
+        },
+        {
+          "id": "theme-colors",
+          "text": "Colors come from MaterialTheme.colorScheme, no hardcoded Color(...) values",
+          "type": "manual"
+        },
+        {
+          "id": "koin-viewmodel",
+          "text": "ViewModel has @KoinViewModel annotation",
+          "type": "manual"
+        },
+        {
+          "id": "no-sealed-class",
+          "text": "No sealed class/interface used for actions or UI state — uses direct functions and data class",
+          "type": "manual"
+        },
+        {
+          "id": "kermit-logger",
+          "text": "Uses Kermit Logger, not println()",
+          "type": "manual"
+        },
+        {
+          "id": "no-preview",
+          "text": "No @Preview functions created",
+          "type": "manual"
+        },
+        {
+          "id": "no-kdoc",
+          "text": "No KDoc-style /** */ comments",
+          "type": "manual"
+        },
+        {
+          "id": "stateless-content",
+          "text": "Separates stateful Screen composable from stateless Content composable",
+          "type": "manual"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Add a server endpoint that returns user activity stats — total chats, total horoscopes viewed, and days since signup.",
+      "expected_output": "New route file in a feature folder with service. Flat route pattern (/getUserActivityStats). One route per file. Uses RequestKeys/KtorVariables. Auth wrapped. Data class in shared/classes/.",
+      "files": [],
+      "assertions": [
+        {
+          "id": "feature-folder-server",
+          "text": "Route and service are co-located in the same feature folder (e.g., user/ or a new folder), not in separate routes/ and services/ folders",
+          "type": "manual"
+        },
+        {
+          "id": "flat-route",
+          "text": "Uses flat route pattern like get(\"/getUserActivityStats\"), not nested paths like /api/v1/user/stats",
+          "type": "manual"
+        },
+        {
+          "id": "no-path-params",
+          "text": "Uses query parameters, not path parameters (no /{userId} in the route)",
+          "type": "manual"
+        },
+        {
+          "id": "one-route-per-file",
+          "text": "The route handler is in its own dedicated .kt file",
+          "type": "manual"
+        },
+        {
+          "id": "auth-wrapped",
+          "text": "Route is wrapped in authenticated { } block",
+          "type": "manual"
+        },
+        {
+          "id": "request-keys-used",
+          "text": "Uses RequestKeys or KtorVariables for parameter keys, not hardcoded strings",
+          "type": "manual"
+        },
+        {
+          "id": "service-injection",
+          "text": "Service injected via Koin: val service by inject<ServiceName>()",
+          "type": "manual"
+        },
+        {
+          "id": "shared-data-class-server",
+          "text": "Response data class placed in shared/classes/, not in server module",
+          "type": "manual"
+        },
+        {
+          "id": "api-response-wrapper",
+          "text": "Response uses ApiResponse<T> wrapper",
+          "type": "manual"
+        },
+        {
+          "id": "constants-centralized",
+          "text": "Any new constants are added to shared Constants.kt, not declared locally",
+          "type": "manual"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Add an empty state to the notifications screen when there are no notifications to show.",
+      "expected_output": "Modifies existing NotificationsComposable.kt. Uses DrawNoContentAvailable or design system components. No hardcoded dp/colors. Uses design system text composables.",
+      "files": [
+        "composeApp/src/commonMain/kotlin/com/aiastro/app/aiastro/notifications/NotificationsComposable.kt"
+      ],
+      "assertions": [
+        {
+          "id": "design-system-empty-state",
+          "text": "Uses DrawNoContentAvailable or existing design system components for empty state, not custom implementation from scratch",
+          "type": "manual"
+        },
+        {
+          "id": "no-vanilla-text-edit",
+          "text": "Any new text uses wrapper composables (BodyMedium, etc.), not vanilla Text()",
+          "type": "manual"
+        },
+        {
+          "id": "no-hardcoded-dp-edit",
+          "text": "No hardcoded dp values in the new code",
+          "type": "manual"
+        },
+        {
+          "id": "theme-colors-edit",
+          "text": "Any new colors use MaterialTheme.colorScheme, not hardcoded Color values",
+          "type": "manual"
+        },
+        {
+          "id": "minimal-change",
+          "text": "Changes are minimal and focused — doesn't refactor unrelated code or add unnecessary features",
+          "type": "manual"
+        }
+      ]
+    }
+  ]
+}

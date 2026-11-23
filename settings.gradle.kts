@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -11,6 +12,7 @@ plugins {
 
 dependencyResolutionManagement {
     repositories {
+        google()
         mavenCentral()
     }
     versionCatalogs {
@@ -20,3 +22,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "Anudeep-Ananth"
 
+// projects.anudeepananth.com (Compose web app + Ktor API). Skipped when the folder is absent,
+// e.g. inside the portfolio's Docker build, which excludes it via .dockerignore.
+if (file("projects").exists()) {
+    include(":projects:shared")
+    include(":projects:server")
+    include(":projects:composeApp")
+}

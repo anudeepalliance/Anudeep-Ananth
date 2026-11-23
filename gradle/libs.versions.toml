@@ -1,10 +1,15 @@
 [versions]
-kotlin = "2.4.0"
+kotlin = "2.4.21"
 kotlinxSerialization = "1.11.0"
 logback = "1.5.37"
 mongodbDriver = "5.9.0"
 koog = "1.0.0"
 commonmark = "0.24.0"
+
+composeMultiplatform = "1.12.2"
+kotlinxCoroutines = "1.11.0"
+# The projects/ module (projects.anudeepananth.com) uses a newer Koog than the portfolio agents.
+koogProjects = "1.3.0"
 
 [libraries]
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
@@ -16,7 +21,14 @@ commonmark = { module = "org.commonmark:commonmark", version.ref = "commonmark" 
 commonmark-tables = { module = "org.commonmark:commonmark-ext-gfm-tables", version.ref = "commonmark" }
 commonmark-autolink = { module = "org.commonmark:commonmark-ext-autolink", version.ref = "commonmark" }
 
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+koog-agents-projects = { module = "ai.koog:koog-agents", version.ref = "koogProjects" }
+koog-prompt-executor-openrouter-projects = { module = "ai.koog:prompt-executor-openrouter-client", version.ref = "koogProjects" }
+
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }

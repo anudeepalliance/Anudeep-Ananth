@@ -3,6 +3,8 @@
 Personal portfolio site for **Anudeep Ananth**. Target audience: TA, recruiters, hiring managers for mid-senior B2B marketing roles. The differentiator is live custom AI agents, not a static resume page.
 
 Canonical design: `docs/superpowers/specs/2026-09-07-portfolio-agent-site-design.md`  
+Subdomain app: `projects/` holds projects.anudeepananth.com (Compose web + Ktor API, Ocrolus assignment automation). See
+`projects/CLAUDE.md`.  
 Work tracker: `tasks.md` (run phases/tasks one by one in Grok Build)
 
 ## Reference project (VPS + Mongo)
